@@ -1,7 +1,7 @@
 name: places
 description: A new Flutter project.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.2
+  flutter_svg: ^0.23.0+1
 
 dev_dependencies:
   flutter_test:
@@ -21,7 +21,13 @@ dev_dependencies:
 
   flutter_lints: ^1.0.0
 
-
 flutter:
-
   uses-material-design: true
+
+  assets:
+    - res/images/
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: res/fonts/Roboto-Regular.ttf
