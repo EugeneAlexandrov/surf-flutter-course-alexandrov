@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Places',
+      title: 'qwerty',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -24,10 +24,13 @@ class MyFirstWidget extends StatelessWidget {
 
   int counter = 0;
 
+  //void printContext() => context.runtimeType;
+
   @override
   Widget build(BuildContext context) {
     counter++;
     print('MyFirstWidget build $counter');
+    //printContext();
     return Container(
       child: const Center(
         child: Text('Hello!'),
@@ -46,10 +49,13 @@ class MySecondWidget extends StatefulWidget {
 class _MySecondWidgetState extends State<MySecondWidget> {
   int counter = 0;
 
+  void printContext() => print(context.runtimeType);
+
   @override
   Widget build(BuildContext context) {
     counter++;
     print('MySecond Widget build: $counter');
+    printContext();
     return Container(
       child: const Center(
         child: Text('Hello!'),
