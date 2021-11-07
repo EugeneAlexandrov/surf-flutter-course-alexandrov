@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 
 void main() {
@@ -12,9 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarColor: Colors.white));
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: _title,
-      theme:ThemeData(
+      theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const SightListScreen(_title),
