@@ -10,7 +10,6 @@ class SightListScreen extends StatefulWidget {
 }
 
 class _SightListScreenState extends State<SightListScreen> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,16 +19,42 @@ class _SightListScreenState extends State<SightListScreen> {
         elevation: 0,
         title: Container(
           margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-          child: const Text(
-            'Список\nинтересных мест',
+          child: RichText(
+            text: const TextSpan(
+              style: TextStyle(
+                fontSize: 32,
+                height: 1.125,
+                fontWeight: FontWeight.w700,
+              ),
+              children: [
+                TextSpan(
+                  text: 'С',
+                  style: TextStyle(
+                    color: Colors.green,
+                  ),
+                  children: [
+                    TextSpan(
+                        text: 'писок',
+                        style:
+                            TextStyle(color: Color(0xff3b3e5b)))
+                  ],
+                ),
+                TextSpan(
+                  text: '\nи',
+                  style: TextStyle(
+                    color: Colors.yellow,
+                  ),
+                  children: [
+                    TextSpan(
+                        text: 'нтересных мест',
+                        style:
+                            TextStyle(color: Color(0xff3b3e5b)))
+                  ],
+                )
+              ],
+            ),
             maxLines: 2,
             textAlign: TextAlign.start,
-            style: TextStyle(
-              color: Color.fromARGB(255, 25, 28, 49),
-              fontSize: 32,
-              height: 0.96,
-              fontWeight: FontWeight.w700,
-            ),
           ),
         ),
       ),
