@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/themes.dart';
 
 class SightCard extends StatelessWidget {
   const SightCard({required Sight sight, Key? key})
@@ -13,7 +14,7 @@ class SightCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
-      color: const Color(0xfff5f5f5),
+      color: Themes.cardBackground,
       elevation: 0,
       child: Stack(
         children: [
@@ -31,29 +32,13 @@ class SightCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                child: Text(_sight.name,
-/*
-Не понимаю как работает подгрузка шрифтов. В pubspec добавлял
-    - asset: res/fonts/Roboto-Bold.ttf
-      weight: 700
-Шрифты все-равно отличаются от макета 
-*/
-                    style: const TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        height: 1.25,
-                        color: Color(0xff3b3e5b))),
+                child: Text(_sight.name, style: Themes.text),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 2, 16, 16),
                 child: Text(_sight.details,
-                    style: const TextStyle(
-                        fontFamily: 'Roboto',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        height: 1.25,
-                        color: Color(0xff7C7E92))),
+                    style:
+                        Themes.small.copyWith(color: Themes.secondaryColor2)),
               ),
             ],
           ),
@@ -66,10 +51,8 @@ class SightCard extends StatelessWidget {
                     alignment: Alignment.centerLeft,
                     child: FittedBox(
                       child: Text(_sight.type,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700)),
+                          style:
+                              Themes.smallBold.copyWith(color: Colors.white)),
                     ),
                   ),
                 ),
