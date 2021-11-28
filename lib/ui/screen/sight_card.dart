@@ -16,55 +16,62 @@ class SightCard extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       color: Themes.cardBackground,
       elevation: 0,
-      child: Stack(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12))),
-                height: 96,
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                child: Text(_sight.name, style: Themes.text),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 2, 16, 16),
-                child: Text(_sight.details,
-                    style:
-                        Themes.small.copyWith(color: Themes.secondaryColor2)),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
+      child: AspectRatio(
+        aspectRatio: 3 / 2,
+        child: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: FittedBox(
-                      child: Text(_sight.type,
-                          style:
-                              Themes.smallBold.copyWith(color: Colors.white)),
-                    ),
-                  ),
+                Container(
+                  decoration: const BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          topRight: Radius.circular(12))),
+                  height: 96,
                 ),
-                const Icon(
-                  Icons.favorite_border_outlined,
-                  size: 24,
-                  color: Colors.white,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  child: Text(_sight.name, style: Themes.text),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 2, 16, 16),
+                  child: Text(_sight.details,
+                      style:
+                          Themes.small.copyWith(color: Themes.secondaryColor2)),
                 ),
               ],
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
+                height: 24,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: FittedBox(
+                          child: Text(_sight.type,
+                              style: Themes.smallBold
+                                  .copyWith(color: Colors.white)),
+                        ),
+                      ),
+                    ),
+                    const Icon(
+                      Icons.favorite_border_outlined,
+                      size: 24,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
