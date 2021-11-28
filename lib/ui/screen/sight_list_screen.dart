@@ -15,20 +15,7 @@ class _SightListScreenState extends State<SightListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 112,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Container(
-          margin: const EdgeInsets.only(top: 40),
-          child: const Text(
-            AppStrings.sightListScreenTitle,
-            style: Themes.largeTitle,
-            maxLines: 2,
-            textAlign: TextAlign.start,
-          ),
-        ),
-      ),
+      appBar: const CustomAppBar(height: 200),
       resizeToAvoidBottomInset: false,
       body: Container(
         color: Colors.white,
@@ -38,6 +25,26 @@ class _SightListScreenState extends State<SightListScreen> {
             children: sights.map((sight) => SightCard(sight: sight)).toList(),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final double height;
+
+  const CustomAppBar({Key? key, required this.height}) : super(key: key);
+
+  @override
+  Size get preferredSize => Size.fromHeight(height);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(top: 64, left: 16),
+      child: const Text(
+        AppStrings.sightListScreenTitle,
+        style: Themes.largeTitle,
       ),
     );
   }
