@@ -30,15 +30,21 @@ class SightCard extends StatelessWidget {
                         topRight: Radius.circular(12))),
                 height: 96,
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                child: Text(_sight.name, style: Themes.text),
+              const SizedBox(
+                height: 16,
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 2, 16, 16),
-                child: Text(_sight.details,
-                    style:
-                        Themes.small.copyWith(color: Themes.secondaryColor2)),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(_sight.name, style: Themes.text),
+              ),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 180),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 2, 16, 16),
+                  child: Text(_sight.details,
+                      style:
+                          Themes.small.copyWith(color: Themes.secondaryColor2)),
+                ),
               ),
             ],
           ),
