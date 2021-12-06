@@ -34,30 +34,6 @@ class SightDetails extends StatelessWidget {
         ),
       ]),
     );
-    // return Scaffold(
-    //   extendBodyBehindAppBar: true,
-    //   body: Stack(children: [
-    //     SingleChildScrollView(
-    //       child: Column(
-    //         children: [
-    //           const Galery(),
-    //           DetailsInfo(
-    //             sight: sight,
-    //           )
-    //         ],
-    //       ),
-    //     ),
-    //     Positioned(
-    //       top: 36,
-    //       left: 16,
-    //       child: SizedBox(
-    //         width: 32,
-    //         height: 32,
-    //         child: Container(color: Colors.white),
-    //       ),
-    //     ),
-    //   ]),
-    // );
   }
 }
 
@@ -69,7 +45,12 @@ class Galery extends StatelessWidget {
     return Container(
       height: 360,
       width: double.infinity,
-      color: Colors.green,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.fill,
+          image: ExactAssetImage('assets/images/Mask Group.png'),
+        ),
+      ),
     );
   }
 }
