@@ -22,14 +22,7 @@ class SightCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration: const BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12))),
-                height: 96,
-              ),
+              ImageContainer(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                 child: Text(_sight.name, style: Themes.text),
@@ -67,5 +60,49 @@ class SightCard extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ImageContainer extends StatefulWidget {
+  ImageContainer({Key? key}) : super(key: key);
+
+  @override
+  _ImageContainerState createState() => _ImageContainerState();
+}
+
+class _ImageContainerState extends State<ImageContainer> {
+  Widget container = Container(
+    child: const LinearProgressIndicator(),
+    height: 96,
+    alignment: Alignment.bottomCenter,
+  );
+
+  void changeLoader() async {
+    await Future.delayed(const Duration(seconds: 5));
+    setState(() {
+      container = Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+              alignment: Alignment.topCenter,
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                Colors.black38,
+                BlendMode.darken,
+              ),
+              image: ExactAssetImage('assets/images/image 6.png')),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12),
+            topRight: Radius.circular(12),
+          ),
+        ),
+        height: 96,
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    changeLoader();
+    return Container(child: container);
   }
 }
