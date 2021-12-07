@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/domain/sight.dart';
-import 'package:places/mocks.dart';
 import 'package:places/themes.dart';
 
 class SightDetails extends StatelessWidget {
@@ -48,7 +47,7 @@ class Galery extends StatelessWidget {
       decoration: const BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: ExactAssetImage('assets/images/Mask Group.png'),
+          image: ExactAssetImage(AppStrings.mockImageDetailPath),
         ),
       ),
     );

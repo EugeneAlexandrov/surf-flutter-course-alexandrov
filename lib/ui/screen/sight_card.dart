@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/app_strings.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/themes.dart';
 
@@ -89,7 +90,7 @@ class _ImageContainerState extends State<ImageContainer> {
                 Colors.black38,
                 BlendMode.darken,
               ),
-              image: ExactAssetImage('assets/images/image 6.png')),
+              image: ExactAssetImage(AppStrings.mockImageCardPath)),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),
             topRight: Radius.circular(12),
