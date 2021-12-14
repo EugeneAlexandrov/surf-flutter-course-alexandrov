@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Themes {
+  static const Color mainColor = Color.fromRGBO(25, 28, 49, 1);
   static const Color secondaryColor = Color.fromRGBO(59, 62, 91, 1);
   static const Color secondaryColor2 = Color.fromRGBO(124, 126, 146, 1);
   static const Color innactiveBlackColor = Color.fromRGBO(124, 126, 146, 0.56);
   static const Color cardBackground = Color.fromRGBO(245, 245, 245, 1);
 
   static const TextStyle largeTitle = TextStyle(
-    color: secondaryColor,
     fontFamily: 'Roboto',
     fontSize: 32,
     height: 1.125,
@@ -15,7 +15,6 @@ class Themes {
   );
 
   static const TextStyle title = TextStyle(
-    color: secondaryColor,
     fontFamily: 'Roboto',
     fontSize: 24,
     height: 1.2,
@@ -23,7 +22,6 @@ class Themes {
   );
 
   static const TextStyle subtitle = TextStyle(
-    color: secondaryColor,
     fontFamily: 'Roboto',
     fontSize: 18,
     height: 1.33,
@@ -31,7 +29,6 @@ class Themes {
   );
 
   static const TextStyle text = TextStyle(
-    color: secondaryColor,
     fontFamily: 'Roboto',
     fontSize: 16,
     height: 1.25,
@@ -39,7 +36,6 @@ class Themes {
   );
 
   static const TextStyle small = TextStyle(
-    color: secondaryColor,
     fontFamily: 'Roboto',
     fontSize: 14,
     height: 1.25,
@@ -47,7 +43,6 @@ class Themes {
   );
 
   static const TextStyle smallBold = TextStyle(
-    color: secondaryColor,
     fontFamily: 'Roboto',
     fontSize: 14,
     height: 1.28,
@@ -55,7 +50,6 @@ class Themes {
   );
 
   static const TextStyle superSmall = TextStyle(
-    color: secondaryColor,
     fontFamily: 'Roboto',
     fontSize: 12,
     height: 1.33,
@@ -63,7 +57,6 @@ class Themes {
   );
 
   static const TextStyle button = TextStyle(
-    color: secondaryColor,
     fontFamily: 'Roboto',
     fontSize: 14,
     height: 1.28,

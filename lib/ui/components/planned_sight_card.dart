@@ -23,7 +23,7 @@ class SightCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageContainer(),
+              const ImageContainer(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                 child: Text(_sight.name, style: Themes.text),
@@ -65,7 +65,7 @@ class SightCard extends StatelessWidget {
 }
 
 class ImageContainer extends StatefulWidget {
-  ImageContainer({Key? key}) : super(key: key);
+  const ImageContainer({Key? key}) : super(key: key);
 
   @override
   _ImageContainerState createState() => _ImageContainerState();
