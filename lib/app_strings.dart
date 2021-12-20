@@ -11,6 +11,8 @@ class AppStrings {
   static const appBarTitleMapString = 'Карта';
   static const appBarTitleFavoriteString = 'Избранное';
   static const appBarTitlrSettingsString = 'Настройки';
+  static const VisitedCardGoalString = 'Цель достигнута ';
+  static const PlannedCardGoalString = 'Запланировано на ';
 
   //Paths
   static const mockImageCardPath = 'assets/images/card_image.png';
@@ -24,4 +26,9 @@ class AppStrings {
   static const iconListFillPath = 'assets/images/icon_list_fill.png';
   static const iconMapFillPath = 'assets/images/icon_map_fill.png';
   static const iconSettingsFillPath = 'assets/images/icon_settings_fill.png';
+  static const emptyVisitedImagePath = 'assets/images/empty_visited_image.png';
+  static const emptyPlannedImagePath = 'assets/images/empty_planned_image.png';
+  static const iconCalendarPath = 'assets/images/icon_calendar.png';
+  static const iconSharePath = 'assets/images/icon_share.png';
+  static const iconCrossPath = 'assets/images/icon_cross.png';
 }

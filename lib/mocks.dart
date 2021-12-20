@@ -1,3 +1,4 @@
+import 'domain/intention.dart';
 import 'domain/sight.dart';
 
 final List<Sight> sights = [
@@ -32,4 +33,11 @@ final List<Sight> sights = [
       lon: 48.0681409,
       type: 'продуктовый рынок',
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
+];
+
+final List<Intention> intentionsList = [
+  Intention(sights[0], DateTime(2021, 8, 5), false),
+  Intention(sights[1], DateTime(2022, 1, 15), false),
+  Intention(sights[2], DateTime(2021, 10, 15), true),
+  Intention(sights[3], DateTime(2022, 01, 15), true),
 ];

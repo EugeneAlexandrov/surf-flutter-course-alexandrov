@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/mocks.dart';
 import 'package:places/themes.dart';
 import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
@@ -48,7 +49,7 @@ class _MainPageState extends State<MainPage>
             children: [
               const SightListScreen(),
               Container(color: Colors.red),
-              const VisitingScreen(),
+              VisitingScreen(intentionsList),
               Container(color: Colors.pink),
             ]),
         bottomNavigationBar: BottomNavigationBar(
