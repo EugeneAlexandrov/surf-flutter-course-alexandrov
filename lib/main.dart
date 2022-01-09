@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:places/mocks.dart';
-import 'package:places/ui/screen/sight_details.dart';
-import 'package:places/ui/screen/sight_list_screen.dart';
+import 'package:places/main_page.dart';
 import 'app_strings.dart';
 
 void main() {
@@ -14,13 +12,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return MaterialApp(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark));
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppStrings.appTitle,
-      // home: SightListScreen(),
-      home: SightDetails(sight: sights[0]),
+      home: MainPage(),
     );
   }
 }

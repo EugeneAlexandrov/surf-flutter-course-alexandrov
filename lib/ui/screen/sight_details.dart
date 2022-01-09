@@ -3,36 +3,35 @@ import 'package:places/app_strings.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/themes.dart';
 
+//Screen with sight card details
 class SightDetails extends StatelessWidget {
-  SightDetails({Key? key, required this.sight}) : super(key: key);
+  const SightDetails({Key? key, required this.sight}) : super(key: key);
 
-  Sight sight;
+  final Sight sight;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Stack(children: [
-        SingleChildScrollView(
-          child: Column(
-            children: [
-              const Galery(),
-              DetailsInfo(
-                sight: sight,
-              )
-            ],
-          ),
+    return Stack(children: [
+      SingleChildScrollView(
+        child: Column(
+          children: [
+            const Galery(),
+            DetailsInfo(
+              sight: sight,
+            )
+          ],
         ),
-        Positioned(
-          top: 36,
-          left: 16,
-          child: SizedBox(
-            width: 32,
-            height: 32,
-            child: Container(color: Colors.white),
-          ),
+      ),
+      Positioned(
+        top: 36,
+        left: 16,
+        child: SizedBox(
+          width: 32,
+          height: 32,
+          child: Container(color: Colors.white),
         ),
-      ]),
-    );
+      ),
+    ]);
   }
 }
 
