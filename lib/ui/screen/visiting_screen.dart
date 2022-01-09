@@ -48,11 +48,11 @@ class NullPlannedPlaceHolder extends StatelessWidget {
           height: 64,
         ),
         const SizedBox(height: 24),
-        Text('Пусто',
+        Text(AppStrings.emptyString,
             style: Themes.subtitle.copyWith(color: Themes.innactiveBlackColor)),
         const SizedBox(height: 8),
         Text(
-          'Отмечайте понравившиеся места\nи они появиятся здесь.',
+          AppStrings.nullPlannedTextString,
           textAlign: TextAlign.center,
           style: Themes.small.copyWith(color: Themes.innactiveBlackColor),
         ),
@@ -71,11 +71,11 @@ class NullVisitedPlaceHolder extends StatelessWidget {
       children: [
         Image.asset(AppStrings.emptyVisitedImagePath, height: 64),
         const SizedBox(height: 24),
-        Text('Пусто',
+        Text(AppStrings.emptyString,
             style: Themes.subtitle.copyWith(color: Themes.innactiveBlackColor)),
         const SizedBox(height: 8),
         Text(
-          'Завершите маршрут,\nчтобы место попало сюда.',
+          AppStrings.nullVisitedTextString,
           textAlign: TextAlign.center,
           style: Themes.small.copyWith(color: Themes.innactiveBlackColor),
         ),

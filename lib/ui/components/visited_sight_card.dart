@@ -33,7 +33,7 @@ class VisitedSightCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 2, 16, 0),
                 child: Text(
-                    AppStrings.VisitedCardGoalString + getDate(_intention.date),
+                    AppStrings.visitedCardGoalString + getDate(_intention.date),
                     style:
                         Themes.small.copyWith(color: Themes.secondaryColor2)),
               ),

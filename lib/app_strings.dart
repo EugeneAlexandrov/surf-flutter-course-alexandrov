@@ -11,24 +11,30 @@ class AppStrings {
   static const appBarTitleMapString = 'Карта';
   static const appBarTitleFavoriteString = 'Избранное';
   static const appBarTitlrSettingsString = 'Настройки';
-  static const VisitedCardGoalString = 'Цель достигнута ';
-  static const PlannedCardGoalString = 'Запланировано на ';
+  static const visitedCardGoalString = 'Цель достигнута ';
+  static const plannedCardGoalString = 'Запланировано на ';
+  static const emptyString = 'Пусто';
+  static const nullVisitedTextString =
+      'Завершите маршрут,\nчтобы место попало сюда.';
+  static const nullPlannedTextString =
+      'Отмечайте понравившиеся места\nи они появиятся здесь.';
 
   //Paths
-  static const mockImageCardPath = 'assets/images/card_image.png';
-  static const mockImageDetailPath = 'assets/images/detail_image.png';
-  static const iconHeartOutlinePath = 'assets/images/icon_heart_outline.png';
-  static const iconListOutlinePath = 'assets/images/icon_list_outline.png';
-  static const iconMapOutlinePath = 'assets/images/icon_map_outline.png';
+  static const basicPath = 'assets/images/';
+  static const mockImageCardPath = basicPath + 'card_image.png';
+  static const mockImageDetailPath = basicPath + 'detail_image.png';
+  static const iconHeartOutlinePath = basicPath + 'icon_heart_outline.png';
+  static const iconListOutlinePath = basicPath + 'icon_list_outline.png';
+  static const iconMapOutlinePath = basicPath + 'icon_map_outline.png';
   static const iconSettingsOutlinePath =
-      'assets/images/icon_settings_outline.png';
-  static const iconHeartFillPath = 'assets/images/icon_heart_fill.png';
-  static const iconListFillPath = 'assets/images/icon_list_fill.png';
-  static const iconMapFillPath = 'assets/images/icon_map_fill.png';
-  static const iconSettingsFillPath = 'assets/images/icon_settings_fill.png';
-  static const emptyVisitedImagePath = 'assets/images/empty_visited_image.png';
-  static const emptyPlannedImagePath = 'assets/images/empty_planned_image.png';
-  static const iconCalendarPath = 'assets/images/icon_calendar.png';
-  static const iconSharePath = 'assets/images/icon_share.png';
-  static const iconCrossPath = 'assets/images/icon_cross.png';
+      basicPath + 'icon_settings_outline.png';
+  static const iconHeartFillPath = basicPath + 'icon_heart_fill.png';
+  static const iconListFillPath = basicPath + 'icon_list_fill.png';
+  static const iconMapFillPath = basicPath + 'icon_map_fill.png';
+  static const iconSettingsFillPath = basicPath + 'icon_settings_fill.png';
+  static const emptyVisitedImagePath = basicPath + 'empty_visited_image.png';
+  static const emptyPlannedImagePath = basicPath + 'empty_planned_image.png';
+  static const iconCalendarPath = basicPath + 'icon_calendar.png';
+  static const iconSharePath = basicPath + 'icon_share.png';
+  static const iconCrossPath = basicPath + 'icon_cross.png';
 }
