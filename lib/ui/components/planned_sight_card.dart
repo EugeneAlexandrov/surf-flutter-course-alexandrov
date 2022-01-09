@@ -3,7 +3,9 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/domain/intention.dart';
-import 'package:places/themes.dart';
+import 'package:places/styles.dart';
+
+import '../../colors.dart';
 
 class PlannedSightCard extends StatelessWidget {
   const PlannedSightCard({required Intention intention, Key? key})
@@ -17,7 +19,7 @@ class PlannedSightCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
-      color: Themes.cardBackground,
+      color: cardBackground,
       elevation: 0,
       child: Stack(
         children: [
@@ -28,20 +30,20 @@ class PlannedSightCard extends StatelessWidget {
               const ImageContainer(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                child: Text(_intention.sight.name, style: Themes.text),
+                child: Text(_intention.sight.name, style: text),
               ),
               Padding(
                   padding: const EdgeInsets.fromLTRB(16, 2, 16, 0),
                   child: Text(
                       AppStrings.plannedCardGoalString +
                           getDate(_intention.date),
-                      style: Themes.small
+                      style: small
                           .copyWith(color: getColor(_intention.date)))),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
                 child: Text(_intention.sight.details,
                     style:
-                        Themes.small.copyWith(color: Themes.secondaryColor2)),
+                        small.copyWith(color: secondaryColor2)),
               ),
             ],
           ),
@@ -55,7 +57,7 @@ class PlannedSightCard extends StatelessWidget {
                     child: FittedBox(
                       child: Text(_intention.sight.type,
                           style:
-                              Themes.smallBold.copyWith(color: Colors.white)),
+                              smallBold.copyWith(color: Colors.white)),
                     ),
                   ),
                 ),

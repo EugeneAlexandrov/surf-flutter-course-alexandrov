@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:places/themes.dart';
+import 'package:places/styles.dart';
 
 import '../../app_strings.dart';
-
+import '../../colors.dart';
 
 //Simple AppBar with single Text
 class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -21,7 +21,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
       alignment: Alignment.center,
       child: Text(
         title,
-        style: Themes.subtitle,
+        style: subtitle,
       ),
     );
   }
@@ -45,35 +45,34 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(top: 40, bottom: 22),
           child: Text(
             title,
-            style: Themes.subtitle.copyWith(color: Themes.mainColor),
+            style: subtitle.copyWith(color: mainColor),
           ),
         ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
           decoration: const BoxDecoration(
-            color: Themes.cardBackground,
+            color: cardBackground,
             borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
           child: TabBar(
             labelColor: Colors.white,
-            unselectedLabelColor: Themes.innactiveBlackColor,
+            unselectedLabelColor: innactiveBlackColor,
             indicatorSize: TabBarIndicatorSize.tab,
             indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Themes.secondaryColor),
+                borderRadius: BorderRadius.circular(50), color: secondaryColor),
             tabs: const [
               Padding(
                 padding: EdgeInsets.fromLTRB(16, 10, 16, 12),
                 child: Text(
                   AppStrings.futureVisitString,
-                  style: Themes.smallBold,
+                  style: smallBold,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(16, 10, 16, 12),
                 child: Text(
                   AppStrings.visitedString,
-                  style: Themes.smallBold,
+                  style: smallBold,
                 ),
               ),
             ],

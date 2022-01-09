@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/domain/intention.dart';
-import 'package:places/themes.dart';
+import 'package:places/styles.dart';
 import 'package:places/ui/components/planned_sight_card.dart';
 import 'package:places/ui/components/visited_sight_card.dart';
+
+import '../../colors.dart';
 
 //Third tab with visited places
 class VisitingScreen extends StatelessWidget {
@@ -49,12 +51,12 @@ class NullPlannedPlaceHolder extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         Text(AppStrings.emptyString,
-            style: Themes.subtitle.copyWith(color: Themes.innactiveBlackColor)),
+            style: subtitle.copyWith(color: innactiveBlackColor)),
         const SizedBox(height: 8),
         Text(
           AppStrings.nullPlannedTextString,
           textAlign: TextAlign.center,
-          style: Themes.small.copyWith(color: Themes.innactiveBlackColor),
+          style: small.copyWith(color: innactiveBlackColor),
         ),
       ],
     );
@@ -72,12 +74,12 @@ class NullVisitedPlaceHolder extends StatelessWidget {
         Image.asset(AppStrings.emptyVisitedImagePath, height: 64),
         const SizedBox(height: 24),
         Text(AppStrings.emptyString,
-            style: Themes.subtitle.copyWith(color: Themes.innactiveBlackColor)),
+            style: subtitle.copyWith(color: innactiveBlackColor)),
         const SizedBox(height: 8),
         Text(
           AppStrings.nullVisitedTextString,
           textAlign: TextAlign.center,
-          style: Themes.small.copyWith(color: Themes.innactiveBlackColor),
+          style: small.copyWith(color: innactiveBlackColor),
         ),
       ],
     );

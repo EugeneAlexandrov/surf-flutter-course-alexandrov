@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/mocks.dart';
-import 'package:places/themes.dart';
 import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 import 'package:places/ui/screen/visiting_screen.dart';
+
+import 'colors.dart';
 
 //Main page with BottomNavigationBar
 class MainPage extends StatefulWidget {
@@ -58,8 +59,8 @@ class _MainPageState extends State<MainPage>
             index = currentIndex;
             bottomNavController.animateTo(currentIndex);
           },
-          unselectedItemColor: Themes.innactiveBlackColor,
-          selectedItemColor: Themes.mainColor,
+          unselectedItemColor: innactiveBlackColor,
+          selectedItemColor: mainColor,
           currentIndex: bottomNavController.index,
           items: const [
             BottomNavigationBarItem(

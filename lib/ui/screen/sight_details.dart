@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/domain/sight.dart';
-import 'package:places/themes.dart';
+import 'package:places/styles.dart';
+
+import '../../colors.dart';
 
 //Screen with sight card details
 class SightDetails extends StatelessWidget {
@@ -72,7 +74,7 @@ class _DetailsInfoState extends State<DetailsInfo> {
         children: [
           Text(
             widget.sight.name,
-            style: Themes.title,
+            style: title,
           ),
           const SizedBox(
             height: 4,
@@ -80,19 +82,19 @@ class _DetailsInfoState extends State<DetailsInfo> {
           Row(children: [
             Text(
               widget.sight.type,
-              style: Themes.smallBold,
+              style: smallBold,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16),
               child: Text(
                 AppStrings.detailsScreenTime,
-                style: Themes.small.copyWith(color: Themes.secondaryColor2),
+                style: small.copyWith(color: secondaryColor2),
               ),
             )
           ]),
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 24),
-              child: Text(widget.sight.details, style: Themes.small)),
+              child: Text(widget.sight.details, style: small)),
           Container(
             width: double.infinity,
             height: 48,
@@ -112,14 +114,13 @@ class _DetailsInfoState extends State<DetailsInfo> {
                 const Icon(
                   Icons.calendar_today,
                   size: 24,
-                  color: Themes.innactiveBlackColor,
+                  color: innactiveBlackColor,
                 ),
                 const SizedBox(
                   width: 8,
                 ),
                 Text(AppStrings.detailsScreenPlanButton,
-                    style: Themes.small
-                        .copyWith(color: Themes.innactiveBlackColor)),
+                    style: small.copyWith(color: innactiveBlackColor)),
               ]),
               Row(children: const [
                 Icon(
