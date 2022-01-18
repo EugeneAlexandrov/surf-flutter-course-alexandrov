@@ -19,7 +19,6 @@ class VisitedSightCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
-      color: cardBackground,
       elevation: 0,
       child: Stack(
         children: [
@@ -36,14 +35,12 @@ class VisitedSightCard extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 2, 16, 0),
                 child: Text(
                     AppStrings.visitedCardGoalString + getDate(_intention.date),
-                    style:
-                        small.copyWith(color: secondaryColor2)),
+                    style: small.copyWith(color: lmSecondaryColor2)),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
                 child: Text(_intention.sight.details,
-                    style:
-                        small.copyWith(color: secondaryColor2)),
+                    style: small.copyWith(color: lmSecondaryColor2)),
               ),
             ],
           ),
@@ -55,9 +52,7 @@ class VisitedSightCard extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: FittedBox(
-                      child: Text(_intention.sight.type,
-                          style:
-                              smallBold.copyWith(color: Colors.white)),
+                      child: Text(_intention.sight.type),
                     ),
                   ),
                 ),

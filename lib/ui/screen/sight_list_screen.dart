@@ -13,13 +13,10 @@ class SightListScreen extends StatefulWidget {
 class _SightListScreenState extends State<SightListScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: sights.map((sight) => SightCard(sight: sight)).toList(),
-        ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: sights.map((sight) => SightCard(sight: sight)).toList(),
       ),
     );
   }

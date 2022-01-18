@@ -18,6 +18,7 @@ class AppStrings {
       'Завершите маршрут,\nчтобы место попало сюда.';
   static const nullPlannedTextString =
       'Отмечайте понравившиеся места\nи они появиятся здесь.';
+  static const themeChangeString = 'сменить тему';
 
   //Paths
   static const basicPath = 'assets/images/';

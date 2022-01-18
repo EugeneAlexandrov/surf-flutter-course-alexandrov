@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/components/custom_appbars.dart';
+import 'package:places/ui/screen/res/config.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 import 'package:places/ui/screen/visiting_screen.dart';
-
-import 'colors.dart';
 
 //Main page with BottomNavigationBar
 class MainPage extends StatefulWidget {
@@ -49,23 +48,27 @@ class _MainPageState extends State<MainPage>
             controller: bottomNavController,
             children: [
               const SightListScreen(),
-              Container(color: Colors.red),
+              Container(),
               VisitingScreen(intentionsList),
               Container(color: Colors.pink),
             ]),
+        floatingActionButton: FloatingActionButton(
+          child: const Text(AppStrings.themeChangeString),
+          onPressed: currentTheme.togleTheme,
+        ),
         bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           type: BottomNavigationBarType.fixed,
           onTap: (currentIndex) {
             index = currentIndex;
             bottomNavController.animateTo(currentIndex);
           },
-          unselectedItemColor: innactiveBlackColor,
-          selectedItemColor: mainColor,
           currentIndex: bottomNavController.index,
           items: const [
             BottomNavigationBarItem(
               activeIcon:
-                  ImageIcon(ExactAssetImage(AppStrings.iconMapFillPath)),
+                  ImageIcon(ExactAssetImage(AppStrings.iconListFillPath)),
               icon: ImageIcon(ExactAssetImage(AppStrings.iconListOutlinePath)),
               label: '',
             ),

@@ -17,7 +17,6 @@ class SightCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
-      color: cardBackground,
       elevation: 0,
       child: Stack(
         children: [
@@ -28,13 +27,17 @@ class SightCard extends StatelessWidget {
               const ImageContainer(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                child: Text(_sight.name, style: text),
+                child: Text(
+                  _sight.name,
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 2, 16, 16),
-                child: Text(_sight.details,
-                    style:
-                        small.copyWith(color: secondaryColor2)),
+                child: Text(
+                  _sight.details,
+                  style: small.copyWith(color: lmSecondaryColor2),
+                ),
               ),
             ],
           ),
@@ -46,9 +49,12 @@ class SightCard extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: FittedBox(
-                      child: Text(_sight.type,
-                          style:
-                              smallBold.copyWith(color: Colors.white)),
+                      child: Text(
+                        _sight.type,
+                        style: smallBold.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                 ),

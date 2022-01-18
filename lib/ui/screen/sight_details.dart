@@ -88,7 +88,7 @@ class _DetailsInfoState extends State<DetailsInfo> {
               padding: const EdgeInsets.only(left: 16),
               child: Text(
                 AppStrings.detailsScreenTime,
-                style: small.copyWith(color: secondaryColor2),
+                style: small.copyWith(color: lmSecondaryColor2),
               ),
             )
           ]),
@@ -114,13 +114,13 @@ class _DetailsInfoState extends State<DetailsInfo> {
                 const Icon(
                   Icons.calendar_today,
                   size: 24,
-                  color: innactiveBlackColor,
+                  color: lmInnactiveBlackColor,
                 ),
                 const SizedBox(
                   width: 8,
                 ),
                 Text(AppStrings.detailsScreenPlanButton,
-                    style: small.copyWith(color: innactiveBlackColor)),
+                    style: small.copyWith(color: lmInnactiveBlackColor)),
               ]),
               Row(children: const [
                 Icon(

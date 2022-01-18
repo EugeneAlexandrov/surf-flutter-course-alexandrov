@@ -51,12 +51,12 @@ class NullPlannedPlaceHolder extends StatelessWidget {
         ),
         const SizedBox(height: 24),
         Text(AppStrings.emptyString,
-            style: subtitle.copyWith(color: innactiveBlackColor)),
+            style: subtitle.copyWith(color: lmInnactiveBlackColor)),
         const SizedBox(height: 8),
         Text(
           AppStrings.nullPlannedTextString,
           textAlign: TextAlign.center,
-          style: small.copyWith(color: innactiveBlackColor),
+          style: small.copyWith(color: lmInnactiveBlackColor),
         ),
       ],
     );
@@ -74,12 +74,12 @@ class NullVisitedPlaceHolder extends StatelessWidget {
         Image.asset(AppStrings.emptyVisitedImagePath, height: 64),
         const SizedBox(height: 24),
         Text(AppStrings.emptyString,
-            style: subtitle.copyWith(color: innactiveBlackColor)),
+            style: subtitle.copyWith(color: lmInnactiveBlackColor)),
         const SizedBox(height: 8),
         Text(
           AppStrings.nullVisitedTextString,
           textAlign: TextAlign.center,
-          style: small.copyWith(color: innactiveBlackColor),
+          style: small.copyWith(color: lmInnactiveBlackColor),
         ),
       ],
     );
