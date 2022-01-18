@@ -29,7 +29,10 @@ class PlannedSightCard extends StatelessWidget {
               const ImageContainer(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                child: Text(_intention.sight.name, style: text),
+                child: Text(
+                  _intention.sight.name,
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
               ),
               Padding(
                   padding: const EdgeInsets.fromLTRB(16, 2, 16, 0),
@@ -52,7 +55,12 @@ class PlannedSightCard extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: FittedBox(
-                      child: Text(_intention.sight.type),
+                      child: Text(
+                        _intention.sight.type,
+                        style: smallBold.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                 ),
