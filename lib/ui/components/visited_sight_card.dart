@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/domain/intention.dart';
+import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
-
-import '../../colors.dart';
+import 'package:places/ui/screen/res/themes.dart';
 
 class VisitedSightCard extends StatelessWidget {
   const VisitedSightCard({required Intention intention, Key? key})
@@ -37,13 +38,19 @@ class VisitedSightCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 2, 16, 0),
                 child: Text(
-                    AppStrings.visitedCardGoalString + getDate(_intention.date),
-                    style: small.copyWith(color: lmSecondaryColor2)),
+                  AppStrings.visitedCardGoalString + getDate(_intention.date),
+                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                        color: Theme.of(context).colorScheme.smallSecondaryTwo,
+                      ),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
-                child: Text(_intention.sight.details,
-                    style: small.copyWith(color: lmSecondaryColor2)),
+                child: Text(
+                  _intention.sight.details,
+                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      color: Theme.of(context).colorScheme.smallSecondaryTwo),
+                ),
               ),
             ],
           ),
@@ -64,9 +71,9 @@ class VisitedSightCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Image.asset(AppStrings.iconSharePath),
+                SvgPicture.asset(AssetImages.iconSharePath),
                 const SizedBox(width: 22),
-                Image.asset(AppStrings.iconCrossPath),
+                SvgPicture.asset(AssetImages.iconCrossPath),
               ],
             ),
           ),
@@ -108,7 +115,7 @@ class _ImageContainerState extends State<ImageContainer> {
                 Colors.black38,
                 BlendMode.darken,
               ),
-              image: ExactAssetImage(AppStrings.mockImageCardPath)),
+              image: ExactAssetImage(AssetImages.mockImageCardPath)),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),
             topRight: Radius.circular(12),

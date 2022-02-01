@@ -20,22 +20,5 @@ class AppStrings {
       'Отмечайте понравившиеся места\nи они появиятся здесь.';
   static const themeChangeString = 'сменить тему';
 
-  //Paths
-  static const basicPath = 'assets/images/';
-  static const mockImageCardPath = basicPath + 'card_image.png';
-  static const mockImageDetailPath = basicPath + 'detail_image.png';
-  static const iconHeartOutlinePath = basicPath + 'icon_heart_outline.png';
-  static const iconListOutlinePath = basicPath + 'icon_list_outline.png';
-  static const iconMapOutlinePath = basicPath + 'icon_map_outline.png';
-  static const iconSettingsOutlinePath =
-      basicPath + 'icon_settings_outline.png';
-  static const iconHeartFillPath = basicPath + 'icon_heart_fill.png';
-  static const iconListFillPath = basicPath + 'icon_list_fill.png';
-  static const iconMapFillPath = basicPath + 'icon_map_fill.png';
-  static const iconSettingsFillPath = basicPath + 'icon_settings_fill.png';
-  static const emptyVisitedImagePath = basicPath + 'empty_visited_image.png';
-  static const emptyPlannedImagePath = basicPath + 'empty_planned_image.png';
-  static const iconCalendarPath = basicPath + 'icon_calendar.png';
-  static const iconSharePath = basicPath + 'icon_share.png';
-  static const iconCrossPath = basicPath + 'icon_cross.png';
+  
 }

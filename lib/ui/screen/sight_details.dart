@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/colors.dart';
 import 'package:places/domain/sight.dart';
-import 'package:places/styles.dart';
-
-import '../../colors.dart';
+import 'package:places/image_paths.dart';
+import 'package:places/ui/screen/res/themes.dart';
 
 //Screen with sight card details
 class SightDetails extends StatelessWidget {
@@ -48,7 +48,7 @@ class Galery extends StatelessWidget {
       decoration: const BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: ExactAssetImage(AppStrings.mockImageDetailPath),
+          image: ExactAssetImage(AssetImages.mockImageDetailPath),
         ),
       ),
     );
@@ -74,7 +74,7 @@ class _DetailsInfoState extends State<DetailsInfo> {
         children: [
           Text(
             widget.sight.name,
-            style: title,
+            style: Theme.of(context).textTheme.headline5,
           ),
           const SizedBox(
             height: 4,
@@ -82,19 +82,25 @@ class _DetailsInfoState extends State<DetailsInfo> {
           Row(children: [
             Text(
               widget.sight.type,
-              style: smallBold,
+              style: Theme.of(context).textTheme.caption?.copyWith(
+                    color: Theme.of(context).colorScheme.smallBoldSecondary,
+                  ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16),
               child: Text(
                 AppStrings.detailsScreenTime,
-                style: small.copyWith(color: lmSecondaryColor2),
+                style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      color: Theme.of(context).colorScheme.smallSecondaryTwo,
+                    ),
               ),
-            )
+            ),
           ]),
           Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: Text(widget.sight.details, style: small)),
+            padding: const EdgeInsets.symmetric(vertical: 24),
+            child: Text(widget.sight.details,
+                style: Theme.of(context).textTheme.bodyText2),
+          ),
           Container(
             width: double.infinity,
             height: 48,
@@ -114,13 +120,17 @@ class _DetailsInfoState extends State<DetailsInfo> {
                 const Icon(
                   Icons.calendar_today,
                   size: 24,
-                  color: lmInnactiveBlackColor,
+                  color: AppColors.lmInnactiveBlack,
                 ),
                 const SizedBox(
                   width: 8,
                 ),
-                Text(AppStrings.detailsScreenPlanButton,
-                    style: small.copyWith(color: lmInnactiveBlackColor)),
+                Text(
+                  AppStrings.detailsScreenPlanButton,
+                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                        color: Theme.of(context).colorScheme.smallInnactive,
+                      ),
+                ),
               ]),
               Row(children: const [
                 Icon(

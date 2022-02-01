@@ -1,8 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/image_paths.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/screen/res/config.dart';
+import 'package:places/ui/screen/sight_details.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 import 'package:places/ui/screen/visiting_screen.dart';
 
@@ -40,58 +46,86 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: appBars[index],
-        body: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: bottomNavController,
-            children: [
-              const SightListScreen(),
-              Container(),
-              VisitingScreen(intentionsList),
-              Container(color: Colors.pink),
-            ]),
-        floatingActionButton: FloatingActionButton(
-          child: const Text(AppStrings.themeChangeString),
-          onPressed: currentTheme.togleTheme,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          type: BottomNavigationBarType.fixed,
-          onTap: (currentIndex) {
-            index = currentIndex;
-            bottomNavController.animateTo(currentIndex);
-          },
-          currentIndex: bottomNavController.index,
-          items: const [
-            BottomNavigationBarItem(
-              activeIcon:
-                  ImageIcon(ExactAssetImage(AppStrings.iconListFillPath)),
-              icon: ImageIcon(ExactAssetImage(AppStrings.iconListOutlinePath)),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              activeIcon:
-                  ImageIcon(ExactAssetImage(AppStrings.iconMapFillPath)),
-              icon: ImageIcon(ExactAssetImage(AppStrings.iconMapOutlinePath)),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              activeIcon:
-                  ImageIcon(ExactAssetImage(AppStrings.iconHeartFillPath)),
-              icon: ImageIcon(ExactAssetImage(AppStrings.iconHeartOutlinePath)),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              activeIcon:
-                  ImageIcon(ExactAssetImage(AppStrings.iconSettingsFillPath)),
-              icon: ImageIcon(
-                  ExactAssetImage(AppStrings.iconSettingsOutlinePath)),
-              label: '',
-            ),
-          ],
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: Platform.isIOS
+            ? SystemUiOverlayStyle.dark
+            : const SystemUiOverlayStyle(
+                statusBarColor: Colors.transparent,
+                statusBarBrightness: Brightness.dark,
+                statusBarIconBrightness: Brightness.dark,
+              ),
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: appBars[index],
+          body: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: bottomNavController,
+              children: [
+                const SightListScreen(),
+                SightDetails(sight: sights[2]),
+                VisitingScreen(intentionsList),
+                Container(color: Colors.pink),
+              ]),
+          floatingActionButton: FloatingActionButton(
+            child: const Text(AppStrings.themeChangeString),
+            onPressed: currentTheme.togleTheme,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            type: BottomNavigationBarType.fixed,
+            onTap: (currentIndex) {
+              index = currentIndex;
+              bottomNavController.animateTo(currentIndex);
+            },
+            currentIndex: bottomNavController.index,
+            items: [
+              BottomNavigationBarItem(
+                activeIcon: SvgPicture.asset(
+                  AssetImages.iconListFillPath,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                icon: SvgPicture.asset(
+                  AssetImages.iconListOutlinePath,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                activeIcon: SvgPicture.asset(
+                  AssetImages.iconMapFillPath,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                icon: SvgPicture.asset(
+                  AssetImages.iconMapOutlinePath,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                activeIcon: SvgPicture.asset(
+                  AssetImages.iconHeartFillPath,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                icon: SvgPicture.asset(
+                  AssetImages.iconHeartOutlinePath,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                activeIcon: SvgPicture.asset(
+                  AssetImages.iconSettingsFillPath,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                icon: SvgPicture.asset(
+                  AssetImages.iconSettingsOutlinePath,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                label: '',
+              ),
+            ],
+          ),
         ),
       ),
     );

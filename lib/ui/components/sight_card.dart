@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:places/app_strings.dart';
 import 'package:places/domain/sight.dart';
-import 'package:places/styles.dart';
-
-import '../../colors.dart';
+import 'package:places/image_paths.dart';
+import 'package:places/ui/screen/res/themes.dart';
 
 class SightCard extends StatelessWidget {
   const SightCard({required Sight sight, Key? key})
@@ -36,7 +34,8 @@ class SightCard extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 2, 16, 16),
                 child: Text(
                   _sight.details,
-                  style: small.copyWith(color: lmSecondaryColor2),
+                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      color: Theme.of(context).colorScheme.smallSecondaryTwo),
                 ),
               ),
             ],
@@ -51,9 +50,7 @@ class SightCard extends StatelessWidget {
                     child: FittedBox(
                       child: Text(
                         _sight.type,
-                        style: smallBold.copyWith(
-                          color: Colors.white,
-                        ),
+                        style: Theme.of(context).textTheme.caption,
                       ),
                     ),
                   ),
@@ -98,7 +95,7 @@ class _ImageContainerState extends State<ImageContainer> {
                 Colors.black38,
                 BlendMode.darken,
               ),
-              image: ExactAssetImage(AppStrings.mockImageCardPath)),
+              image: ExactAssetImage(AssetImages.mockImageCardPath)),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(12),
             topRight: Radius.circular(12),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/domain/intention.dart';
-import 'package:places/styles.dart';
+import 'package:places/image_paths.dart';
 import 'package:places/ui/components/planned_sight_card.dart';
 import 'package:places/ui/components/visited_sight_card.dart';
-
-import '../../colors.dart';
+import 'package:places/ui/screen/res/themes.dart';
 
 //Third tab with visited places
 class VisitingScreen extends StatelessWidget {
@@ -28,10 +27,10 @@ class VisitingScreen extends StatelessWidget {
       children: [
         intentions.isEmpty
             ? const NullPlannedPlaceHolder()
-            : Column(children: visitedList),
+            : Column(children: plannedList),
         intentions.isEmpty
             ? const NullVisitedPlaceHolder()
-            : Column(children: plannedList),
+            : Column(children: visitedList),
       ],
     );
   }
@@ -46,18 +45,20 @@ class NullPlannedPlaceHolder extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          AppStrings.emptyPlannedImagePath,
+          AssetImages.emptyPlannedImagePath,
           height: 64,
         ),
         const SizedBox(height: 24),
         Text(AppStrings.emptyString,
-            style: subtitle.copyWith(color: lmInnactiveBlackColor)),
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                ?.copyWith(color: Theme.of(context).colorScheme.subTitle)),
         const SizedBox(height: 8),
-        Text(
-          AppStrings.nullPlannedTextString,
-          textAlign: TextAlign.center,
-          style: small.copyWith(color: lmInnactiveBlackColor),
-        ),
+        Text(AppStrings.nullPlannedTextString,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                color: Theme.of(context).colorScheme.smallInnactive)),
       ],
     );
   }
@@ -71,16 +72,18 @@ class NullVisitedPlaceHolder extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(AppStrings.emptyVisitedImagePath, height: 64),
+        Image.asset(AssetImages.emptyVisitedImagePath, height: 64),
         const SizedBox(height: 24),
         Text(AppStrings.emptyString,
-            style: subtitle.copyWith(color: lmInnactiveBlackColor)),
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                ?.copyWith(color: Theme.of(context).colorScheme.subTitle)),
         const SizedBox(height: 8),
-        Text(
-          AppStrings.nullVisitedTextString,
-          textAlign: TextAlign.center,
-          style: small.copyWith(color: lmInnactiveBlackColor),
-        ),
+        Text(AppStrings.nullVisitedTextString,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                color: Theme.of(context).colorScheme.smallInnactive)),
       ],
     );
   }

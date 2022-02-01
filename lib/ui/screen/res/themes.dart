@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:places/colors.dart';
 import 'package:places/styles.dart';
-
-import '../../../colors.dart';
 
 class CustomTheme with ChangeNotifier {
   static bool _isDarkTheme = false;
@@ -14,55 +14,113 @@ class CustomTheme with ChangeNotifier {
 
   static ThemeData get lightTheme {
     return ThemeData(
-      cardColor: lmCardBackground,
-      scaffoldBackgroundColor: lmBackground,
+      brightness: Brightness.light,
+      fontFamily: 'Roboto',
+      appBarTheme: const AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: AppColors.lmBackground,
+          //statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+      ),
+      cardColor: AppColors.lmBackground,
+      scaffoldBackgroundColor: AppColors.lmBackground,
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: lmBackground,
-        selectedItemColor: lmSecondaryColor,
-        unselectedItemColor: lmSecondaryColor,
+        backgroundColor: AppColors.lmBackground,
+        selectedItemColor: AppColors.lmSecondary,
+        unselectedItemColor: AppColors.lmSecondary,
       ),
       tabBarTheme: TabBarTheme(
         indicator: BoxDecoration(
-            borderRadius: BorderRadius.circular(30), color: lmSecondaryColor),
+            borderRadius: BorderRadius.circular(30),
+            color: AppColors.lmSecondary),
         indicatorSize: TabBarIndicatorSize.tab,
         labelColor: Colors.white,
-        unselectedLabelColor: lmInnactiveBlackColor,
+        unselectedLabelColor: AppColors.lmInnactiveBlack,
       ),
       textTheme: TextTheme(
-        headline6: title.copyWith(
-          color: lmMainColor,
+        headline6: subtitle.copyWith(
+          color: AppColors.lmMain,
+        ),
+        headline5: title.copyWith(
+          color: AppColors.lmSecondary,
         ),
         bodyText1: text.copyWith(
-          color: lmSecondaryColor,
+          color: AppColors.lmSecondary,
+        ),
+        bodyText2: small.copyWith(
+          color: AppColors.lmSecondary,
+        ),
+        caption: smallBold.copyWith(
+          color: Colors.white,
         ),
       ),
+      iconTheme: const IconThemeData(color: AppColors.lmSecondary),
     );
   }
 
   static ThemeData get darkTheme {
     return ThemeData(
-      cardColor: dmDark,
-      scaffoldBackgroundColor: dmMainColor,
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: dmMainColor,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-      ),
-      tabBarTheme: TabBarTheme(
-        indicator: BoxDecoration(
-            borderRadius: BorderRadius.circular(30), color: Colors.white),
-        indicatorSize: TabBarIndicatorSize.tab,
-        labelColor: lmSecondaryColor,
-        unselectedLabelColor: lmSecondaryColor2,
-      ),
-      textTheme: TextTheme(
-        headline6: title.copyWith(
-          color: Colors.white,
+        brightness: Brightness.dark,
+        fontFamily: 'Roboto',
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: AppColors.dmMain,
+            statusBarBrightness: Brightness.dark,
+            statusBarIconBrightness: Brightness.dark,
+          ),
         ),
-        bodyText1: text.copyWith(
-          color: Colors.white,
+        cardColor: AppColors.dmDark,
+        scaffoldBackgroundColor: AppColors.dmMain,
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: AppColors.dmMain,
+          selectedItemColor: Colors.red,
+          unselectedItemColor: Colors.white,
         ),
-      ),
-    );
+        tabBarTheme: TabBarTheme(
+          indicator: BoxDecoration(
+              borderRadius: BorderRadius.circular(30), color: Colors.white),
+          indicatorSize: TabBarIndicatorSize.tab,
+          labelColor: AppColors.lmSecondary,
+          unselectedLabelColor: AppColors.lmSecondary,
+        ),
+        textTheme: TextTheme(
+          headline6: subtitle.copyWith(
+            color: AppColors.dmInnactiveBlack,
+          ),
+          headline5: title.copyWith(
+            color: Colors.white,
+          ),
+          bodyText1: text.copyWith(
+            color: Colors.white,
+          ),
+          bodyText2: small.copyWith(
+            color: Colors.white,
+          ),
+          caption: smallBold.copyWith(
+            color: Colors.white,
+          ),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white));
   }
+}
+
+extension CustomColorScheme on ColorScheme {
+  Color get title =>
+      brightness == Brightness.light ? AppColors.lmMain : Colors.white;
+  Color get subTitle => brightness == Brightness.light
+      ? AppColors.lmInnactiveBlack
+      : AppColors.dmInnactiveBlack;
+  Color get smallSecondaryTwo => brightness == Brightness.light
+      ? AppColors.lmSecondaryTwo
+      : AppColors.dmSecondaryTwo;
+  Color get smallInnactive => brightness == Brightness.light
+      ? AppColors.lmInnactiveBlack
+      : AppColors.dmInnactiveBlack;
+  Color get smallBoldInnactive => brightness == Brightness.light
+      ? AppColors.lmInnactiveBlack
+      : AppColors.dmInnactiveBlack;
+  Color get smallBoldSecondary => brightness == Brightness.light
+      ? AppColors.lmSecondary
+      : AppColors.dmSecondary;
 }
