@@ -7,10 +7,11 @@ import 'package:places/app_strings.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/components/custom_appbars.dart';
-import 'package:places/ui/screen/res/config.dart';
-import 'package:places/ui/screen/sight_details.dart';
-import 'package:places/ui/screen/sight_list_screen.dart';
-import 'package:places/ui/screen/visiting_screen.dart';
+import 'package:places/ui/screens/res/config.dart';
+import 'package:places/ui/screens/settings_screen.dart';
+import 'package:places/ui/screens/sight_details_screen.dart';
+import 'package:places/ui/screens/sight_list_screen.dart';
+import 'package:places/ui/screens/visiting_screen.dart';
 
 //Main page with BottomNavigationBar
 class MainPage extends StatefulWidget {
@@ -26,12 +27,19 @@ class _MainPageState extends State<MainPage>
 
   List<PreferredSizeWidget> appBars = [
     const SimpleAppBar(AppStrings.appBarTitleIntesestingString),
-    const SimpleAppBar(AppStrings.appBarTitleMapString),
+    const ImageAppBar(),
     const TabsAppBar(AppStrings.appBarTitleFavoriteString),
     const SimpleAppBar(AppStrings.appBarTitlrSettingsString),
   ];
 
-  int index = 0;
+  List<Widget> bottomNavTabs = [
+    const SightListScreen(),
+    SightDetailsScreen(sight: sights[2]),
+    VisitingScreen(intentionsList),
+    const SettingsScreen(),
+  ];
+
+  int _index = 0;
 
   @override
   void initState() {
@@ -40,6 +48,11 @@ class _MainPageState extends State<MainPage>
     bottomNavController.addListener(() {
       setState(() {});
     });
+  }
+
+  void onSelectTab(int index) {
+    _index = index;
+    bottomNavController.animateTo(index);
   }
 
   @override
@@ -56,16 +69,11 @@ class _MainPageState extends State<MainPage>
               ),
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: appBars[index],
+          appBar: appBars[_index],
           body: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: bottomNavController,
-              children: [
-                const SightListScreen(),
-                SightDetails(sight: sights[2]),
-                VisitingScreen(intentionsList),
-                Container(color: Colors.pink),
-              ]),
+              children: bottomNavTabs),
           floatingActionButton: FloatingActionButton(
             child: const Text(AppStrings.themeChangeString),
             onPressed: currentTheme.togleTheme,
@@ -74,10 +82,7 @@ class _MainPageState extends State<MainPage>
             showSelectedLabels: false,
             showUnselectedLabels: false,
             type: BottomNavigationBarType.fixed,
-            onTap: (currentIndex) {
-              index = currentIndex;
-              bottomNavController.animateTo(currentIndex);
-            },
+            onTap: onSelectTab,
             currentIndex: bottomNavController.index,
             items: [
               BottomNavigationBarItem(

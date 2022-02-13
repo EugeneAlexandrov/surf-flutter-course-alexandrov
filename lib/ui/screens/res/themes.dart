@@ -24,9 +24,9 @@ class CustomTheme with ChangeNotifier {
         ),
       ),
       cardColor: AppColors.lmBackground,
-      scaffoldBackgroundColor: AppColors.lmBackground,
+      scaffoldBackgroundColor: Colors.white,
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: AppColors.lmBackground,
+        backgroundColor: Colors.white,
         selectedItemColor: AppColors.lmSecondary,
         unselectedItemColor: AppColors.lmSecondary,
       ),

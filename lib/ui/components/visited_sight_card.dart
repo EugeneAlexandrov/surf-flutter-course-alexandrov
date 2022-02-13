@@ -6,7 +6,7 @@ import 'package:places/app_strings.dart';
 import 'package:places/domain/intention.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
-import 'package:places/ui/screen/res/themes.dart';
+import 'package:places/ui/screens/res/themes.dart';
 
 class VisitedSightCard extends StatelessWidget {
   const VisitedSightCard({required Intention intention, Key? key})

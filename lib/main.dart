@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:places/main_page.dart';
-import 'package:places/ui/screen/res/config.dart';
-import 'package:places/ui/screen/res/themes.dart';
+import 'package:places/mocks.dart';
+import 'package:places/ui/screens/res/config.dart';
+import 'package:places/ui/screens/res/themes.dart';
+import 'package:places/ui/screens/sight_details_screen.dart';
 import 'app_strings.dart';
 
 void main() {
@@ -34,7 +36,21 @@ class _MyAppState extends State<MyApp> {
       themeMode: currentTheme.currentTheme,
       debugShowCheckedModeBanner: false,
       title: AppStrings.appTitle,
-      home: const MainPage(),
+      routes: {
+        '/main_screen': (context) => const MainPage(),
+        '/main_screen/details': (context) =>
+            SightDetailsScreen(sight: sights[2]),
+      },
+      initialRoute: '/main_screen',
+      onGenerateRoute: (RouteSettings settings) {
+        return MaterialPageRoute<void>(builder: (context) {
+          return const Scaffold(
+            body: Center(
+              child: Text('Ошибка пути'),
+            ),
+          );
+        });
+      },
     );
   }
 }

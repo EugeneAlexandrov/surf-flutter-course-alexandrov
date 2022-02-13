@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/ui/screen/res/themes.dart';
+import 'package:places/ui/screens/res/themes.dart';
 
 class SightCard extends StatelessWidget {
   const SightCard({required Sight sight, Key? key})
@@ -15,6 +16,7 @@ class SightCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
+      clipBehavior: Clip.hardEdge,
       elevation: 0,
       child: Stack(
         children: [
@@ -40,32 +42,31 @@ class SightCard extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: FittedBox(
-                      child: Text(
-                        _sight.type,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ),
-                  ),
-                ),
-                const Icon(
-                  Icons.favorite_border_outlined,
-                  size: 24,
-                  color: Colors.white,
-                ),
-              ],
+          Positioned(
+            top: 16,
+            left: 16,
+            child: Text(
+              _sight.type,
+              style: Theme.of(context).textTheme.caption,
             ),
+          ),
+          const Positioned(
+            top: 16,
+            right: 16,
+            child: FavouriteIconButton(),
           ),
         ],
       ),
     );
+  }
+}
+
+class FavouriteIconButton extends StatelessWidget {
+  const FavouriteIconButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(AssetImages.iconHeartOutlinePath);
   }
 }
 
@@ -96,10 +97,6 @@ class _ImageContainerState extends State<ImageContainer> {
                 BlendMode.darken,
               ),
               image: ExactAssetImage(AssetImages.mockImageCardPath)),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            topRight: Radius.circular(12),
-          ),
         ),
         height: 96,
       );

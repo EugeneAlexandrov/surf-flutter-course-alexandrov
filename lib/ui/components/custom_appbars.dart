@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
 import '../../app_strings.dart';
 
@@ -79,6 +80,28 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+//AppBar for details screen with image
+class ImageAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const ImageAppBar({Key? key}) : super(key: key);
+
+  @override
+  Size get preferredSize => const Size.fromHeight(361);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 360,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.fill,
+          image: ExactAssetImage(AssetImages.mockImageDetailPath),
+        ),
+      ),
     );
   }
 }

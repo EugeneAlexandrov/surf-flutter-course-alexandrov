@@ -2,54 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/colors.dart';
 import 'package:places/domain/sight.dart';
-import 'package:places/image_paths.dart';
-import 'package:places/ui/screen/res/themes.dart';
+import 'package:places/ui/screens/res/themes.dart';
 
 //Screen with sight card details
-class SightDetails extends StatelessWidget {
-  const SightDetails({Key? key, required this.sight}) : super(key: key);
+class SightDetailsScreen extends StatelessWidget {
+  const SightDetailsScreen({Key? key, required this.sight}) : super(key: key);
 
   final Sight sight;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      SingleChildScrollView(
-        child: Column(
-          children: [
-            const Galery(),
-            DetailsInfo(
-              sight: sight,
-            )
-          ],
-        ),
-      ),
-      Positioned(
-        top: 36,
-        left: 16,
-        child: SizedBox(
-          width: 32,
-          height: 32,
-          child: Container(color: Colors.white),
-        ),
-      ),
-    ]);
-  }
-}
-
-class Galery extends StatelessWidget {
-  const Galery({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 360,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: ExactAssetImage(AssetImages.mockImageDetailPath),
-        ),
+    return SingleChildScrollView(
+      child: DetailsInfo(
+        sight: sight,
       ),
     );
   }
