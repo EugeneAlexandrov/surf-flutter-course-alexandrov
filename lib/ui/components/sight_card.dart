@@ -24,20 +24,24 @@ class SightCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ImageContainer(),
+              const BackgroundImageContainer(),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                child: Text(
-                  _sight.name,
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 2, 16, 16),
-                child: Text(
-                  _sight.details,
-                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      color: Theme.of(context).colorScheme.smallSecondaryTwo),
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _sight.name,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    Text(
+                      _sight.details,
+                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                          color:
+                              Theme.of(context).colorScheme.smallSecondaryTwo),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -66,18 +70,20 @@ class FavouriteIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //TODO replace svg by IconButton
     return SvgPicture.asset(AssetImages.iconHeartOutlinePath);
   }
 }
 
-class ImageContainer extends StatefulWidget {
-  const ImageContainer({Key? key}) : super(key: key);
+class BackgroundImageContainer extends StatefulWidget {
+  const BackgroundImageContainer({Key? key}) : super(key: key);
 
   @override
-  _ImageContainerState createState() => _ImageContainerState();
+  _BackgroundImageContainerState createState() =>
+      _BackgroundImageContainerState();
 }
 
-class _ImageContainerState extends State<ImageContainer> {
+class _BackgroundImageContainerState extends State<BackgroundImageContainer> {
   Widget container = Container(
     child: const LinearProgressIndicator(),
     height: 96,

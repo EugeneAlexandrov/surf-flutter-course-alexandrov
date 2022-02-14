@@ -29,29 +29,33 @@ class VisitedSightCard extends StatelessWidget {
             children: [
               const ImageContainer(),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                child: Text(
-                  _intention.sight.name,
-                  style: Theme.of(context).textTheme.bodyText1,
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _intention.sight.name,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    Text(
+                      AppStrings.visitedCardGoalString +
+                          getDate(_intention.date),
+                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                            color:
+                                Theme.of(context).colorScheme.smallSecondaryTwo,
+                          ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      _intention.sight.details,
+                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                          color:
+                              Theme.of(context).colorScheme.smallSecondaryTwo),
+                    ),
+                  ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 2, 16, 0),
-                child: Text(
-                  AppStrings.visitedCardGoalString + getDate(_intention.date),
-                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                        color: Theme.of(context).colorScheme.smallSecondaryTwo,
-                      ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
-                child: Text(
-                  _intention.sight.details,
-                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      color: Theme.of(context).colorScheme.smallSecondaryTwo),
-                ),
-              ),
+              )
             ],
           ),
           Padding(
@@ -71,8 +75,10 @@ class VisitedSightCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                //TODO replace svg by IconButton
                 SvgPicture.asset(AssetImages.iconSharePath),
                 const SizedBox(width: 22),
+                //TODO replace svg by IconButton
                 SvgPicture.asset(AssetImages.iconCrossPath),
               ],
             ),

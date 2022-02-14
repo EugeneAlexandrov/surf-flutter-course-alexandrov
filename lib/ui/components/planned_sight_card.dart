@@ -28,27 +28,30 @@ class PlannedSightCard extends StatelessWidget {
             children: [
               const ImageContainer(),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                child: Text(
-                  _intention.sight.name,
-                  style: Theme.of(context).textTheme.bodyText1,
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _intention.sight.name,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    Text(
+                        AppStrings.plannedCardGoalString +
+                            getDate(_intention.date),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2
+                            ?.copyWith(color: getColor(_intention.date))),
+                    const SizedBox(height: 16),
+                    Text(_intention.sight.details,
+                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .smallSecondaryTwo)),
+                  ],
                 ),
-              ),
-              Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 2, 16, 0),
-                  child: Text(
-                      AppStrings.plannedCardGoalString +
-                          getDate(_intention.date),
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2
-                          ?.copyWith(color: getColor(_intention.date)))),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
-                child: Text(_intention.sight.details,
-                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                        color:
-                            Theme.of(context).colorScheme.smallSecondaryTwo)),
               ),
             ],
           ),
@@ -67,11 +70,13 @@ class PlannedSightCard extends StatelessWidget {
                     ),
                   ),
                 ),
+                //TODO replace svg by IconButton
                 SvgPicture.asset(
                   AssetImages.iconCalendarPath,
                   color: Colors.white,
                 ),
                 const SizedBox(width: 22),
+                //TODO replace svg by IconButton
                 SvgPicture.asset(
                   AssetImages.iconCrossPath,
                   color: Colors.white,

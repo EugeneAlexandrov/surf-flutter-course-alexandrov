@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/colors.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/image_paths.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 //Screen with sight card details
@@ -33,7 +34,7 @@ class _DetailsInfoState extends State<DetailsInfo> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 26, 16, 0),
+      padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -51,21 +52,19 @@ class _DetailsInfoState extends State<DetailsInfo> {
                     color: Theme.of(context).colorScheme.smallBoldSecondary,
                   ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16),
-              child: Text(
-                AppStrings.detailsScreenTime,
-                style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      color: Theme.of(context).colorScheme.smallSecondaryTwo,
-                    ),
-              ),
+            const SizedBox(width: 16),
+            Text(
+              AppStrings.detailsScreenTime,
+              style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                    color: Theme.of(context).colorScheme.smallSecondaryTwo,
+                  ),
             ),
           ]),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            child: Text(widget.sight.details,
-                style: Theme.of(context).textTheme.bodyText2),
-          ),
+          const SizedBox(height: 24),
+          Text(widget.sight.details,
+              style: Theme.of(context).textTheme.bodyText2),
+          const SizedBox(height: 24),
+//TODO replace placeholder with ElevatedButton
           Container(
             width: double.infinity,
             height: 48,
@@ -74,39 +73,51 @@ class _DetailsInfoState extends State<DetailsInfo> {
               borderRadius: BorderRadius.circular(12),
             ),
           ),
+          const SizedBox(height: 24),
           Container(
-              margin: const EdgeInsets.only(top: 24, bottom: 16),
-              height: 1,
-              color: const Color(0x567C7E92)),
+            height: 0.8,
+            color: const Color.fromRGBO(124, 126, 146, 0.24),
+          ),
+          const SizedBox(height: 8),
+          //placeholder for two buttons
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Row(children: [
-                const Icon(
-                  Icons.calendar_today,
-                  size: 24,
-                  color: AppColors.lmInnactiveBlack,
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  AppStrings.detailsScreenPlanButton,
-                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                        color: Theme.of(context).colorScheme.smallInnactive,
-                      ),
-                ),
-              ]),
-              Row(children: const [
-                Icon(
-                  Icons.favorite_border_rounded,
-                  size: 24,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(AppStrings.detailsScreenFavButton),
-              ]),
+              //TODO replace by TextButton
+              SizedBox(
+                height: 40,
+                child: Row(children: [
+                  SvgPicture.asset(
+                    AssetImages.iconCalendarPath,
+                    color: Theme.of(context).colorScheme.smallInnactive,
+                    height: 24,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    AppStrings.detailsScreenPlanButton,
+                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                          color: Theme.of(context).colorScheme.smallInnactive,
+                        ),
+                  ),
+                ]),
+              ),
+              //TODO replace by TextButton
+              SizedBox(
+                height: 40,
+                child: Row(children: [
+                  SvgPicture.asset(
+                    AssetImages.iconHeartFillPath,
+                    color: Colors.green,
+                    height: 24,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  const Text(AppStrings.detailsScreenFavButton),
+                ]),
+              ),
             ],
           ),
         ],
