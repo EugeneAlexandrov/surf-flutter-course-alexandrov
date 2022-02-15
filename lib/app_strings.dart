@@ -19,6 +19,5 @@ class AppStrings {
   static const nullPlannedTextString =
       'Отмечайте понравившиеся места\nи они появиятся здесь.';
   static const themeChangeString = 'сменить тему';
-
-  
+  static const buildPathString = 'ПОСТРОИТЬ МАРШРУТ';
 }

@@ -6,6 +6,8 @@ import 'package:places/app_strings.dart';
 import 'package:places/domain/intention.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
+import 'package:places/ui/components/background_image_container.dart';
+import 'package:places/ui/components/custom_icon_button.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 class VisitedSightCard extends StatelessWidget {
@@ -20,6 +22,7 @@ class VisitedSightCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
+      clipBehavior: Clip.hardEdge,
       elevation: 0,
       child: Stack(
         children: [
@@ -27,7 +30,7 @@ class VisitedSightCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ImageContainer(),
+              const BackgroundImageContainer(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
@@ -58,29 +61,42 @@ class VisitedSightCard extends StatelessWidget {
               )
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: FittedBox(
-                      child: Text(
-                        _intention.sight.type,
-                        style: smallBold.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
+          Positioned(
+            top: 16,
+            left: 16,
+            child: Text(
+              _intention.sight.type,
+              style: smallBold.copyWith(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Positioned(
+            top: 8,
+            right: 52,
+            child: SizedBox(
+              height: 40,
+              width: 40,
+              child: CustomIconButton(
+                onPressed: () {
+                  print('share');
+                },
+                child: SvgPicture.asset(
+                  AssetImages.iconSharePath,
                 ),
-                //TODO replace svg by IconButton
-                SvgPicture.asset(AssetImages.iconSharePath),
-                const SizedBox(width: 22),
-                //TODO replace svg by IconButton
-                SvgPicture.asset(AssetImages.iconCrossPath),
-              ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 8,
+            right: 8,
+            child: SizedBox(
+              height: 40,
+              width: 40,
+              child: CustomIconButton(
+                child: SvgPicture.asset(AssetImages.iconCrossPath),
+                onPressed: () => print('delete'),
+              ),
             ),
           ),
         ],
@@ -92,49 +108,5 @@ class VisitedSightCard extends StatelessWidget {
     initializeDateFormatting();
     final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
     return formatter.format(date);
-  }
-}
-
-class ImageContainer extends StatefulWidget {
-  const ImageContainer({Key? key}) : super(key: key);
-
-  @override
-  _ImageContainerState createState() => _ImageContainerState();
-}
-
-class _ImageContainerState extends State<ImageContainer> {
-  Widget container = Container(
-    child: const LinearProgressIndicator(),
-    height: 96,
-    alignment: Alignment.bottomCenter,
-  );
-
-  void changeLoader() async {
-    //await Future.delayed(const Duration(seconds: 5));
-    setState(() {
-      container = Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              alignment: Alignment.topCenter,
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                Colors.black38,
-                BlendMode.darken,
-              ),
-              image: ExactAssetImage(AssetImages.mockImageCardPath)),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12),
-            topRight: Radius.circular(12),
-          ),
-        ),
-        height: 96,
-      );
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    changeLoader();
-    return Container(child: container);
   }
 }

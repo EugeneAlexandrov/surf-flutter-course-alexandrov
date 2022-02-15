@@ -38,6 +38,21 @@ class CustomTheme with ChangeNotifier {
         labelColor: Colors.white,
         unselectedLabelColor: AppColors.lmInnactiveBlack,
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          primary: AppColors.lmGreen,
+          fixedSize: const Size(double.infinity, 48),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          textStyle: small,
+          primary: AppColors.lmSecondary,
+        ),
+      ),
       textTheme: TextTheme(
         headline6: subtitle.copyWith(
           color: AppColors.lmMain,
@@ -83,6 +98,21 @@ class CustomTheme with ChangeNotifier {
           indicatorSize: TabBarIndicatorSize.tab,
           labelColor: AppColors.lmSecondary,
           unselectedLabelColor: AppColors.lmSecondary,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: AppColors.dmGreen,
+            fixedSize: const Size(double.infinity, 48),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            textStyle: small,
+            primary: Colors.white,
+          ),
         ),
         textTheme: TextTheme(
           headline6: subtitle.copyWith(

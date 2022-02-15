@@ -16,4 +16,5 @@ class AssetImages {
   static const iconCalendarPath = basicPath + 'Calendar.svg';
   static const iconSharePath = basicPath + 'Share.svg';
   static const iconCrossPath = basicPath + 'Close.svg';
+  static const goPath = basicPath + 'GO.svg';
 }

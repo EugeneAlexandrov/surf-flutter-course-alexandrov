@@ -64,14 +64,10 @@ class _DetailsInfoState extends State<DetailsInfo> {
           Text(widget.sight.details,
               style: Theme.of(context).textTheme.bodyText2),
           const SizedBox(height: 24),
-//TODO replace placeholder with ElevatedButton
-          Container(
-            width: double.infinity,
-            height: 48,
-            decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(12),
-            ),
+          ElevatedButton.icon(
+            onPressed: () {},
+            icon: SvgPicture.asset(AssetImages.goPath),
+            label: const Text(AppStrings.buildPathString),
           ),
           const SizedBox(height: 24),
           Container(
@@ -83,40 +79,23 @@ class _DetailsInfoState extends State<DetailsInfo> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              //TODO replace by TextButton
-              SizedBox(
-                height: 40,
-                child: Row(children: [
-                  SvgPicture.asset(
-                    AssetImages.iconCalendarPath,
-                    color: Theme.of(context).colorScheme.smallInnactive,
-                    height: 24,
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    AppStrings.detailsScreenPlanButton,
-                    style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                          color: Theme.of(context).colorScheme.smallInnactive,
-                        ),
-                  ),
-                ]),
+              TextButton.icon(
+                onPressed: null,
+                icon: SvgPicture.asset(
+                  AssetImages.iconCalendarPath,
+                  color: Theme.of(context).colorScheme.smallInnactive,
+                  height: 24,
+                ),
+                label: const Text(AppStrings.detailsScreenPlanButton),
               ),
-              //TODO replace by TextButton
-              SizedBox(
-                height: 40,
-                child: Row(children: [
-                  SvgPicture.asset(
-                    AssetImages.iconHeartFillPath,
-                    color: Colors.green,
-                    height: 24,
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  const Text(AppStrings.detailsScreenFavButton),
-                ]),
+              TextButton.icon(
+                onPressed: () {},
+                icon: SvgPicture.asset(
+                  AssetImages.iconHeartOutlinePath,
+                  color: Theme.of(context).colorScheme.smallInnactive,
+                  height: 24,
+                ),
+                label: const Text(AppStrings.detailsScreenFavButton),
               ),
             ],
           ),
