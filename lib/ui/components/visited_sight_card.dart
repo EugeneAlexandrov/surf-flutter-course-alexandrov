@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/domain/intention.dart';
+import 'package:places/domain/model/intention.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
 import 'package:places/ui/components/background_image_container.dart';

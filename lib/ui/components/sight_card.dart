@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/colors.dart';
-import 'package:places/domain/sight.dart';
+import 'package:places/domain/model/sight.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/favorite_icon_button.dart';
 import 'package:places/ui/screens/res/themes.dart';
@@ -16,7 +16,6 @@ class SightCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      margin: const EdgeInsets.all(8),
       clipBehavior: Clip.hardEdge,
       elevation: 0,
       child: Stack(

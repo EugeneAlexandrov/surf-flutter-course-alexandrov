@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:places/data/mock_sights.dart';
 import 'package:places/main_page.dart';
-import 'package:places/mocks.dart';
+import 'package:places/ui/screens/filters_screen.dart';
 import 'package:places/ui/screens/res/config.dart';
 import 'package:places/ui/screens/res/themes.dart';
 import 'package:places/ui/screens/sight_details_screen.dart';
@@ -39,7 +40,8 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/main_screen': (context) => const MainPage(),
         '/main_screen/details': (context) =>
-            SightDetailsScreen(sight: sights[2]),
+            SightDetailsScreen(sight: mockSights[2]),
+        '/main_screen/filters': (context) => const FiltersScreen(),
       },
       initialRoute: '/main_screen',
       onGenerateRoute: (RouteSettings settings) {

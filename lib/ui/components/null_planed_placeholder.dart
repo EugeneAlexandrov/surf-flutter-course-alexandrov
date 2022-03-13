@@ -13,7 +13,7 @@ class NullPlannedPlaceHolder extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SvgPicture.asset(
-          AssetImages.goPath,
+          AssetImages.iconGoPath,
           color: Colors.white,
           height: 64,
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:places/domain/intention.dart';
+import 'package:places/domain/model/intention.dart';
 import 'package:places/ui/components/null_planed_placeholder.dart';
 import 'package:places/ui/components/null_visited_placeholder.dart';
 import 'package:places/ui/components/planned_sight_card.dart';

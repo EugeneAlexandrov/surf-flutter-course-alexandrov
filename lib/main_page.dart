@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/data/mock_intentions.dart';
+import 'package:places/data/mock_sights.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/mocks.dart';
 import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/screens/res/config.dart';
 import 'package:places/ui/screens/settings_screen.dart';
@@ -34,8 +35,8 @@ class _MainPageState extends State<MainPage>
 
   List<Widget> bottomNavTabs = [
     const SightListScreen(),
-    SightDetailsScreen(sight: sights[2]),
-    VisitingScreen(intentionsList),
+    SightDetailsScreen(sight: mockSights[2]),
+    VisitingScreen(mockIntentionsList),
     const SettingsScreen(),
   ];
 

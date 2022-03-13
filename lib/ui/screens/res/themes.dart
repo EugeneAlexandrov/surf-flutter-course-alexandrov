@@ -23,7 +23,12 @@ class CustomTheme with ChangeNotifier {
           statusBarIconBrightness: Brightness.dark,
         ),
       ),
-      cardColor: AppColors.lmBackground,
+      textSelectionTheme:
+          const TextSelectionThemeData(cursorColor: AppColors.lmGreen),
+      cardTheme: const CardTheme(
+        color: AppColors.lmBackground,
+        margin: EdgeInsets.all(0),
+      ),
       scaffoldBackgroundColor: Colors.white,
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: Colors.white,
@@ -53,6 +58,12 @@ class CustomTheme with ChangeNotifier {
           primary: AppColors.lmSecondary,
         ),
       ),
+      sliderTheme: const SliderThemeData(
+        activeTrackColor: AppColors.lmGreen,
+        thumbColor: Colors.white,
+        inactiveTrackColor: AppColors.lmInnactiveBlack,
+        trackHeight: 1,
+      ),
       textTheme: TextTheme(
         headline6: subtitle.copyWith(
           color: AppColors.lmMain,
@@ -68,6 +79,9 @@ class CustomTheme with ChangeNotifier {
         ),
         caption: smallBold.copyWith(
           color: Colors.white,
+        ),
+        headline1: superSmall.copyWith(
+          color: AppColors.lmSecondary,
         ),
       ),
       iconTheme: const IconThemeData(color: AppColors.lmSecondary),
@@ -85,7 +99,12 @@ class CustomTheme with ChangeNotifier {
             statusBarIconBrightness: Brightness.dark,
           ),
         ),
-        cardColor: AppColors.dmDark,
+        textSelectionTheme:
+            const TextSelectionThemeData(cursorColor: AppColors.dmGreen),
+        cardTheme: const CardTheme(
+          color: AppColors.dmDark,
+          margin: EdgeInsets.all(0),
+        ),
         scaffoldBackgroundColor: AppColors.dmMain,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: AppColors.dmMain,
@@ -114,6 +133,12 @@ class CustomTheme with ChangeNotifier {
             primary: Colors.white,
           ),
         ),
+        sliderTheme: const SliderThemeData(
+          activeTrackColor: AppColors.lmGreen,
+          thumbColor: Colors.white,
+          inactiveTrackColor: AppColors.lmInnactiveBlack,
+          trackHeight: 1,
+        ),
         textTheme: TextTheme(
           headline6: subtitle.copyWith(
             color: AppColors.dmInnactiveBlack,
@@ -128,6 +153,9 @@ class CustomTheme with ChangeNotifier {
             color: Colors.white,
           ),
           caption: smallBold.copyWith(
+            color: Colors.white,
+          ),
+          headline1: superSmall.copyWith(
             color: Colors.white,
           ),
         ),
@@ -153,4 +181,9 @@ extension CustomColorScheme on ColorScheme {
   Color get smallBoldSecondary => brightness == Brightness.light
       ? AppColors.lmSecondary
       : AppColors.dmSecondary;
+  Color get lmBackgroundDmDark => brightness == Brightness.light
+      ? AppColors.lmBackground
+      : AppColors.dmDark;
+  Color get lmMainDmWhite =>
+      brightness == Brightness.light ? AppColors.lmMain : Colors.white;
 }
