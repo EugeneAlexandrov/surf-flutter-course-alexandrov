@@ -4,11 +4,12 @@ import 'package:places/colors.dart';
 import 'package:places/styles.dart';
 
 class CustomTheme with ChangeNotifier {
-  static bool _isDarkTheme = false;
+  bool _isDarkTheme = false;
+  bool get isDark => _isDarkTheme;
   ThemeMode get currentTheme => _isDarkTheme ? ThemeMode.dark : ThemeMode.light;
 
-  void togleTheme() {
-    _isDarkTheme = !_isDarkTheme;
+  void changeTheme(bool newValue) {
+    _isDarkTheme = newValue;
     notifyListeners();
   }
 

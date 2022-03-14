@@ -75,10 +75,6 @@ class _MainPageState extends State<MainPage>
               physics: const NeverScrollableScrollPhysics(),
               controller: bottomNavController,
               children: bottomNavTabs),
-          floatingActionButton: FloatingActionButton(
-            child: const Text(AppStrings.themeChangeString),
-            onPressed: currentTheme.togleTheme,
-          ),
           bottomNavigationBar: BottomNavigationBar(
             showSelectedLabels: false,
             showUnselectedLabels: false,

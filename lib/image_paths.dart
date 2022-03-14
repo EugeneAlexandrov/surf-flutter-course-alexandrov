@@ -26,4 +26,5 @@ class AssetImages {
   static const iconSpecialFilterPath = basicPath + 'Special.svg';
   static const iconCafeFilterPath = basicPath + 'Cafe.svg';
   static const iconAppbarArrowPath = basicPath + 'Arrow.svg';
+  static const iconInfoPath = basicPath + 'Info.svg';
 }
