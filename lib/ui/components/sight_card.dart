@@ -57,7 +57,7 @@ class SightCard extends StatelessWidget {
           //Ripple effect behind card
           Positioned.fill(
             child: Material(
-              color: Colors.transparent,
+              type: MaterialType.transparency,
               child: InkWell(
                 splashColor: AppColors.dmInnactiveBlack,
                 onTap: () {
