@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/domain/sight.dart';
+import 'package:places/domain/model/sight.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
@@ -66,7 +66,7 @@ class _DetailsInfoState extends State<DetailsInfo> {
           const SizedBox(height: 24),
           ElevatedButton.icon(
             onPressed: () {},
-            icon: SvgPicture.asset(AssetImages.goPath),
+            icon: SvgPicture.asset(AssetImages.iconGoPath),
             label: const Text(AppStrings.buildPathString),
           ),
           const SizedBox(height: 24),

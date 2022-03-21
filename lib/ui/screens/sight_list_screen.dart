@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:places/mocks.dart';
+import 'package:places/domain/repository/sight_repository.dart';
+import 'package:places/ui/components/search_widget.dart';
 import 'package:places/ui/components/sight_card.dart';
 
 //First tab with list of interesting places
@@ -11,12 +12,31 @@ class SightListScreen extends StatefulWidget {
 }
 
 class _SightListScreenState extends State<SightListScreen> {
+  SightRepository sightRepository = SightRepository();
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(8),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
-        children: sights.map((sight) => SightCard(sight: sight)).toList(),
+        children: [
+          const SearchField(),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.only(top: 26),
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              itemCount: sightRepository.sightList.length,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                final sight = sightRepository.sightList[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: SightCard(sight: sight),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

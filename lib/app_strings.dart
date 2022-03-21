@@ -20,4 +20,11 @@ class AppStrings {
       'Отмечайте понравившиеся места\nи они появиятся здесь.';
   static const themeChangeString = 'сменить тему';
   static const buildPathString = 'ПОСТРОИТЬ МАРШРУТ';
+  static const searchString = 'Поиск';
+  static const cleanFiltersString = 'Очистить';
+  static const categoriesString = 'категории';
+  static const showString = 'ПОКАЗАТЬ';
+  static const distanceString = 'Расстояние';
+  static const darkThemeString = 'Темная тема';
+  static const showTutorialString = 'Показать Туториал';
 }
