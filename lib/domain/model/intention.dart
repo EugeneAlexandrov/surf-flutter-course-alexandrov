@@ -1,4 +1,4 @@
-import 'sight.dart';
+import 'package:places/domain/model/sight.dart';
 
 //dataclass for sights user signed to visit or have already visited
 class Intention {

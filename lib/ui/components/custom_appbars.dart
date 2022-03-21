@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
+import 'package:places/ui/screens/res/themes.dart';
 import '../../app_strings.dart';
 
 //Simple AppBar with single Text
@@ -20,7 +21,10 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
       alignment: Alignment.center,
       child: Text(
         title,
-        style: Theme.of(context).textTheme.headline6,
+        style: Theme.of(context)
+            .textTheme
+            .headline6
+            ?.copyWith(color: Theme.of(context).colorScheme.lmMainDmWhite),
       ),
     );
   }
