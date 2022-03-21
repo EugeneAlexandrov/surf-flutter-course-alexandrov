@@ -75,7 +75,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
               MyRangeSlider(onChanged: changeRange),
               ElevatedButton(
                 child: Text('${AppStrings.showString} (${sightList.length})'),
-                onPressed: () {},
+                onPressed: sightList.isEmpty ? null : () {},
               ),
             ],
           ),

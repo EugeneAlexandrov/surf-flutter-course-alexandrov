@@ -80,3 +80,4 @@ ios/Runner/GeneratedPluginRegistrant.*
 packages/template/ios/Flutter/flutter_export_environment.sh
 android/build.gradle
 android/app/build.gradle
+.flutter-plugins-dependencies

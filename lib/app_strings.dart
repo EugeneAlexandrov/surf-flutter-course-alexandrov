@@ -25,4 +25,6 @@ class AppStrings {
   static const categoriesString = 'категории';
   static const showString = 'ПОКАЗАТЬ';
   static const distanceString = 'Расстояние';
+  static const darkThemeString = 'Темная тема';
+  static const showTutorialString = 'Показать Туториал';
 }
