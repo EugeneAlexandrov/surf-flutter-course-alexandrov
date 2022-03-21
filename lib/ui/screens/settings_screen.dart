@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
@@ -16,7 +17,7 @@ class SettingsScreen extends StatelessWidget {
           title: const Text(AppStrings.darkThemeString),
           trailing: Consumer<CustomTheme>(
             builder: (context, CustomTheme theme, child) {
-              return Switch(
+              return CupertinoSwitch(
                 value: theme.isDark,
                 onChanged: (newValue) {
                   theme.changeTheme(newValue);

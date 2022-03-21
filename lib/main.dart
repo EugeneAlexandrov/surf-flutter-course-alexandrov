@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/app_router.dart';
 import 'package:places/data/mock_sights.dart';
 import 'package:places/main_page.dart';
 import 'package:places/ui/screens/filters_screen.dart';
@@ -43,12 +44,12 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: AppStrings.appTitle,
             routes: {
-              '/main_screen': (context) => const MainPage(),
-              '/main_screen/details': (context) =>
+              AppRouter.main: (context) => const MainPage(),
+              AppRouter.details: (context) =>
                   SightDetailsScreen(sight: mockSights[2]),
-              '/main_screen/filters': (context) => const FiltersScreen(),
+              AppRouter.filters: (context) => const FiltersScreen(),
             },
-            initialRoute: '/main_screen',
+            initialRoute: AppRouter.main,
             onGenerateRoute: (RouteSettings settings) {
               return MaterialPageRoute<void>(builder: (context) {
                 return const Scaffold(
