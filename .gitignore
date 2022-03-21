@@ -79,3 +79,6 @@ ios/Runner/GeneratedPluginRegistrant.*
 ~changed_list_file
 packages/template/ios/Flutter/flutter_export_environment.sh
 pubspec.lock
+android/build.gradle
+android/app/build.gradle
+.flutter-plugins-dependencies

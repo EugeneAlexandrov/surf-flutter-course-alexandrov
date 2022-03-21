@@ -16,4 +16,15 @@ class AssetImages {
   static const iconCalendarPath = basicPath + 'Calendar.svg';
   static const iconSharePath = basicPath + 'Share.svg';
   static const iconCrossPath = basicPath + 'Close.svg';
+  static const iconGoPath = basicPath + 'GO.svg';
+  static const iconSearchPath = basicPath + 'Search.svg';
+  static const iconFilterPath = basicPath + 'Filter.svg';
+  static const iconHotelFilterPath = basicPath + 'Hotel.svg';
+  static const iconMuseumFilterPath = basicPath + 'Museum.svg';
+  static const iconParkFilterPath = basicPath + 'Park.svg';
+  static const iconRestourantFilterPath = basicPath + 'Restourant.svg';
+  static const iconSpecialFilterPath = basicPath + 'Special.svg';
+  static const iconCafeFilterPath = basicPath + 'Cafe.svg';
+  static const iconAppbarArrowPath = basicPath + 'Arrow.svg';
+  static const iconInfoPath = basicPath + 'Info.svg';
 }
