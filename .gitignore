@@ -35,6 +35,7 @@ ios/Runner/GeneratedPluginRegistrant.*
 .pub/
 /build/
 *.lock
+.flutter-plugins-dependencies
 # Android related
 **/android/**/gradle-wrapper.jar
 **/android/.gradle
@@ -81,4 +82,3 @@ packages/template/ios/Flutter/flutter_export_environment.sh
 pubspec.lock
 android/build.gradle
 android/app/build.gradle
-.flutter-plugins-dependencies
