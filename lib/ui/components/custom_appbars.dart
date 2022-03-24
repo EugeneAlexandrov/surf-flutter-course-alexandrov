@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
 import 'package:places/ui/screens/res/themes.dart';
@@ -48,7 +49,10 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(top: 40, bottom: 22),
           child: Text(
             title,
-            style: Theme.of(context).textTheme.headline6,
+            style: Theme.of(context)
+                .textTheme
+                .headline6
+                ?.copyWith(color: Theme.of(context).colorScheme.lmMainDmWhite),
           ),
         ),
         Theme(
@@ -60,7 +64,7 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
+              color: Theme.of(context).cardTheme.color,
               borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
             child: const TabBar(
@@ -97,15 +101,39 @@ class ImageAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 360,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fill,
-          image: ExactAssetImage(AssetImages.mockImageDetailPath),
+    return Stack(
+      children: [
+        Container(
+          height: 360,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              image: ExactAssetImage(AssetImages.mockImageDetailPath),
+            ),
+          ),
         ),
-      ),
+        Positioned(
+          top: 36,
+          left: 16,
+          child: Container(
+            height: 32,
+            width: 32,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: InkWell(
+              onTap: () => Navigator.of(context).pop(),
+              child: SvgPicture.asset(
+                AssetImages.iconAppbarArrowPath,
+                color: Colors.black,
+                height: 5,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

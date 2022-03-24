@@ -28,10 +28,9 @@ class _SightListScreenState extends State<SightListScreen> {
               itemCount: sightRepository.sightList.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                final sight = sightRepository.sightList[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: SightCard(sight: sight),
+                  child: SightCard(index: index),
                 );
               },
             ),

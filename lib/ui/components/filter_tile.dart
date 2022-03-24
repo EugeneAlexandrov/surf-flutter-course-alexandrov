@@ -5,7 +5,7 @@ import 'package:places/domain/model/filter.dart';
 
 typedef FilterChangeCallback = Function(int index);
 
-Widget FilterTile(
+Widget buildFilterTile(
   BuildContext context,
   Filter filter,
   FilterChangeCallback onPressed,

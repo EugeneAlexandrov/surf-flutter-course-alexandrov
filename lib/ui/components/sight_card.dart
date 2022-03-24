@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:places/app_router.dart';
 import 'package:places/colors.dart';
-import 'package:places/domain/model/sight.dart';
+import 'package:places/data/mock_sights.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/favorite_icon_button.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 class SightCard extends StatelessWidget {
-  const SightCard({required Sight sight, Key? key})
-      : _sight = sight,
-        super(key: key);
+  const SightCard({required this.index, Key? key}) : super(key: key);
 
-  final Sight _sight;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +31,11 @@ class SightCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _sight.name,
+                      mockSights[index].name,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Text(
-                      _sight.details,
+                      mockSights[index].details,
                       style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           color:
                               Theme.of(context).colorScheme.smallSecondaryTwo),
@@ -50,7 +49,7 @@ class SightCard extends StatelessWidget {
             top: 16,
             left: 16,
             child: Text(
-              _sight.type,
+              mockSights[index].type,
               style: Theme.of(context).textTheme.caption,
             ),
           ),
@@ -61,7 +60,7 @@ class SightCard extends StatelessWidget {
               child: InkWell(
                 splashColor: AppColors.dmInnactiveBlack,
                 onTap: () {
-                  print('Tap ${_sight.name}');
+                  onSightTap(context, index);
                 },
               ),
             ),
@@ -74,5 +73,9 @@ class SightCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void onSightTap(BuildContext context, int index) {
+    Navigator.of(context).pushNamed(AppRouter.details,arguments: index);
   }
 }

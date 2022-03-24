@@ -5,12 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/data/mock_intentions.dart';
-import 'package:places/data/mock_sights.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_appbars.dart';
-import 'package:places/ui/screens/res/config.dart';
 import 'package:places/ui/screens/settings_screen.dart';
-import 'package:places/ui/screens/sight_details_screen.dart';
 import 'package:places/ui/screens/sight_list_screen.dart';
 import 'package:places/ui/screens/visiting_screen.dart';
 
@@ -28,14 +25,14 @@ class _MainPageState extends State<MainPage>
 
   List<PreferredSizeWidget> appBars = [
     const SimpleAppBar(AppStrings.appBarTitleIntesestingString),
-    const ImageAppBar(),
+    const SimpleAppBar(AppStrings.appBarTitleMapString),
     const TabsAppBar(AppStrings.appBarTitleFavoriteString),
     const SimpleAppBar(AppStrings.appBarTitlrSettingsString),
   ];
 
   List<Widget> bottomNavTabs = [
     const SightListScreen(),
-    SightDetailsScreen(sight: mockSights[2]),
+    Container(color: Colors.red),
     VisitingScreen(mockIntentionsList),
     const SettingsScreen(),
   ];

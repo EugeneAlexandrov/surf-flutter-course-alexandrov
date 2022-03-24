@@ -28,7 +28,8 @@ class _FilterGridViewWidgetState extends State<FilterGridViewWidget> {
       shrinkWrap: true,
       itemCount: widget.children.length,
       itemBuilder: (BuildContext context, index) {
-        return FilterTile(context, widget.children[index], widget.onChanged);
+        return buildFilterTile(
+            context, widget.children[index], widget.onChanged);
       },
     );
   }

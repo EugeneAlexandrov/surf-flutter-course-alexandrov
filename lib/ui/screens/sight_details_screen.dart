@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/data/mock_sights.dart';
 import 'package:places/domain/model/sight.dart';
 import 'package:places/image_paths.dart';
+import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 //Screen with sight card details
 class SightDetailsScreen extends StatelessWidget {
-  const SightDetailsScreen({Key? key, required this.sight}) : super(key: key);
+  const SightDetailsScreen({Key? key, required this.index}) : super(key: key);
 
-  final Sight sight;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: DetailsInfo(
-        sight: sight,
+    return Scaffold(
+      appBar: const ImageAppBar(),
+      body: SingleChildScrollView(
+        child: DetailsInfo(
+          sight: mockSights[index],
+        ),
       ),
     );
   }
