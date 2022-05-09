@@ -8,7 +8,7 @@ final List<Sight> mockSights = [
           'Величественная крепость из белого камня, построенная в XVI веке, в которой сейчас расположен музей.',
       lat: 46.3460304,
       lon: 48.036286,
-      type: 'Особое место',
+      filterId: 2,
       url: 'https://goo.gl/maps/zQU9HsQBjZDc5p967'),
   Sight(
       id: 1,
@@ -16,7 +16,7 @@ final List<Sight> mockSights = [
       details: '',
       lat: 46.3515615,
       lon: 48.0359429,
-      type: 'Кафе',
+      filterId: 5,
       url: 'https://goo.gl/maps/AbX9sV6MtFEqvw6w6'),
   Sight(
       id: 2,
@@ -25,7 +25,7 @@ final List<Sight> mockSights = [
           'Пряный вкус радостной жизни вместе с шеф-поваром Изо Дзандзава, благодаря которой у гостей ресторана есть возможность выбирать из двух направлений: европейского и восточного',
       lat: 46.3401663,
       lon: 48.0505972,
-      type: 'Ресторан',
+      filterId: 1,
       url: 'https://g.page/AstMusei?share'),
   Sight(
       id: 3,
@@ -34,7 +34,7 @@ final List<Sight> mockSights = [
           'один из исторических районов Астрахани, расположен в восточной трети безымянного искусственного острова, образованного каналом имени Варвация, Волгой, Кутумом и Царёвом',
       lat: 46.3329807,
       lon: 48.0681409,
-      type: 'Особое место',
+      filterId: 2,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
   Sight(
       id: 4,
@@ -43,7 +43,7 @@ final List<Sight> mockSights = [
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       lat: 46.350234,
       lon: 48.036362,
-      type: 'Парк',
+      filterId: 3,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
   Sight(
       id: 5,
@@ -52,7 +52,7 @@ final List<Sight> mockSights = [
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       lat: 46.349301,
       lon: 48.039653,
-      type: 'Музей',
+      filterId: 4,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
   Sight(
       id: 6,
@@ -61,7 +61,7 @@ final List<Sight> mockSights = [
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       lat: 46.346125,
       lon: 48.023349,
-      type: 'Отель',
+      filterId: 0,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
   Sight(
       id: 7,
@@ -70,7 +70,7 @@ final List<Sight> mockSights = [
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       lat: 46.371726,
       lon: 48.012976,
-      type: 'Парк',
+      filterId: 3,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
   Sight(
       id: 8,
@@ -79,6 +79,6 @@ final List<Sight> mockSights = [
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       lat: 46.420343,
       lon: 47.990383,
-      type: 'Кафе',
+      filterId: 5,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
 ];

@@ -13,7 +13,7 @@ class VisitingScreen extends StatelessWidget {
 
   List<Widget> get visitedList => intentions
       .where((element) => element.hasVisited)
-      .map((intention) => VisitedSightCard(intention: intention))
+      .map((intention) => VisitedSightCard(intention))
       .toList();
   List<Widget> get plannedList => intentions
       .where((element) => !element.hasVisited)

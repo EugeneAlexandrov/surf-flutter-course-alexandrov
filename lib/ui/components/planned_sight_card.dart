@@ -38,18 +38,18 @@ class PlannedSightCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _intention.sight.name,
+                      '${_intention.sightId}',
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Text(
                         AppStrings.plannedCardGoalString +
-                            getDate(_intention.date),
+                            '${getDate(_intention.date)}',
                         style: Theme.of(context)
                             .textTheme
                             .bodyText2
                             ?.copyWith(color: getColor(_intention.date))),
                     const SizedBox(height: 16),
-                    Text(_intention.sight.details,
+                    Text('${_intention.sightId}' /*.details*/,
                         style: Theme.of(context).textTheme.bodyText2?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
@@ -63,7 +63,7 @@ class PlannedSightCard extends StatelessWidget {
             top: 16,
             left: 16,
             child: Text(
-              _intention.sight.type,
+              '${_intention.sightId}',
               style: smallBold.copyWith(
                 color: Colors.white,
               ),
@@ -102,13 +102,19 @@ class PlannedSightCard extends StatelessWidget {
     );
   }
 
-  Color getColor(DateTime date) {
-    return (date.isAfter(DateTime.now())) ? Colors.green : Colors.red;
+  Color getColor(DateTime? date) {
+    if (date != null) {
+      return (date.isAfter(DateTime.now())) ? Colors.green : Colors.red;
+    }
+    return Colors.black;
   }
 
-  String getDate(DateTime date) {
-    initializeDateFormatting();
-    final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
-    return formatter.format(date);
+  String? getDate(DateTime? date) {
+    if (date != null) {
+      initializeDateFormatting();
+      final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
+      return formatter.format(date);
+    }
+    return null;
   }
 }

@@ -11,9 +11,7 @@ import 'package:places/ui/components/custom_icon_button.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 class VisitedSightCard extends StatelessWidget {
-  const VisitedSightCard({required Intention intention, Key? key})
-      : _intention = intention,
-        super(key: key);
+  const VisitedSightCard(this._intention, {Key? key}) : super(key: key);
 
   final Intention _intention;
 
@@ -38,12 +36,12 @@ class VisitedSightCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _intention.sight.name,
+                      '${_intention.sightId}' /*.name*/,
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Text(
                       AppStrings.visitedCardGoalString +
-                          getDate(_intention.date),
+                          '${getDate(_intention.date)}',
                       style: Theme.of(context).textTheme.bodyText2?.copyWith(
                             color:
                                 Theme.of(context).colorScheme.smallSecondaryTwo,
@@ -51,7 +49,7 @@ class VisitedSightCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      _intention.sight.details,
+                      '${_intention.sightId}' /*.details*/,
                       style: Theme.of(context).textTheme.bodyText2?.copyWith(
                           color:
                               Theme.of(context).colorScheme.smallSecondaryTwo),
@@ -65,7 +63,7 @@ class VisitedSightCard extends StatelessWidget {
             top: 16,
             left: 16,
             child: Text(
-              _intention.sight.type,
+              '${_intention.sightId}' /*.type*/,
               style: smallBold.copyWith(
                 color: Colors.white,
               ),
@@ -104,9 +102,12 @@ class VisitedSightCard extends StatelessWidget {
     );
   }
 
-  String getDate(DateTime date) {
-    initializeDateFormatting();
-    final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
-    return formatter.format(date);
+  String? getDate(DateTime? date) {
+    if (date != null) {
+      initializeDateFormatting();
+      final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
+      return formatter.format(date);
+    }
+    return null;
   }
 }

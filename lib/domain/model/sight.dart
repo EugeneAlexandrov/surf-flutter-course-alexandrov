@@ -5,7 +5,7 @@ class Sight {
   final double lat;
   final String url;
   final String details;
-  final String type;
+  final int filterId;
 
   Sight({
     required this.id,
@@ -14,6 +14,6 @@ class Sight {
     required this.lat,
     required this.url,
     required this.details,
-    required this.type,
+    required this.filterId,
   });
 }

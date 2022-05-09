@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:places/app_router.dart';
+import 'package:places/domain/repository/filter_repository.dart';
+import 'package:places/domain/repository/location_repository.dart';
+import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/main_page.dart';
+import 'package:places/ui/screens/add_sight_screen.dart/add_sight_screen.dart';
 import 'package:places/ui/screens/filters_screen.dart';
 import 'package:places/ui/screens/res/themes.dart';
 import 'package:places/ui/screens/sight_details_screen.dart';
@@ -16,8 +21,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => CustomTheme(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<CustomTheme>(create: (_) => CustomTheme()),
+        ChangeNotifierProvider<FilterRepository>(
+          create: (_) => FilterRepository(),
+        ),
+        ChangeNotifierProvider<LocationRepository>(
+          create: (_) => LocationRepository(),
+        ),
+        ChangeNotifierProxyProvider2<LocationRepository, FilterRepository,
+            SightRepository>(
+          create: (context) =>
+              SightRepository(),
+          update: (context, locationRepository, filterRepository,
+                  sightRepository) =>
+              /*--- Не могу понять почему sightRepository nullable*/
+              sightRepository!
+                ..updateFilter(filterRepository)
+                ..updateLocation(locationRepository),
+        ),
+      ],
       child: Consumer<CustomTheme>(
         builder: (context, CustomTheme customTheme, child) {
           return MaterialApp(
@@ -29,10 +53,11 @@ class MyApp extends StatelessWidget {
             routes: {
               AppRouter.main: (context) => const MainPage(),
               AppRouter.details: (context) {
-                final index = ModalRoute.of(context)?.settings.arguments as int;
-                return SightDetailsScreen(index: index);
+                final id = ModalRoute.of(context)?.settings.arguments as int;
+                return SightDetailsScreen(id: id);
               },
               AppRouter.filters: (context) => const FiltersScreen(),
+              AppRouter.addSight: (context) => const NewSightScreen(),
             },
             initialRoute: AppRouter.main,
             onGenerateRoute: (RouteSettings settings) {
