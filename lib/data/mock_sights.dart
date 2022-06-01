@@ -1,7 +1,7 @@
 import 'package:places/domain/model/sight.dart';
 
 final List<Sight> mockSights = [
-  Sight(
+  Sight.withId(
       id: 0,
       name: 'Астраханский кремль',
       details:
@@ -10,7 +10,7 @@ final List<Sight> mockSights = [
       lon: 48.036286,
       filterId: 2,
       url: 'https://goo.gl/maps/zQU9HsQBjZDc5p967'),
-  Sight(
+  Sight.withId(
       id: 1,
       name: 'Три Топора',
       details: '',
@@ -18,7 +18,7 @@ final List<Sight> mockSights = [
       lon: 48.0359429,
       filterId: 5,
       url: 'https://goo.gl/maps/AbX9sV6MtFEqvw6w6'),
-  Sight(
+  Sight.withId(
       id: 2,
       name: 'Пряности и радости',
       details:
@@ -27,7 +27,7 @@ final List<Sight> mockSights = [
       lon: 48.0505972,
       filterId: 1,
       url: 'https://g.page/AstMusei?share'),
-  Sight(
+  Sight.withId(
       id: 3,
       name: 'Большие Исады',
       details:
@@ -36,7 +36,7 @@ final List<Sight> mockSights = [
       lon: 48.0681409,
       filterId: 2,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
-  Sight(
+  Sight.withId(
       id: 4,
       name: 'Место 5 в 150 метрах',
       details:
@@ -45,7 +45,7 @@ final List<Sight> mockSights = [
       lon: 48.036362,
       filterId: 3,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
-  Sight(
+  Sight.withId(
       id: 5,
       name: 'Нулевой километр',
       details:
@@ -54,7 +54,7 @@ final List<Sight> mockSights = [
       lon: 48.039653,
       filterId: 4,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
-  Sight(
+  Sight.withId(
       id: 6,
       name: 'Место №7 в 1.1 километре',
       details:
@@ -63,7 +63,7 @@ final List<Sight> mockSights = [
       lon: 48.023349,
       filterId: 0,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
-  Sight(
+  Sight.withId(
       id: 7,
       name: 'Место №8 в 2,6 километре',
       details:
@@ -72,7 +72,7 @@ final List<Sight> mockSights = [
       lon: 48.012976,
       filterId: 3,
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
-  Sight(
+  Sight.withId(
       id: 8,
       name: 'Место №9 в 8,7 километре',
       details:

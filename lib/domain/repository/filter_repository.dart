@@ -4,7 +4,7 @@ import 'package:places/domain/model/filter.dart';
 
 class FilterRepository with ChangeNotifier {
   final List<Filter> _filters = mockFilters;
-  RangeValues _range = RangeValues(0.5, 5);
+  RangeValues _range = const RangeValues(0.5, 5);
 
   // static final FilterRepository _filterRepository =
   //     FilterRepository._privateConstructor();

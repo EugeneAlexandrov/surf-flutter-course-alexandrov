@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 import 'package:places/app_router.dart';
 import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/location_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/main_page.dart';
 import 'package:places/ui/screens/add_sight_screen.dart/add_sight_screen.dart';
+import 'package:places/ui/screens/add_sight_screen.dart/filter_type_picker_screen.dart';
 import 'package:places/ui/screens/filters_screen.dart';
 import 'package:places/ui/screens/res/themes.dart';
 import 'package:places/ui/screens/sight_details_screen.dart';
@@ -32,8 +32,7 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProxyProvider2<LocationRepository, FilterRepository,
             SightRepository>(
-          create: (context) =>
-              SightRepository(),
+          create: (context) => SightRepository(),
           update: (context, locationRepository, filterRepository,
                   sightRepository) =>
               /*--- Не могу понять почему sightRepository nullable*/
@@ -58,6 +57,8 @@ class MyApp extends StatelessWidget {
               },
               AppRouter.filters: (context) => const FiltersScreen(),
               AppRouter.addSight: (context) => const NewSightScreen(),
+              AppRouter.chooseFilter: (context) =>
+                  const FilterTypePickerScreen(),
             },
             initialRoute: AppRouter.main,
             onGenerateRoute: (RouteSettings settings) {

@@ -18,7 +18,6 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _selectedRange = context.read<FilterRepository>().range;
   }

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:places/app_router.dart';
+import 'package:places/app_strings.dart';
 import 'package:places/colors.dart';
+import 'package:places/domain/model/sight.dart';
+import 'package:places/domain/repository/filter_repository.dart';
+import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_text_field.dart';
 import 'package:places/ui/screens/res/themes.dart';
+import 'package:provider/provider.dart';
 
 class NewSightScreen extends StatefulWidget {
   const NewSightScreen({Key? key}) : super(key: key);
@@ -22,10 +28,12 @@ class _NewSightScreenState extends State<NewSightScreen> {
   final descriptionFocus = FocusNode();
 
   //Controllers
-  final titleControler = TextEditingController();
-  final latitudeControler = TextEditingController();
-  final longitudeControler = TextEditingController();
-  final descriptionControler = TextEditingController();
+  final titleController = TextEditingController();
+  final latitudeController = TextEditingController();
+  final longitudeController = TextEditingController();
+  final descriptionController = TextEditingController();
+
+  int? filterId;
 
   final decoration = InputDecoration(
     // suffixIcon: IconButton(
@@ -57,7 +65,7 @@ class _NewSightScreenState extends State<NewSightScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Text(
-          'Новое место',
+          AppStrings.addSightAppbarTitle,
           style: Theme.of(context)
               .textTheme
               .headline6
@@ -69,7 +77,7 @@ class _NewSightScreenState extends State<NewSightScreen> {
             Navigator.pop(context);
           },
           child: Text(
-            'Отмена',
+            AppStrings.cancel,
             style: Theme.of(context).textTheme.bodyText1?.copyWith(
                 color: Theme.of(context).colorScheme.smallSecondaryTwo),
           ),
@@ -88,18 +96,25 @@ class _NewSightScreenState extends State<NewSightScreen> {
               child: const Text('Galary'),
             ),
             MyInputField(
-              title: 'КАТЕГОРИИ',
+              title: AppStrings.addSightCategories,
               child: ListTile(
                 contentPadding: const EdgeInsets.all(0),
-                onTap: () {},
-                title: const Text('Не выбрано'),
+                onTap: () {
+                  _navigateAndPickFIlterType(context);
+                },
+                title: Text(filterId == null
+                    ? AppStrings.addSightNoFiltersSelect
+                    : Provider.of<FilterRepository>(context)
+                        .getFilterById(filterId!)
+                        .title),
                 trailing: SvgPicture.asset(AssetImages.iconRihgtArrowPath),
               ),
             ),
             const Divider(),
             MyInputField(
-              title: 'НАЗВАНИЕ',
+              title: AppStrings.addSightSightTitle,
               child: TextField(
+                controller: titleController,
                 textAlign: TextAlign.start,
                 focusNode: titleFocus,
                 onSubmitted: (String value) {
@@ -115,8 +130,9 @@ class _NewSightScreenState extends State<NewSightScreen> {
               children: [
                 Expanded(
                   child: MyInputField(
-                    title: 'ШИРОТА',
+                    title: AppStrings.addSightLatitude,
                     child: TextField(
+                      controller: latitudeController,
                       focusNode: latitudeFocus,
                       onSubmitted: (String value) {
                         FocusScope.of(context).requestFocus(longitudeFocus);
@@ -130,8 +146,9 @@ class _NewSightScreenState extends State<NewSightScreen> {
                 const SizedBox(width: 16),
                 Expanded(
                   child: MyInputField(
-                    title: 'ДОЛГОТА',
+                    title: AppStrings.addSightLongitude,
                     child: TextField(
+                      controller: longitudeController,
                       focusNode: longitudeFocus,
                       onSubmitted: (String value) {
                         FocusScope.of(context).requestFocus(descriptionFocus);
@@ -146,14 +163,15 @@ class _NewSightScreenState extends State<NewSightScreen> {
             ),
             TextButton(
               onPressed: () {},
-              child: const Text('Указать на карте'),
+              child: const Text(AppStrings.addSightShowOnMap),
             ),
             Expanded(
               child: MyInputField(
-                title: 'ОПИСАНИЕ',
+                title: AppStrings.addSightDescription,
                 child: Expanded(
                   child: TextField(
                     textAlign: TextAlign.justify,
+                    controller: descriptionController,
                     focusNode: descriptionFocus,
                     maxLines: null,
                     expands: true,
@@ -163,17 +181,45 @@ class _NewSightScreenState extends State<NewSightScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 28),
+            const SizedBox(height: 28),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('СОЗДАТЬ'),
+                onPressed: (titleController.text.isEmpty ||
+                        longitudeController.text.isEmpty ||
+                        latitudeController.text.isEmpty ||
+                        descriptionController.text.isEmpty ||
+                        filterId == null)
+                    ? null
+                    : () {
+                        addSight(context);
+                      },
+                child: const Text(AppStrings.addSightCreate),
               ),
             )
           ],
         ),
       ),
     );
+  }
+
+  void addSight(BuildContext context) {
+    Sight newSight = Sight(
+        name: titleController.text,
+        lon: double.parse(longitudeController.text),
+        lat: double.parse(latitudeController.text),
+        details: descriptionController.text,
+        filterId: filterId!);
+    Provider.of<SightRepository>(context, listen: false).addSight(newSight);
+    Navigator.pop(context);
+  }
+
+  void _navigateAndPickFIlterType(BuildContext context) async {
+    final int? result =
+        await Navigator.of(context).pushNamed(AppRouter.chooseFilter) as int?;
+    print(result);
+    setState(() {
+      filterId = result;
+    });
   }
 }

@@ -65,14 +65,26 @@ class FiltersScreen extends StatelessWidget {
                   const FilterGridViewWidget(),
                   const SizedBox(height: 30),
                   const MyRangeSlider(),
-                  ElevatedButton(
-                    child: Text(
-                        '${AppStrings.showString} (${sightRepository.sights.length})'),
-                    onPressed: sightRepository.sights.isEmpty
-                        ? null
-                        : () {
-                            Navigator.pop(context);
-                          },
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            child: Text(
+                                '${AppStrings.showString} (${sightRepository.sights.length})'),
+                            onPressed: sightRepository.sights.isEmpty
+                                ? null
+                                : () {
+                                    Navigator.pop(context);
+                                    sightRepository.notifyListeners();
+                                  },
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

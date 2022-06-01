@@ -29,9 +29,9 @@ class SightRepository with ChangeNotifier {
   }
 
   List<Sight> get sights {
-    if (_locationData == null)
+    if (_locationData == null) {
       return <Sight>[];
-    else {
+    } else {
       return _sights
           .where(
             (element) =>
