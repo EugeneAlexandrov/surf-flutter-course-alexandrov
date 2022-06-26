@@ -76,9 +76,7 @@ class PlannedSightCard extends StatelessWidget {
               height: 40,
               width: 40,
               child: CustomIconButton(
-                onPressed: () {
-                  print('planed');
-                },
+                onPressed: () {},
                 child: SvgPicture.asset(
                   AssetImages.iconCalendarPath,
                 ),
@@ -93,7 +91,7 @@ class PlannedSightCard extends StatelessWidget {
               width: 40,
               child: CustomIconButton(
                 child: SvgPicture.asset(AssetImages.iconCrossPath),
-                onPressed: () => print('delete'),
+                onPressed: () {},
               ),
             ),
           ),

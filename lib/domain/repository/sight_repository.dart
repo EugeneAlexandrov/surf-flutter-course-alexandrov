@@ -12,21 +12,14 @@ class SightRepository with ChangeNotifier {
   late LocationData? _locationData;
   final List<Sight> _sights = List<Sight>.from(mockSights);
 
-  // static final SightRepository _sightRepository =
-  //     SightRepository._privateConstructor();
-
-  // SightRepository._privateConstructor();
-
-  // factory SightRepository() {
-  //   return _sightRepository;
-  // }
-
   void updateLocation(LocationRepository locationRepository) =>
       _locationData = locationRepository.locationData;
 
   void updateFilter(FilterRepository filterRepository) {
     _filterRepository = filterRepository;
   }
+
+  FilterRepository get filterRepository => _filterRepository;
 
   List<Sight> get sights {
     if (_locationData == null) {

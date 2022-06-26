@@ -4,4 +4,5 @@ class AppRouter {
   static const String filters = '/main_screen/filters';
   static const String addSight = '/main_screen/addSight';
   static const String chooseFilter = '/main_screen/addSight/chooseFilter';
+  static String searchScreen = '/main_screen/addSight/search';
 }

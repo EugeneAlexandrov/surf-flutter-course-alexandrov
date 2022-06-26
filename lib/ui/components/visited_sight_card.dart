@@ -76,9 +76,7 @@ class VisitedSightCard extends StatelessWidget {
               height: 40,
               width: 40,
               child: CustomIconButton(
-                onPressed: () {
-                  print('share');
-                },
+                onPressed: () {},
                 child: SvgPicture.asset(
                   AssetImages.iconSharePath,
                 ),
@@ -93,7 +91,7 @@ class VisitedSightCard extends StatelessWidget {
               width: 40,
               child: CustomIconButton(
                 child: SvgPicture.asset(AssetImages.iconCrossPath),
-                onPressed: () => print('delete'),
+                onPressed: () {},
               ),
             ),
           ),

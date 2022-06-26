@@ -50,13 +50,9 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
           max: 10,
           values: _selectedRange,
           onChangeEnd: (RangeValues newRange) {
-            print(
-                'onChangeEnd ${_selectedRange.start} - ${_selectedRange.end} _selectedRange: ${_selectedRange.start} - ${_selectedRange.end}');
             context.read<FilterRepository>().changeRange(_selectedRange);
           },
           onChanged: (RangeValues value) {
-            print(
-                'onChange ${value.start} - ${value.end} _selectedRange: ${_selectedRange.start} - ${_selectedRange.end}');
             roundToDecimals(value);
             setState(() {});
           },

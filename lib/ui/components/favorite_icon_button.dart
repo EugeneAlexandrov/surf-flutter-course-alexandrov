@@ -37,7 +37,6 @@ class _FavoriteIconButtonState extends State<FavoriteIconButton> {
   void _toggleFavorite() {
     setState(() {
       _isFavorited = !_isFavorited;
-      print('$_isFavorited');
     });
   }
 }

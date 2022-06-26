@@ -217,7 +217,6 @@ class _NewSightScreenState extends State<NewSightScreen> {
   void _navigateAndPickFIlterType(BuildContext context) async {
     final int? result =
         await Navigator.of(context).pushNamed(AppRouter.chooseFilter) as int?;
-    print(result);
     setState(() {
       filterId = result;
     });

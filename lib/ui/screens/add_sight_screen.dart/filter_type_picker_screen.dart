@@ -42,48 +42,46 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
           ),
         ),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(mockFilters[index].title),
-                      trailing: index != _index
-                          ? null
-                          : const Icon(
-                              Icons.done,
-                              color: Colors.green,
-                            ),
-                      onTap: () {
-                        setState(() {
-                          _index = index;
-                        });
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Expanded(
+            child: ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(mockFilters[index].title),
+                    trailing: index != _index
+                        ? null
+                        : const Icon(
+                            Icons.done,
+                            color: Colors.green,
+                          ),
+                    onTap: () {
+                      setState(() {
+                        _index = index;
+                      });
+                    },
+                  );
+                },
+                separatorBuilder: (context, index) => const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Divider(color: Colors.grey),
+                    ),
+                itemCount: mockFilters.length),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: ElevatedButton(
+                onPressed: _index == null
+                    ? null
+                    : () {
+                        Navigator.of(context).pop(mockFilters[_index!].id);
                       },
-                    );
-                  },
-                  separatorBuilder: (context, index) => const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Divider(color: Colors.grey),
-                      ),
-                  itemCount: mockFilters.length),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: ElevatedButton(
-                  onPressed: _index == null
-                      ? null
-                      : () {
-                          Navigator.of(context).pop(mockFilters[_index!].id);
-                        },
-                  child: const Text(AppStrings.select)),
-            ),
-          ],
-        ),
+                child: const Text(AppStrings.select)),
+          ),
+        ],
       ),
     );
   }
