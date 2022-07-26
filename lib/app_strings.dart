@@ -27,4 +27,24 @@ class AppStrings {
   static const distanceString = 'Расстояние';
   static const darkThemeString = 'Темная тема';
   static const showTutorialString = 'Показать Туториал';
+  static const addSightAppbarTitle = 'Новое место';
+  static const cancel = 'Отмена';
+  static const addSightCategories = 'КАТЕГОРИИ';
+  static const addSightNoFiltersSelect = 'Ничего не выбрано';
+  static const addSightSightTitle = 'НАЗВАНИЕ';
+  static const addSightLatitude = 'ШИРОТА';
+  static const addSightLongitude = 'ДОЛГОТА';
+  static const addSightShowOnMap = 'Указать на карте';
+  static const addSightDescription = 'ОПИСАНИЕ';
+  static const addSightCreate = 'СОЗДАТЬ';
+  static const filterTypePickerAppbarTitle = 'Категории';
+  static const select = 'Выбрать';
+  static const findNothing = 'Ничего не найдено.';
+  static const tryAnotherQuery = 'Попробуйте изменить параметры поиска';
+  static const clearHistory = 'Очистить историю';
+  static const youSearched = 'ВЫ ИСКАЛИ';
+
+
+
+
 }

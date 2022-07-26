@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:places/domain/model/filter.dart';
+import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/ui/components/filter_tile.dart';
+import 'package:provider/provider.dart';
 
-class FilterGridViewWidget extends StatefulWidget {
+class FilterGridViewWidget extends StatelessWidget {
   const FilterGridViewWidget({
-    required this.children,
-    required this.onChanged,
     Key? key,
   }) : super(key: key);
 
-  final ValueChanged<int> onChanged;
-  final List<Filter> children;
-
-  @override
-  State<FilterGridViewWidget> createState() => _FilterGridViewWidgetState();
-}
-
-class _FilterGridViewWidgetState extends State<FilterGridViewWidget> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -26,10 +17,9 @@ class _FilterGridViewWidgetState extends State<FilterGridViewWidget> {
         crossAxisSpacing: 10,
       ),
       shrinkWrap: true,
-      itemCount: widget.children.length,
+      itemCount: context.read<FilterRepository>().allFilters.length,
       itemBuilder: (BuildContext context, index) {
-        return buildFilterTile(
-            context, widget.children[index], widget.onChanged);
+        return buildFilterTile(context, index);
       },
     );
   }

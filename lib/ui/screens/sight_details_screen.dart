@@ -1,111 +1,118 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/data/mock_sights.dart';
-import 'package:places/domain/model/sight.dart';
+import 'package:places/domain/repository/filter_repository.dart';
+import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/screens/res/themes.dart';
+import 'package:provider/provider.dart';
 
 //Screen with sight card details
 class SightDetailsScreen extends StatelessWidget {
-  const SightDetailsScreen({Key? key, required this.index}) : super(key: key);
-
-  final int index;
+  const SightDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final id = ModalRoute.of(context)?.settings.arguments as int;
     return Scaffold(
       appBar: const ImageAppBar(),
       body: SingleChildScrollView(
         child: DetailsInfo(
-          sight: mockSights[index],
+          id: id,
         ),
       ),
     );
   }
 }
 
-class DetailsInfo extends StatefulWidget {
-  const DetailsInfo({Key? key, required this.sight}) : super(key: key);
+class DetailsInfo extends StatelessWidget {
+  const DetailsInfo({Key? key, required this.id}) : super(key: key);
 
-  final Sight sight;
+  final int id;
 
-  @override
-  _DetailsInfoState createState() => _DetailsInfoState();
-}
-
-class _DetailsInfoState extends State<DetailsInfo> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            widget.sight.name,
-            style: Theme.of(context).textTheme.headline5,
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          Row(children: [
-            Text(
-              widget.sight.type,
-              style: Theme.of(context).textTheme.caption?.copyWith(
-                    color: Theme.of(context).colorScheme.smallBoldSecondary,
-                  ),
-            ),
-            const SizedBox(width: 16),
-            Text(
-              AppStrings.detailsScreenTime,
-              style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                    color: Theme.of(context).colorScheme.smallSecondaryTwo,
-                  ),
-            ),
-          ]),
-          const SizedBox(height: 24),
-          Text(widget.sight.details,
-              style: Theme.of(context).textTheme.bodyText2),
-          const SizedBox(height: 24),
-          ElevatedButton.icon(
-            onPressed: () {},
-            icon: SvgPicture.asset(AssetImages.iconGoPath),
-            label: const Text(AppStrings.buildPathString),
-          ),
-          const SizedBox(height: 24),
-          Container(
-            height: 0.8,
-            color: const Color.fromRGBO(124, 126, 146, 0.24),
-          ),
-          const SizedBox(height: 8),
-          //placeholder for two buttons
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+    final theme = Theme.of(context);
+    return Consumer2<SightRepository, FilterRepository>(
+      builder: (
+        context,
+        SightRepository sightRepository,
+        FilterRepository filterRepository,
+        child,
+      ) {
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextButton.icon(
-                onPressed: null,
-                icon: SvgPicture.asset(
-                  AssetImages.iconCalendarPath,
-                  color: Theme.of(context).colorScheme.smallInnactive,
-                  height: 24,
-                ),
-                label: const Text(AppStrings.detailsScreenPlanButton),
+              Text(
+                sightRepository.getSightById(id).name,
+                style: Theme.of(context).textTheme.headline5,
               ),
-              TextButton.icon(
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  AssetImages.iconHeartOutlinePath,
-                  color: Theme.of(context).colorScheme.smallInnactive,
-                  height: 24,
+              const SizedBox(
+                height: 4,
+              ),
+              Row(children: [
+                Text(
+                  filterRepository
+                      .getFilterById(sightRepository.getSightById(id).filterId)
+                      .title,
+                  style: theme.textTheme.caption?.copyWith(
+                    color: theme.colorScheme.smallBoldSecondary,
+                  ),
                 ),
-                label: const Text(AppStrings.detailsScreenFavButton),
+                const SizedBox(width: 16),
+                Text(
+                  AppStrings.detailsScreenTime,
+                  style: theme.textTheme.bodyText2?.copyWith(
+                    color: theme.colorScheme.smallSecondaryTwo,
+                  ),
+                ),
+              ]),
+              const SizedBox(height: 24),
+              Text(sightRepository.getSightById(id).details,
+                  style: theme.textTheme.bodyText2),
+              const SizedBox(height: 24),
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: SvgPicture.asset(AssetImages.iconGoPath),
+                label: const Text(AppStrings.buildPathString),
+              ),
+              const SizedBox(height: 24),
+              Container(
+                height: 0.8,
+                color: const Color.fromRGBO(124, 126, 146, 0.24),
+              ),
+              const SizedBox(height: 8),
+              //placeholder for two buttons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton.icon(
+                    onPressed: null,
+                    icon: SvgPicture.asset(
+                      AssetImages.iconCalendarPath,
+                      color: theme.colorScheme.smallInnactive,
+                      height: 24,
+                    ),
+                    label: const Text(AppStrings.detailsScreenPlanButton),
+                  ),
+                  TextButton.icon(
+                    onPressed: () {},
+                    icon: SvgPicture.asset(
+                      AssetImages.iconHeartOutlinePath,
+                      color: theme.colorScheme.smallInnactive,
+                      height: 24,
+                    ),
+                    label: const Text(AppStrings.detailsScreenFavButton),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

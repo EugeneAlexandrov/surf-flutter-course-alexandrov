@@ -55,6 +55,7 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return DefaultTabController(
       length: 2,
       child: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -82,44 +83,44 @@ class _MainPageState extends State<MainPage>
               BottomNavigationBarItem(
                 activeIcon: SvgPicture.asset(
                   AssetImages.iconListFillPath,
-                  color: Theme.of(context).iconTheme.color,
+                  color: theme.iconTheme.color,
                 ),
                 icon: SvgPicture.asset(
                   AssetImages.iconListOutlinePath,
-                  color: Theme.of(context).iconTheme.color,
+                  color: theme.iconTheme.color,
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
                 activeIcon: SvgPicture.asset(
                   AssetImages.iconMapFillPath,
-                  color: Theme.of(context).iconTheme.color,
+                  color: theme.iconTheme.color,
                 ),
                 icon: SvgPicture.asset(
                   AssetImages.iconMapOutlinePath,
-                  color: Theme.of(context).iconTheme.color,
+                  color: theme.iconTheme.color,
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
                 activeIcon: SvgPicture.asset(
                   AssetImages.iconHeartFillPath,
-                  color: Theme.of(context).iconTheme.color,
+                  color: theme.iconTheme.color,
                 ),
                 icon: SvgPicture.asset(
                   AssetImages.iconHeartOutlinePath,
-                  color: Theme.of(context).iconTheme.color,
+                  color: theme.iconTheme.color,
                 ),
                 label: '',
               ),
               BottomNavigationBarItem(
                 activeIcon: SvgPicture.asset(
                   AssetImages.iconSettingsFillPath,
-                  color: Theme.of(context).iconTheme.color,
+                  color: theme.iconTheme.color,
                 ),
                 icon: SvgPicture.asset(
                   AssetImages.iconSettingsOutlinePath,
-                  color: Theme.of(context).iconTheme.color,
+                  color: theme.iconTheme.color,
                 ),
                 label: '',
               ),

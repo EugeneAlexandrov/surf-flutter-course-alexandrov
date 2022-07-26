@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/ui/screens/res/themes.dart';
+import 'package:provider/provider.dart';
 
 class MyRangeSlider extends StatefulWidget {
   const MyRangeSlider({
     Key? key,
-    required this.onChanged,
   }) : super(key: key);
-
-  final void Function(RangeValues range) onChanged;
 
   @override
   State<MyRangeSlider> createState() => _MyRangeSliderState();
 }
 
 class _MyRangeSliderState extends State<MyRangeSlider> {
-  var selectedRange = const RangeValues(0.5, 5);
+  late RangeValues _selectedRange;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedRange = context.read<FilterRepository>().range;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       children: [
         Row(
@@ -28,14 +34,14 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
             Text(
               AppStrings.distanceString,
               textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                  color: Theme.of(context).colorScheme.lmMainDmWhite),
+              style: theme.textTheme.bodyText1?.copyWith(
+                  color: theme.colorScheme.lmMainDmWhite),
             ),
             Text(
-              'от ${selectedRange.start} до ${selectedRange.end} км',
+              'от ${_selectedRange.start} до ${_selectedRange.end} км',
               textAlign: TextAlign.end,
-              style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                  color: Theme.of(context).colorScheme.smallSecondaryTwo),
+              style: theme.textTheme.bodyText1?.copyWith(
+                  color: theme.colorScheme.smallSecondaryTwo),
             )
           ],
         ),
@@ -43,26 +49,22 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
         RangeSlider(
           min: 0.1,
           max: 10,
-          values: selectedRange,
+          values: _selectedRange,
           onChangeEnd: (RangeValues newRange) {
-            print('${selectedRange.start} - ${selectedRange.end}');
-            widget.onChanged(newRange);
+            context.read<FilterRepository>().changeRange(_selectedRange);
           },
           onChanged: (RangeValues value) {
-            setState(
-              () {
-                selectedRange = roundToDecimals(value);
-              },
-            );
+            roundToDecimals(value);
+            setState(() {});
           },
         )
       ],
     );
   }
 
-  RangeValues roundToDecimals(RangeValues oldRange) {
+  void roundToDecimals(RangeValues oldRange) {
     double start = (oldRange.start * 10).round() / 10;
     double end = (oldRange.end * 10).round() / 10;
-    return RangeValues(start, end);
+    _selectedRange = RangeValues(start, end);
   }
 }

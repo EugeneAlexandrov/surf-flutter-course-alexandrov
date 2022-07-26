@@ -19,6 +19,7 @@ class PlannedSightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
@@ -38,20 +39,20 @@ class PlannedSightCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _intention.sight.name,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      '${_intention.sightId}',
+                      style: theme.textTheme.bodyText1,
                     ),
                     Text(
                         AppStrings.plannedCardGoalString +
-                            getDate(_intention.date),
-                        style: Theme.of(context)
+                            '${getDate(_intention.date)}',
+                        style: theme
                             .textTheme
                             .bodyText2
                             ?.copyWith(color: getColor(_intention.date))),
                     const SizedBox(height: 16),
-                    Text(_intention.sight.details,
-                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                            color: Theme.of(context)
+                    Text('${_intention.sightId}' /*.details*/,
+                        style: theme.textTheme.bodyText2?.copyWith(
+                            color: theme
                                 .colorScheme
                                 .smallSecondaryTwo)),
                   ],
@@ -63,7 +64,7 @@ class PlannedSightCard extends StatelessWidget {
             top: 16,
             left: 16,
             child: Text(
-              _intention.sight.type,
+              '${_intention.sightId}',
               style: smallBold.copyWith(
                 color: Colors.white,
               ),
@@ -76,9 +77,7 @@ class PlannedSightCard extends StatelessWidget {
               height: 40,
               width: 40,
               child: CustomIconButton(
-                onPressed: () {
-                  print('planed');
-                },
+                onPressed: () {},
                 child: SvgPicture.asset(
                   AssetImages.iconCalendarPath,
                 ),
@@ -93,7 +92,7 @@ class PlannedSightCard extends StatelessWidget {
               width: 40,
               child: CustomIconButton(
                 child: SvgPicture.asset(AssetImages.iconCrossPath),
-                onPressed: () => print('delete'),
+                onPressed: () {},
               ),
             ),
           ),
@@ -102,13 +101,19 @@ class PlannedSightCard extends StatelessWidget {
     );
   }
 
-  Color getColor(DateTime date) {
-    return (date.isAfter(DateTime.now())) ? Colors.green : Colors.red;
+  Color getColor(DateTime? date) {
+    if (date != null) {
+      return (date.isAfter(DateTime.now())) ? Colors.green : Colors.red;
+    }
+    return Colors.black;
   }
 
-  String getDate(DateTime date) {
-    initializeDateFormatting();
-    final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
-    return formatter.format(date);
+  String? getDate(DateTime? date) {
+    if (date != null) {
+      initializeDateFormatting();
+      final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
+      return formatter.format(date);
+    }
+    return null;
   }
 }

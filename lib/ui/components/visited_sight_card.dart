@@ -11,14 +11,13 @@ import 'package:places/ui/components/custom_icon_button.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 class VisitedSightCard extends StatelessWidget {
-  const VisitedSightCard({required Intention intention, Key? key})
-      : _intention = intention,
-        super(key: key);
+  const VisitedSightCard(this._intention, {Key? key}) : super(key: key);
 
   final Intention _intention;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
@@ -38,23 +37,23 @@ class VisitedSightCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _intention.sight.name,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      '${_intention.sightId}' /*.name*/,
+                      style: theme.textTheme.bodyText1,
                     ),
                     Text(
                       AppStrings.visitedCardGoalString +
-                          getDate(_intention.date),
-                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                          '${getDate(_intention.date)}',
+                      style: theme.textTheme.bodyText2?.copyWith(
                             color:
-                                Theme.of(context).colorScheme.smallSecondaryTwo,
+                                theme.colorScheme.smallSecondaryTwo,
                           ),
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      _intention.sight.details,
-                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      '${_intention.sightId}' /*.details*/,
+                      style: theme.textTheme.bodyText2?.copyWith(
                           color:
-                              Theme.of(context).colorScheme.smallSecondaryTwo),
+                              theme.colorScheme.smallSecondaryTwo),
                     ),
                   ],
                 ),
@@ -65,7 +64,7 @@ class VisitedSightCard extends StatelessWidget {
             top: 16,
             left: 16,
             child: Text(
-              _intention.sight.type,
+              '${_intention.sightId}' /*.type*/,
               style: smallBold.copyWith(
                 color: Colors.white,
               ),
@@ -78,9 +77,7 @@ class VisitedSightCard extends StatelessWidget {
               height: 40,
               width: 40,
               child: CustomIconButton(
-                onPressed: () {
-                  print('share');
-                },
+                onPressed: () {},
                 child: SvgPicture.asset(
                   AssetImages.iconSharePath,
                 ),
@@ -95,7 +92,7 @@ class VisitedSightCard extends StatelessWidget {
               width: 40,
               child: CustomIconButton(
                 child: SvgPicture.asset(AssetImages.iconCrossPath),
-                onPressed: () => print('delete'),
+                onPressed: () {},
               ),
             ),
           ),
@@ -104,9 +101,12 @@ class VisitedSightCard extends StatelessWidget {
     );
   }
 
-  String getDate(DateTime date) {
-    initializeDateFormatting();
-    final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
-    return formatter.format(date);
+  String? getDate(DateTime? date) {
+    if (date != null) {
+      initializeDateFormatting();
+      final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
+      return formatter.format(date);
+    }
+    return null;
   }
 }
