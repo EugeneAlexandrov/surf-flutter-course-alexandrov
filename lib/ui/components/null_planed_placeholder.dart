@@ -13,11 +13,7 @@ class NullPlannedPlaceHolder extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SvgPicture.asset(
-          AssetImages.iconGoPath,
-          color: Colors.white,
-          height: 64,
-        ),
+        Image.asset(AssetImages.emptyVisitedImagePath, height: 64),
         const SizedBox(height: 24),
         Text(
           AppStrings.emptyString,
