@@ -16,16 +16,17 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       margin: const EdgeInsets.only(top: 24),
       padding: const EdgeInsets.only(top: 16, bottom: 16),
       alignment: Alignment.center,
       child: Text(
         title,
-        style: Theme.of(context)
+        style: theme
             .textTheme
             .headline6
-            ?.copyWith(color: Theme.of(context).colorScheme.lmMainDmWhite),
+            ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
       ),
     );
   }
@@ -42,6 +43,7 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       children: [
         Container(
@@ -49,22 +51,22 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(top: 40, bottom: 22),
           child: Text(
             title,
-            style: Theme.of(context)
+            style: theme
                 .textTheme
                 .headline6
-                ?.copyWith(color: Theme.of(context).colorScheme.lmMainDmWhite),
+                ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
           ),
         ),
         Theme(
           data: ThemeData(
             highlightColor: Colors.transparent,
             splashColor: Colors.transparent,
-            tabBarTheme: Theme.of(context).tabBarTheme,
+            tabBarTheme: theme.tabBarTheme,
           ),
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              color: Theme.of(context).cardTheme.color,
+              color: theme.cardTheme.color,
               borderRadius: const BorderRadius.all(Radius.circular(20)),
             ),
             child: const TabBar(

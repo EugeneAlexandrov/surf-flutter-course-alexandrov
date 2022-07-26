@@ -10,12 +10,11 @@ import 'package:provider/provider.dart';
 
 //Screen with sight card details
 class SightDetailsScreen extends StatelessWidget {
-  const SightDetailsScreen({Key? key, required this.id}) : super(key: key);
-
-  final int id;
+  const SightDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final id = ModalRoute.of(context)?.settings.arguments as int;
     return Scaffold(
       appBar: const ImageAppBar(),
       body: SingleChildScrollView(
@@ -34,6 +33,7 @@ class DetailsInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Consumer2<SightRepository, FilterRepository>(
       builder: (
         context,
@@ -58,21 +58,21 @@ class DetailsInfo extends StatelessWidget {
                   filterRepository
                       .getFilterById(sightRepository.getSightById(id).filterId)
                       .title,
-                  style: Theme.of(context).textTheme.caption?.copyWith(
-                        color: Theme.of(context).colorScheme.smallBoldSecondary,
-                      ),
+                  style: theme.textTheme.caption?.copyWith(
+                    color: theme.colorScheme.smallBoldSecondary,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Text(
                   AppStrings.detailsScreenTime,
-                  style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                        color: Theme.of(context).colorScheme.smallSecondaryTwo,
-                      ),
+                  style: theme.textTheme.bodyText2?.copyWith(
+                    color: theme.colorScheme.smallSecondaryTwo,
+                  ),
                 ),
               ]),
               const SizedBox(height: 24),
               Text(sightRepository.getSightById(id).details,
-                  style: Theme.of(context).textTheme.bodyText2),
+                  style: theme.textTheme.bodyText2),
               const SizedBox(height: 24),
               ElevatedButton.icon(
                 onPressed: () {},
@@ -93,7 +93,7 @@ class DetailsInfo extends StatelessWidget {
                     onPressed: null,
                     icon: SvgPicture.asset(
                       AssetImages.iconCalendarPath,
-                      color: Theme.of(context).colorScheme.smallInnactive,
+                      color: theme.colorScheme.smallInnactive,
                       height: 24,
                     ),
                     label: const Text(AppStrings.detailsScreenPlanButton),
@@ -102,7 +102,7 @@ class DetailsInfo extends StatelessWidget {
                     onPressed: () {},
                     icon: SvgPicture.asset(
                       AssetImages.iconHeartOutlinePath,
-                      color: Theme.of(context).colorScheme.smallInnactive,
+                      color: theme.colorScheme.smallInnactive,
                       height: 24,
                     ),
                     label: const Text(AppStrings.detailsScreenFavButton),

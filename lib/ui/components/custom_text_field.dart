@@ -10,17 +10,18 @@ class MyInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 24),
-        Text(title,
-            style: Theme.of(context)
-                .textTheme
-                .headline1
-                ?.copyWith(color: Theme.of(context).colorScheme.subTitle)),
+        Text(
+          title,
+          style: theme.textTheme.headline1
+              ?.copyWith(color: theme.colorScheme.subTitle),
+        ),
         const SizedBox(height: 12),
         child,
       ],

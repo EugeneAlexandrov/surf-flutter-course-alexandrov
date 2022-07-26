@@ -8,21 +8,24 @@ class NullVisitedPlaceHolder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(AssetImages.emptyVisitedImagePath, height: 64),
         const SizedBox(height: 24),
-        Text(AppStrings.emptyString,
-            style: Theme.of(context)
-                .textTheme
-                .headline6
-                ?.copyWith(color: Theme.of(context).colorScheme.subTitle)),
+        Text(
+          AppStrings.emptyString,
+          style: theme.textTheme.headline6
+              ?.copyWith(color: theme.colorScheme.subTitle),
+        ),
         const SizedBox(height: 8),
-        Text(AppStrings.nullVisitedTextString,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                color: Theme.of(context).colorScheme.smallInnactive)),
+        Text(
+          AppStrings.nullVisitedTextString,
+          textAlign: TextAlign.center,
+          style: theme.textTheme.bodyText2
+              ?.copyWith(color: theme.colorScheme.smallInnactive),
+        ),
       ],
     );
   }

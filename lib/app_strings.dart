@@ -39,6 +39,11 @@ class AppStrings {
   static const addSightCreate = 'СОЗДАТЬ';
   static const filterTypePickerAppbarTitle = 'Категории';
   static const select = 'Выбрать';
+  static const findNothing = 'Ничего не найдено.';
+  static const tryAnotherQuery = 'Попробуйте изменить параметры поиска';
+  static const clearHistory = 'Очистить историю';
+  static const youSearched = 'ВЫ ИСКАЛИ';
+
 
 
 

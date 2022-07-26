@@ -24,6 +24,7 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Column(
       children: [
         Row(
@@ -33,14 +34,14 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
             Text(
               AppStrings.distanceString,
               textAlign: TextAlign.start,
-              style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                  color: Theme.of(context).colorScheme.lmMainDmWhite),
+              style: theme.textTheme.bodyText1?.copyWith(
+                  color: theme.colorScheme.lmMainDmWhite),
             ),
             Text(
               'от ${_selectedRange.start} до ${_selectedRange.end} км',
               textAlign: TextAlign.end,
-              style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                  color: Theme.of(context).colorScheme.smallSecondaryTwo),
+              style: theme.textTheme.bodyText1?.copyWith(
+                  color: theme.colorScheme.smallSecondaryTwo),
             )
           ],
         ),
@@ -50,13 +51,9 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
           max: 10,
           values: _selectedRange,
           onChangeEnd: (RangeValues newRange) {
-            print(
-                'onChangeEnd ${_selectedRange.start} - ${_selectedRange.end} _selectedRange: ${_selectedRange.start} - ${_selectedRange.end}');
             context.read<FilterRepository>().changeRange(_selectedRange);
           },
           onChanged: (RangeValues value) {
-            print(
-                'onChange ${value.start} - ${value.end} _selectedRange: ${_selectedRange.start} - ${_selectedRange.end}');
             roundToDecimals(value);
             setState(() {});
           },
