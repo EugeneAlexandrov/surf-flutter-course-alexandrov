@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/colors.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
@@ -12,7 +14,11 @@ class NullVisitedPlaceHolder extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(AssetImages.emptyVisitedImagePath, height: 64),
+        SvgPicture.asset(
+          AssetImages.iconGoPath,
+          color: AppColors.lmInnactiveBlack,
+          height: 64,
+        ),
         const SizedBox(height: 24),
         Text(
           AppStrings.emptyString,
