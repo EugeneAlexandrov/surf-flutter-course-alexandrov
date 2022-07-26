@@ -17,6 +17,7 @@ class SightListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Stack(
@@ -38,8 +39,8 @@ class SightListScreen extends StatelessWidget {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: AppStrings.searchString,
-                    hintStyle: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        color: Theme.of(context).colorScheme.smallInnactive),
+                    hintStyle: theme.textTheme.bodyText1
+                        ?.copyWith(color: theme.colorScheme.smallInnactive),
                   ),
                 ),
               ),

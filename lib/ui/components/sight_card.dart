@@ -15,6 +15,7 @@ class SightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Consumer2<FilterRepository, SightRepository>(builder: (context,
         FilterRepository filterRepository,
         SightRepository sightRepository,
@@ -38,12 +39,12 @@ class SightCard extends StatelessWidget {
                     children: [
                       Text(
                         sightRepository.getSightById(sightID).name,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: theme.textTheme.bodyText1,
                       ),
                       Text(
                         sightRepository.getSightById(sightID).details,
-                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                            color: Theme.of(context)
+                        style: theme.textTheme.bodyText2?.copyWith(
+                            color: theme
                                 .colorScheme
                                 .smallSecondaryTwo),
                       ),
@@ -60,7 +61,7 @@ class SightCard extends StatelessWidget {
                     .getFilterById(
                         sightRepository.getSightById(sightID).filterId)
                     .title,
-                style: Theme.of(context).textTheme.caption,
+                style: theme.textTheme.caption,
               ),
             ),
             //Ripple effect behind card

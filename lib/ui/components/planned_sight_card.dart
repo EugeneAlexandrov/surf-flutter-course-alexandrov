@@ -19,6 +19,7 @@ class PlannedSightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
@@ -39,19 +40,19 @@ class PlannedSightCard extends StatelessWidget {
                   children: [
                     Text(
                       '${_intention.sightId}',
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: theme.textTheme.bodyText1,
                     ),
                     Text(
                         AppStrings.plannedCardGoalString +
                             '${getDate(_intention.date)}',
-                        style: Theme.of(context)
+                        style: theme
                             .textTheme
                             .bodyText2
                             ?.copyWith(color: getColor(_intention.date))),
                     const SizedBox(height: 16),
                     Text('${_intention.sightId}' /*.details*/,
-                        style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                            color: Theme.of(context)
+                        style: theme.textTheme.bodyText2?.copyWith(
+                            color: theme
                                 .colorScheme
                                 .smallSecondaryTwo)),
                   ],

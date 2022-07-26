@@ -58,6 +58,7 @@ class _NewSightScreenState extends State<NewSightScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -66,10 +67,10 @@ class _NewSightScreenState extends State<NewSightScreen> {
         backgroundColor: Colors.transparent,
         title: Text(
           AppStrings.addSightAppbarTitle,
-          style: Theme.of(context)
+          style: theme
               .textTheme
               .headline6
-              ?.copyWith(color: Theme.of(context).colorScheme.lmMainDmWhite),
+              ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
         ),
         centerTitle: true,
         leading: TextButton(
@@ -78,8 +79,8 @@ class _NewSightScreenState extends State<NewSightScreen> {
           },
           child: Text(
             AppStrings.cancel,
-            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                color: Theme.of(context).colorScheme.smallSecondaryTwo),
+            style: theme.textTheme.bodyText1?.copyWith(
+                color:theme.colorScheme.smallSecondaryTwo),
           ),
         ),
       ),
@@ -121,7 +122,7 @@ class _NewSightScreenState extends State<NewSightScreen> {
                   FocusScope.of(context).requestFocus(latitudeFocus);
                 },
                 textInputAction: TextInputAction.next,
-                style: Theme.of(context).textTheme.bodyText1,
+                style: theme.textTheme.bodyText1,
                 decoration: decoration,
               ),
             ),

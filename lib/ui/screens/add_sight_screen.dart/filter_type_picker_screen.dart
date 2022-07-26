@@ -17,6 +17,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -24,10 +25,8 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
         backgroundColor: Colors.transparent,
         title: Text(
           AppStrings.filterTypePickerAppbarTitle,
-          style: Theme.of(context)
-              .textTheme
-              .headline6
-              ?.copyWith(color: Theme.of(context).colorScheme.lmMainDmWhite),
+          style: theme.textTheme.headline6
+              ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
         ),
         leading: Center(
           child: IconButton(
@@ -36,7 +35,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
             },
             icon: SvgPicture.asset(
               AssetImages.iconAppbarArrowPath,
-              color: Theme.of(context).colorScheme.title,
+              color: theme.colorScheme.title,
               height: 32,
             ),
           ),

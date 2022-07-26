@@ -15,71 +15,95 @@ import 'package:provider/provider.dart';
 import 'app_strings.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const AppDependencies(
+      app: App(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class AppDependencies extends StatefulWidget {
+  final App app;
+
+  const AppDependencies({required this.app, Key? key}) : super(key: key);
+
+  @override
+  State<AppDependencies> createState() => _AppDependenciesState();
+}
+
+class _AppDependenciesState extends State<AppDependencies> {
+  late final LocationRepository _locationRepository;
+  late final FilterRepository _filterRepository;
+  late final SightRepository _sightRepository;
+  late final SearchRepository _searchRepository;
+
+  @override
+  void initState() {
+    super.initState();
+    _locationRepository = LocationRepository();
+    _locationRepository.initLocation();
+    _filterRepository = FilterRepository(_locationRepository);
+    _sightRepository = SightRepository(_filterRepository);
+    _searchRepository = SearchRepository(_sightRepository);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<CustomTheme>(create: (_) => CustomTheme()),
-        ChangeNotifierProvider<FilterRepository>(
-          create: (_) => FilterRepository(),
-        ),
         ChangeNotifierProvider<LocationRepository>(
-          create: (_) => LocationRepository(),
+          create: (_) => LocationRepository()..initLocation(),
         ),
-        ChangeNotifierProxyProvider2<LocationRepository, FilterRepository,
-            SightRepository>(
-          create: (context) => SightRepository(),
-          update: (context, locationRepository, filterRepository,
-                  sightRepository) =>
-              /*--- Не могу понять почему sightRepository nullable*/
-              sightRepository!
-                ..updateFilter(filterRepository)
-                ..updateLocation(locationRepository),
+        ChangeNotifierProxyProvider<LocationRepository, FilterRepository>(
+          create: (context) => FilterRepository(
+              Provider.of<LocationRepository>(context, listen: false)),
+          update: (context, locationRepository, filterRepository) =>
+              FilterRepository(locationRepository),
+        ),
+        ChangeNotifierProxyProvider<FilterRepository, SightRepository>(
+          create: (context) => SightRepository(
+              Provider.of<FilterRepository>(context, listen: false)),
+          update: (context, filterRepository, sightRepository) =>
+              SightRepository(filterRepository),
         ),
         ChangeNotifierProxyProvider<SightRepository, SearchRepository>(
-            create: (context) => SearchRepository(),
+            create: (context) => SearchRepository(
+                Provider.of<SightRepository>(context, listen: false)),
             update: (context, sightRepository, searchRepository) =>
-                searchRepository!..updateSightRepository(sightRepository)),
+                SearchRepository(sightRepository)),
       ],
-      child: Consumer<CustomTheme>(
-        builder: (context, CustomTheme customTheme, child) {
-          return MaterialApp(
-            theme: CustomTheme.lightTheme,
-            darkTheme: CustomTheme.darkTheme,
-            themeMode: customTheme.currentTheme,
-            debugShowCheckedModeBanner: false,
-            title: AppStrings.appTitle,
-            routes: {
-              AppRouter.main: (context) => const MainPage(),
-              AppRouter.details: (context) {
-                final id = ModalRoute.of(context)?.settings.arguments as int;
-                return SightDetailsScreen(id: id);
-              },
-              AppRouter.filters: (context) => const FiltersScreen(),
-              AppRouter.addSight: (context) => const NewSightScreen(),
-              AppRouter.chooseFilter: (context) =>
-                  const FilterTypePickerScreen(),
-              AppRouter.searchScreen: (context) => const SearchScreen(),
-            },
-            initialRoute: AppRouter.main,
-            onGenerateRoute: (RouteSettings settings) {
-              return MaterialPageRoute<void>(builder: (context) {
-                return const Scaffold(
-                  body: Center(
-                    child: Text('Ошибка пути'),
-                  ),
-                );
-              });
-            },
-          );
-        },
-      ),
+      child: widget.app,
+    );
+  }
+}
+
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<CustomTheme>(
+      builder: (context, CustomTheme customTheme, child) {
+        return MaterialApp(
+          theme: CustomTheme.lightTheme,
+          darkTheme: CustomTheme.darkTheme,
+          themeMode: customTheme.currentTheme,
+          debugShowCheckedModeBanner: false,
+          title: AppStrings.appTitle,
+          routes: AppRouter.routes,
+          initialRoute: AppRouter.main,
+          onGenerateRoute: (RouteSettings settings) {
+            return MaterialPageRoute<void>(builder: (context) {
+              return const Scaffold(
+                body: Center(
+                  child: Text('Ошибка пути'),
+                ),
+              );
+            });
+          },
+        );
+      },
     );
   }
 }

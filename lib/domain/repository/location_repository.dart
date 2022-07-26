@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
 class LocationRepository with ChangeNotifier {
-  LocationData? _locationData;
-
-  LocationRepository() {
-    initLocation();
-  }
+  late LocationData? _locationData;
 
   LocationData? get locationData => _locationData;
 

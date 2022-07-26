@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/colors.dart';
+import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/search_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
@@ -44,6 +45,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -52,10 +54,8 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Список интересных мест',
-          style: Theme.of(context)
-              .textTheme
-              .headline6
-              ?.copyWith(color: Theme.of(context).colorScheme.lmMainDmWhite),
+          style: theme.textTheme.headline6
+              ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
         ),
         centerTitle: true,
         leading: TextButton(
@@ -64,8 +64,8 @@ class _SearchScreenState extends State<SearchScreen> {
           },
           child: Text(
             AppStrings.cancel,
-            style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                color: Theme.of(context).colorScheme.smallSecondaryTwo),
+            style: theme.textTheme.bodyText1
+                ?.copyWith(color: theme.colorScheme.smallSecondaryTwo),
           ),
         ),
       ),
@@ -90,8 +90,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: AppStrings.searchString,
-                  hintStyle: Theme.of(context).textTheme.bodyText1?.copyWith(
-                      color: Theme.of(context).colorScheme.smallInnactive),
+                  hintStyle: theme.textTheme.bodyText1
+                      ?.copyWith(color: theme.colorScheme.smallInnactive),
                 ),
               ),
             ),
@@ -107,13 +107,8 @@ class _SearchScreenState extends State<SearchScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 32.0),
                           child: Text(AppStrings.youSearched,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline1
-                                  ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .subTitle)),
+                              style: theme.textTheme.headline1?.copyWith(
+                                  color: theme.colorScheme.subTitle)),
                         ),
                         Flexible(
                           child: ListView.separated(
@@ -149,9 +144,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             ).clearHistory();
                           }),
                           child: Text(AppStrings.clearHistory,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText1
+                              style: theme.textTheme.bodyText1
                                   ?.copyWith(color: AppColors.lmGreen)),
                         ),
                       ],
@@ -182,23 +175,28 @@ class _SearchScreenState extends State<SearchScreen> {
                                   height: 56,
                                 ),
                               ),
-                              title: Text(
+                              title: highlightedSearchText(
                                 searchRepository.searchSightList[index].name,
-                                style: Theme.of(context).textTheme.bodyText1,
+                                searchController.text,
+                                theme.textTheme.bodyText1,
                               ),
+                              //  Text(
+                              //   searchRepository.searchSightList[index].name,
+                              //   style: theme.textTheme.bodyText1,
+                              // ),
                               subtitle: Text(
-                                searchRepository
-                                    .sightRepository.filterRepository
+                                Provider.of<FilterRepository>(context,
+                                        listen: false)
                                     .getFilterById(searchRepository
                                         .searchSightList[index].filterId)
                                     .title,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText2
-                                    ?.copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .smallSecondaryTwo),
+                                // searchRepository
+                                //     .sightRepository.filterRepository
+                                //     .getFilterById(searchRepository
+                                //         .searchSightList[index].filterId)
+                                //     .title,
+                                style: theme.textTheme.bodyText2?.copyWith(
+                                    color: theme.colorScheme.smallSecondaryTwo),
                               ),
                             );
                           },
@@ -219,25 +217,15 @@ class _SearchScreenState extends State<SearchScreen> {
                             padding: const EdgeInsets.only(top: 32),
                             child: Text(
                               AppStrings.findNothing,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headline6
-                                  ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .subTitle),
+                              style: theme.textTheme.headline6
+                                  ?.copyWith(color: theme.colorScheme.subTitle),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(AppStrings.tryAnotherQuery,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText2
-                                    ?.copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .subTitle)),
+                                style: theme.textTheme.bodyText2?.copyWith(
+                                    color: theme.colorScheme.subTitle)),
                           ),
                         ],
                       ),
@@ -250,5 +238,22 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
       ),
     );
+  }
+
+  RichText highlightedSearchText(
+    String text,
+    String hightlightText,
+    TextStyle? style,
+  ) {
+    int startIndex = text.indexOf(hightlightText);
+    int endIndex = startIndex + hightlightText.length;
+    String start = text.substring(0, startIndex);
+    String middle = text.substring(startIndex, endIndex);
+    String end = text.substring(endIndex);
+    return RichText(
+        text: TextSpan(text: start, style: style, children: <TextSpan>[
+      TextSpan(text: middle, style: style?.copyWith(color: Colors.green)),
+      TextSpan(text: end, style: style),
+    ]));
   }
 }

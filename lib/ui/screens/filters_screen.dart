@@ -15,6 +15,7 @@ class FiltersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Consumer2<SightRepository, FilterRepository>(
       builder: (context, sightRepository, filterRepository, _) {
         return Scaffold(
@@ -28,9 +29,7 @@ class FiltersScreen extends StatelessWidget {
                 },
                 child: Text(
                   AppStrings.cleanFiltersString,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
+                  style: theme.textTheme.bodyText1
                       ?.copyWith(color: AppColors.lmGreen),
                 ),
               ),
@@ -42,7 +41,7 @@ class FiltersScreen extends StatelessWidget {
                 },
                 icon: SvgPicture.asset(
                   AssetImages.iconAppbarArrowPath,
-                  color: Theme.of(context).colorScheme.title,
+                  color: theme.colorScheme.title,
                   height: 32,
                 ),
               ),
@@ -59,8 +58,8 @@ class FiltersScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 24.0, bottom: 24),
                     child: Text(AppStrings.categoriesString.toUpperCase(),
-                        style: Theme.of(context).textTheme.headline1?.copyWith(
-                            color: Theme.of(context).colorScheme.subTitle)),
+                        style: theme.textTheme.headline1
+                            ?.copyWith(color: theme.colorScheme.subTitle)),
                   ),
                   const FilterGridViewWidget(),
                   const SizedBox(height: 30),
@@ -79,7 +78,6 @@ class FiltersScreen extends StatelessWidget {
                                 ? null
                                 : () {
                                     Navigator.pop(context);
-                                    sightRepository.notifyListeners();
                                   },
                           ),
                         ),

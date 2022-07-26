@@ -3,15 +3,18 @@ import 'package:places/domain/model/sight.dart';
 import 'package:places/domain/repository/sight_repository.dart';
 
 class SearchRepository with ChangeNotifier {
-  SightRepository _sightRepository = SightRepository();
+  final SightRepository _sightRepository;
   List<Sight> searchSightList = <Sight>[];
   List<String> searchQueries = <String>[];
 
-  SightRepository get sightRepository => _sightRepository;
+  SearchRepository(SightRepository sightRepository)
+      : _sightRepository = sightRepository;
 
-  void updateSightRepository(SightRepository sightRepository) {
-    _sightRepository = sightRepository;
-  }
+  // SightRepository get sightRepository => _sightRepository;
+
+  // void updateSightRepository(SightRepository sightRepository) {
+  //   _sightRepository = sightRepository;
+  // }
 
   void findSightsByName(String name) {
     searchSightList = _sightRepository.sights

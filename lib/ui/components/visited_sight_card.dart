@@ -17,6 +17,7 @@ class VisitedSightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
@@ -37,22 +38,22 @@ class VisitedSightCard extends StatelessWidget {
                   children: [
                     Text(
                       '${_intention.sightId}' /*.name*/,
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: theme.textTheme.bodyText1,
                     ),
                     Text(
                       AppStrings.visitedCardGoalString +
                           '${getDate(_intention.date)}',
-                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      style: theme.textTheme.bodyText2?.copyWith(
                             color:
-                                Theme.of(context).colorScheme.smallSecondaryTwo,
+                                theme.colorScheme.smallSecondaryTwo,
                           ),
                     ),
                     const SizedBox(height: 16),
                     Text(
                       '${_intention.sightId}' /*.details*/,
-                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                      style: theme.textTheme.bodyText2?.copyWith(
                           color:
-                              Theme.of(context).colorScheme.smallSecondaryTwo),
+                              theme.colorScheme.smallSecondaryTwo),
                     ),
                   ],
                 ),
