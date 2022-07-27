@@ -1,15 +1,10 @@
 //dataclass for sights user signed to visit or have already visited
 class Intention {
-  int id;
   int sightId;
   DateTime? date;
   bool hasVisited;
 
-  Intention(
-      {required this.id,
-      required this.sightId,
-      this.date,
-      this.hasVisited = false});
+  Intention({required this.sightId, this.date, this.hasVisited = false});
 
   @override
   bool operator ==(dynamic other) {
@@ -18,5 +13,5 @@ class Intention {
   }
 
   @override
-  int get hashCode => id;
+  int get hashCode => sightId;
 }

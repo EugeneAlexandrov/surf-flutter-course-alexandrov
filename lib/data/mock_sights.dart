@@ -38,7 +38,7 @@ final List<Sight> mockSights = [
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
   Sight.withId(
       id: 4,
-      name: 'Место 5 в 150 метрах',
+      name: 'Место #4 в 150 метрах',
       details:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       lat: 46.350234,
@@ -56,7 +56,7 @@ final List<Sight> mockSights = [
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
   Sight.withId(
       id: 6,
-      name: 'Место №7 в 1.1 километре',
+      name: 'Место №6 в 1.1 километре',
       details:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       lat: 46.346125,
@@ -65,7 +65,7 @@ final List<Sight> mockSights = [
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
   Sight.withId(
       id: 7,
-      name: 'Место №8 в 2,6 километре',
+      name: 'Место №7 в 2,6 километре',
       details:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       lat: 46.371726,
@@ -74,7 +74,7 @@ final List<Sight> mockSights = [
       url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6'),
   Sight.withId(
       id: 8,
-      name: 'Место №9 в 8,7 километре',
+      name: 'Место №8 в 8,7 километре',
       details:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
       lat: 46.420343,

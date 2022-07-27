@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_router.dart';
 import 'package:places/domain/repository/filter_repository.dart';
+import 'package:places/domain/repository/intention_repository.dart';
 import 'package:places/domain/repository/location_repository.dart';
 import 'package:places/domain/repository/search_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
@@ -31,6 +32,8 @@ class _AppDependenciesState extends State<AppDependencies> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<CustomTheme>(create: (_) => CustomTheme()),
+        ChangeNotifierProvider<IntentionRepository>(
+            create: (_) => IntentionRepository()),
         ChangeNotifierProvider<LocationRepository>(
           create: (_) => LocationRepository()..initLocation(),
         ),
