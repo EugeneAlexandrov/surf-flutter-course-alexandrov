@@ -44,9 +44,7 @@ class SightCard extends StatelessWidget {
                       Text(
                         sightRepository.getSightById(sightID).details,
                         style: theme.textTheme.bodyText2?.copyWith(
-                            color: theme
-                                .colorScheme
-                                .smallSecondaryTwo),
+                            color: theme.colorScheme.smallSecondaryTwo),
                       ),
                     ],
                   ),
@@ -77,10 +75,10 @@ class SightCard extends StatelessWidget {
                 ),
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 4,
               right: 4,
-              child: FavoriteIconButton(),
+              child: FavoriteIconButton(sightID),
             ),
           ],
         ),

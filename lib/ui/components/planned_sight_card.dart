@@ -1,25 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/domain/model/intention.dart';
+import 'package:places/app_utils.dart';
+import 'package:places/domain/repository/filter_repository.dart';
+import 'package:places/domain/repository/intention_repository.dart';
+import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
 import 'package:places/ui/screens/res/themes.dart';
+import 'package:provider/provider.dart';
 
 class PlannedSightCard extends StatelessWidget {
-  const PlannedSightCard({required Intention intention, Key? key})
-      : _intention = intention,
-        super(key: key);
+  const PlannedSightCard(this._sightId, {Key? key}) : super(key: key);
 
-  final Intention _intention;
+  final int _sightId;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
+    final intention = Provider.of<IntentionRepository>(context, listen: false)
+        .findIntentionBySightId(_sightId);
+    final sight = Provider.of<SightRepository>(context, listen: false)
+        .getSightById(_sightId);
+    final filter = Provider.of<FilterRepository>(context, listen: false)
+        .getFilterById(sight.filterId);
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
@@ -39,22 +47,18 @@ class PlannedSightCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${_intention.sightId}',
+                      sight.name,
                       style: theme.textTheme.bodyText1,
                     ),
                     Text(
                         AppStrings.plannedCardGoalString +
-                            '${getDate(_intention.date)}',
-                        style: theme
-                            .textTheme
-                            .bodyText2
-                            ?.copyWith(color: getColor(_intention.date))),
-                    const SizedBox(height: 16),
-                    Text('${_intention.sightId}' /*.details*/,
+                            '${AppUtils.getDate(intention.date)}',
                         style: theme.textTheme.bodyText2?.copyWith(
-                            color: theme
-                                .colorScheme
-                                .smallSecondaryTwo)),
+                            color: AppUtils.getColor(intention.date))),
+                    const SizedBox(height: 16),
+                    Text(sight.details /*.details*/,
+                        style: theme.textTheme.bodyText2?.copyWith(
+                            color: theme.colorScheme.smallSecondaryTwo)),
                   ],
                 ),
               ),
@@ -64,7 +68,7 @@ class PlannedSightCard extends StatelessWidget {
             top: 16,
             left: 16,
             child: Text(
-              '${_intention.sightId}',
+              filter.title,
               style: smallBold.copyWith(
                 color: Colors.white,
               ),
@@ -92,28 +96,15 @@ class PlannedSightCard extends StatelessWidget {
               width: 40,
               child: CustomIconButton(
                 child: SvgPicture.asset(AssetImages.iconCrossPath),
-                onPressed: () {},
+                onPressed: () {
+                  Provider.of<IntentionRepository>(context, listen: false)
+                      .delete(_sightId);
+                },
               ),
             ),
           ),
         ],
       ),
     );
-  }
-
-  Color getColor(DateTime? date) {
-    if (date != null) {
-      return (date.isAfter(DateTime.now())) ? Colors.green : Colors.red;
-    }
-    return Colors.black;
-  }
-
-  String? getDate(DateTime? date) {
-    if (date != null) {
-      initializeDateFormatting();
-      final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
-      return formatter.format(date);
-    }
-    return null;
   }
 }

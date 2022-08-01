@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/domain/model/intention.dart';
+import 'package:places/app_utils.dart';
+import 'package:places/domain/repository/filter_repository.dart';
+import 'package:places/domain/repository/intention_repository.dart';
+import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
 import 'package:places/ui/screens/res/themes.dart';
+import 'package:provider/provider.dart';
 
 class VisitedSightCard extends StatelessWidget {
-  const VisitedSightCard(this._intention, {Key? key}) : super(key: key);
+  const VisitedSightCard(this._sightId, {Key? key}) : super(key: key);
 
-  final Intention _intention;
+  final int _sightId;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final intention = Provider.of<IntentionRepository>(context, listen: false)
+        .findIntentionBySightId(_sightId);
+    final sight = Provider.of<SightRepository>(context, listen: false)
+        .getSightById(_sightId);
+    final filter = Provider.of<FilterRepository>(context, listen: false)
+        .getFilterById(sight.filterId);
+
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.all(8),
@@ -37,23 +46,22 @@ class VisitedSightCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${_intention.sightId}' /*.name*/,
+                      sight.name /*.name*/,
                       style: theme.textTheme.bodyText1,
                     ),
                     Text(
                       AppStrings.visitedCardGoalString +
-                          '${getDate(_intention.date)}',
+                          '${AppUtils.getDate(intention.date)}',
+                      /*.date*/
                       style: theme.textTheme.bodyText2?.copyWith(
-                            color:
-                                theme.colorScheme.smallSecondaryTwo,
-                          ),
+                        color: theme.colorScheme.smallSecondaryTwo,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      '${_intention.sightId}' /*.details*/,
+                      sight.details /*.details*/,
                       style: theme.textTheme.bodyText2?.copyWith(
-                          color:
-                              theme.colorScheme.smallSecondaryTwo),
+                          color: theme.colorScheme.smallSecondaryTwo),
                     ),
                   ],
                 ),
@@ -64,7 +72,7 @@ class VisitedSightCard extends StatelessWidget {
             top: 16,
             left: 16,
             child: Text(
-              '${_intention.sightId}' /*.type*/,
+              filter.title /*.type*/,
               style: smallBold.copyWith(
                 color: Colors.white,
               ),
@@ -92,21 +100,15 @@ class VisitedSightCard extends StatelessWidget {
               width: 40,
               child: CustomIconButton(
                 child: SvgPicture.asset(AssetImages.iconCrossPath),
-                onPressed: () {},
+                onPressed: () {
+                  Provider.of<IntentionRepository>(context, listen: false)
+                      .delete(_sightId);
+                },
               ),
             ),
           ),
         ],
       ),
     );
-  }
-
-  String? getDate(DateTime? date) {
-    if (date != null) {
-      initializeDateFormatting();
-      final formatter = DateFormat('dd MMM yyyy', 'ru_RU');
-      return formatter.format(date);
-    }
-    return null;
   }
 }
