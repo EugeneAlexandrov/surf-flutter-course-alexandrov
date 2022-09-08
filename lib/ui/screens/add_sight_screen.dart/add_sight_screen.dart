@@ -310,31 +310,38 @@ class ImageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final int color =
         ImageListProvider.read(context)?.imageList[index].color ?? 10;
-    return Stack(
-      children: [
-        Container(
-          height: 72,
-          width: 72,
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(
-                color * 100 % 255, 255 - color * 10, color * 15, 1),
-            borderRadius: BorderRadius.circular(12),
+    return Dismissible(
+      direction: DismissDirection.up,
+      key: UniqueKey(),
+      onDismissed: (direction) {
+        ImageListProvider.read(context)?.deleteImage(index);
+      },
+      child: Stack(
+        children: [
+          Container(
+            height: 72,
+            width: 72,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(
+                  color * 128 % 256, 255 - color * 10, color * 15, 1),
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
-        ),
-        Positioned(
-            top: 6,
-            right: 6,
-            child: GestureDetector(
-              onTap: () {
-                ImageListProvider.read(context)?.deleteImage(index);
-              },
-              child: const Icon(
-                Icons.cancel,
-                color: Colors.white,
-                size: 20,
-              ),
-            ))
-      ],
+          Positioned(
+              top: 6,
+              right: 6,
+              child: GestureDetector(
+                onTap: () {
+                  ImageListProvider.read(context)?.deleteImage(index);
+                },
+                child: const Icon(
+                  Icons.cancel,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ))
+        ],
+      ),
     );
   }
 }
