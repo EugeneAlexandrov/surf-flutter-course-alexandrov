@@ -30,80 +30,108 @@ class PlannedSightCard extends StatelessWidget {
 
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      margin: const EdgeInsets.all(8),
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       clipBehavior: Clip.hardEdge,
       elevation: 0,
-      child: Stack(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const BackgroundImageContainer(),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
+      child: Dismissible(
+        direction: DismissDirection.endToStart,
+        key: UniqueKey(),
+        onDismissed: (direction) {
+          Provider.of<IntentionRepository>(context, listen: false)
+              .changeFavoriteState(_sightId);
+        },
+        background: Container(
+            color: Colors.red,
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
+                    const Icon(Icons.delete, size: 50, color: Colors.white),
                     Text(
-                      sight.name,
-                      style: theme.textTheme.bodyText1,
+                      'Удалить',
+                      style: smallBold.copyWith(
+                        color: Colors.white,
+                      ),
                     ),
-                    Text(
-                        AppStrings.plannedCardGoalString +
-                            '${AppUtils.getDate(intention.date)}',
-                        style: theme.textTheme.bodyText2?.copyWith(
-                            color: AppUtils.getColor(intention.date))),
-                    const SizedBox(height: 16),
-                    Text(sight.details /*.details*/,
-                        style: theme.textTheme.bodyText2?.copyWith(
-                            color: theme.colorScheme.smallSecondaryTwo)),
                   ],
                 ),
               ),
-            ],
-          ),
-          Positioned(
-            top: 16,
-            left: 16,
-            child: Text(
-              filter.title,
-              style: smallBold.copyWith(
-                color: Colors.white,
-              ),
+            )),
+        child: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const BackgroundImageContainer(),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        sight.name,
+                        style: theme.textTheme.bodyText1,
+                      ),
+                      Text(
+                          AppStrings.plannedCardGoalString +
+                              '${AppUtils.getDate(intention.date)}',
+                          style: theme.textTheme.bodyText2?.copyWith(
+                              color: AppUtils.getColor(intention.date))),
+                      const SizedBox(height: 16),
+                      Text(sight.details /*.details*/,
+                          style: theme.textTheme.bodyText2?.copyWith(
+                              color: theme.colorScheme.smallSecondaryTwo)),
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ),
-          Positioned(
-            top: 8,
-            right: 52,
-            child: SizedBox(
-              height: 40,
-              width: 40,
-              child: CustomIconButton(
-                onPressed: () {},
-                child: SvgPicture.asset(
-                  AssetImages.iconCalendarPath,
+            Positioned(
+              top: 16,
+              left: 16,
+              child: Text(
+                filter.title,
+                style: smallBold.copyWith(
+                  color: Colors.white,
                 ),
               ),
             ),
-          ),
-          Positioned(
-            top: 8,
-            right: 8,
-            child: SizedBox(
-              height: 40,
-              width: 40,
-              child: CustomIconButton(
-                child: SvgPicture.asset(AssetImages.iconCrossPath),
-                onPressed: () {
-                  Provider.of<IntentionRepository>(context, listen: false)
-                      .delete(_sightId);
-                },
+            Positioned(
+              top: 8,
+              right: 52,
+              child: SizedBox(
+                height: 40,
+                width: 40,
+                child: CustomIconButton(
+                  onPressed: () {},
+                  child: SvgPicture.asset(
+                    AssetImages.iconCalendarPath,
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
+            Positioned(
+              top: 8,
+              right: 8,
+              child: SizedBox(
+                height: 40,
+                width: 40,
+                child: CustomIconButton(
+                  child: SvgPicture.asset(AssetImages.iconCrossPath),
+                  onPressed: () {
+                    Provider.of<IntentionRepository>(context, listen: false)
+                        .delete(_sightId);
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
