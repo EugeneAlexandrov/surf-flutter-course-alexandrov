@@ -45,4 +45,14 @@ class IntentionRepository with ChangeNotifier {
   void changeFavoriteState(int sightId) {
     isFavorite(sightId) ? delete(sightId) : add(sightId);
   }
+
+  void swapIntention(int fromId, int toId) {
+    var fromIntention = findIntentionBySightId(fromId);
+    var toIntention = findIntentionBySightId(toId);
+    int fromIndex = _intentionList.indexOf(fromIntention);
+    int toIndex = _intentionList.indexOf(toIntention);
+    _intentionList[fromIndex] = toIntention;
+    _intentionList[toIndex] = fromIntention;
+    notifyListeners();
+  }
 }
