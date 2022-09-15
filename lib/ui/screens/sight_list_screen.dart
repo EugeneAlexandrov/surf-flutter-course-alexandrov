@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
@@ -48,6 +50,9 @@ class SightListScreen extends StatelessWidget {
                 child: Consumer<SightRepository>(
                   builder: (context, sightRepository, child) {
                     return ListView.builder(
+                      physics: Platform.isAndroid
+                          ? const ClampingScrollPhysics()
+                          : const BouncingScrollPhysics(),
                       padding: const EdgeInsets.only(top: 26),
                       keyboardDismissBehavior:
                           ScrollViewKeyboardDismissBehavior.onDrag,
