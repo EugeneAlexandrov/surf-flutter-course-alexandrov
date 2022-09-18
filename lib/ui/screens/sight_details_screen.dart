@@ -16,7 +16,7 @@ class SightDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)?.settings.arguments as int;
     return Scaffold(
-      appBar: const ImageAppBar(),
+      appBar: ImageAppBar(),
       body: SingleChildScrollView(
         child: DetailsInfo(
           id: id,
