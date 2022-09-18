@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
@@ -224,6 +226,9 @@ class Gallary extends StatelessWidget {
     return SizedBox(
       height: 72,
       child: ListView.separated(
+        physics: Platform.isAndroid
+            ? const ClampingScrollPhysics()
+            : const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         //смещение индексов для первого жлемента списка
         itemCount: model == null ? 1 : model.imageList.length + 1,

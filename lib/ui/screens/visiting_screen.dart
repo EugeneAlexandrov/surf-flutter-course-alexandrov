@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:places/domain/model/intention.dart';
 import 'package:places/domain/repository/intention_repository.dart';
@@ -46,6 +48,9 @@ class _DraggableListState extends State<DraggableList> {
     return widget.list.isEmpty
         ? const NullPlannedPlaceHolder()
         : ListView.builder(
+            physics: Platform.isAndroid
+                ? const ClampingScrollPhysics()
+                : const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return DraggableElementWidget(widget.list[index].sightId);
             },

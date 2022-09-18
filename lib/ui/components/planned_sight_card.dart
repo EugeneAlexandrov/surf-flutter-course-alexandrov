@@ -45,7 +45,7 @@ class PlannedSightCard extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerRight,
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
