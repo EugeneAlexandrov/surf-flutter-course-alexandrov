@@ -67,25 +67,64 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CustomTheme>(
       builder: (context, CustomTheme customTheme, child) {
-        return MaterialApp(
-          theme: CustomTheme.lightTheme,
-          darkTheme: CustomTheme.darkTheme,
-          themeMode: customTheme.currentTheme,
-          debugShowCheckedModeBanner: false,
-          title: AppStrings.appTitle,
-          routes: AppRouter.routes,
-          initialRoute: AppRouter.main,
-          onGenerateRoute: (RouteSettings settings) {
-            return MaterialPageRoute<void>(builder: (context) {
-              return const Scaffold(
-                body: Center(
-                  child: Text('Ошибка пути'),
-                ),
-              );
-            });
-          },
+        return OnBoardindShowProvider(
+          model: OnboardingShowModel(),
+          child: MaterialApp(
+            theme: CustomTheme.lightTheme,
+            darkTheme: CustomTheme.darkTheme,
+            themeMode: customTheme.currentTheme,
+            debugShowCheckedModeBanner: false,
+            title: AppStrings.appTitle,
+            routes: AppRouter.routes,
+            initialRoute: OnBoardindShowProvider.watch(context)?.shown ?? false
+                ? AppRouter.main
+                : AppRouter.onboarding,
+            onGenerateRoute: (RouteSettings settings) {
+              return MaterialPageRoute<void>(builder: (context) {
+                return const Scaffold(
+                  body: Center(
+                    child: Text('Ошибка пути'),
+                  ),
+                );
+              });
+            },
+          ),
         );
       },
     );
+  }
+}
+
+class OnboardingShowModel extends ChangeNotifier {
+  bool _shown = false;
+
+  bool get shown => _shown;
+
+  void endShow() {
+    _shown = true;
+    notifyListeners();
+  }
+}
+
+class OnBoardindShowProvider extends InheritedNotifier<OnboardingShowModel> {
+  final OnboardingShowModel model;
+
+  const OnBoardindShowProvider(
+      {required this.model, required Widget child, Key? key})
+      : super(key: key, notifier: model, child: child);
+
+  //подписка
+  static OnboardingShowModel? watch(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<OnBoardindShowProvider>()
+        ?.model;
+  }
+
+  //чтение
+  static OnboardingShowModel? read(BuildContext context) {
+    final widget = context
+        .getElementForInheritedWidgetOfExactType<OnBoardindShowProvider>()
+        ?.widget;
+    return widget is OnBoardindShowProvider ? widget.notifier : null;
   }
 }

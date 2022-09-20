@@ -103,10 +103,10 @@ class ImageAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           height: 360,
           child: Scrollbar(
-            radius: Radius.circular(12),
+            radius: const Radius.circular(12),
             thickness: 8,
             controller: pageController,
             thumbVisibility: true,

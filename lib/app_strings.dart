@@ -43,8 +43,14 @@ class AppStrings {
   static const tryAnotherQuery = 'Попробуйте изменить параметры поиска';
   static const clearHistory = 'Очистить историю';
   static const youSearched = 'ВЫ ИСКАЛИ';
-
-
-
-
+  static const onBoardingTitleOne = 'Добро пожаловать в Путеводитель';
+  static const onBoardingSubtitleOne =
+      'Ищи новые локации и сохраняй самые любимые.';
+  static const onBoardingTitleTwo = 'Построй маршрут и отправляйся в путь';
+  static const onBoardingSubtitleTwo =
+      'Достигай цели максимально быстро и комфортно.';
+  static const onBoardingTitleThree = 'Добавляй места, которые нашёл сам';
+  static const onBoardingSubtitleThree =
+      'Делись самыми интересными и помоги нам стать лучше!';
+  static const onBoardingStart = 'НА СТАРТ';
 }

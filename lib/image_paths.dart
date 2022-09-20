@@ -28,4 +28,7 @@ class AssetImages {
   static const iconAppbarArrowPath = basicPath + 'Arrow.svg';
   static const iconInfoPath = basicPath + 'Info.svg';
   static const iconRihgtArrowPath = basicPath + 'View.svg';
+  static const iconOnboardingOnePath = basicPath + 'onboarding1.svg';
+  static const iconOnboardingTwoPath = basicPath + 'onboarding2.svg';
+  static const iconOnboardingThreePath = basicPath + 'onboarding3.svg';
 }
