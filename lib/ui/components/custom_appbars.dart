@@ -23,9 +23,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
       alignment: Alignment.center,
       child: Text(
         title,
-        style: theme
-            .textTheme
-            .headline6
+        style: theme.textTheme.headline6
             ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
       ),
     );
@@ -51,9 +49,7 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(top: 40, bottom: 22),
           child: Text(
             title,
-            style: theme
-                .textTheme
-                .headline6
+            style: theme.textTheme.headline6
                 ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
           ),
         ),
@@ -96,7 +92,9 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 //AppBar for details screen with image
 class ImageAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const ImageAppBar({Key? key}) : super(key: key);
+  ImageAppBar({Key? key}) : super(key: key);
+
+  final PageController pageController = PageController();
 
   @override
   Size get preferredSize => const Size.fromHeight(361);
@@ -105,13 +103,20 @@ class ImageAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           height: 360,
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: ExactAssetImage(AssetImages.mockImageDetailPath),
+          child: Scrollbar(
+            radius: const Radius.circular(12),
+            thickness: 8,
+            controller: pageController,
+            thumbVisibility: true,
+            child: PageView.builder(
+              controller: pageController,
+              itemBuilder: (context, index) {
+                return Container(
+                    color: index % 2 == 0 ? Colors.green : Colors.red);
+              },
+              itemCount: 4,
             ),
           ),
         ),

@@ -15,6 +15,7 @@ class CustomTheme with ChangeNotifier {
 
   static ThemeData get lightTheme {
     return ThemeData(
+      highlightColor: AppColors.lmMain,
       brightness: Brightness.light,
       fontFamily: 'Roboto',
       appBarTheme: const AppBarTheme(
@@ -91,6 +92,7 @@ class CustomTheme with ChangeNotifier {
 
   static ThemeData get darkTheme {
     return ThemeData(
+        highlightColor: AppColors.lmBackground,
         brightness: Brightness.dark,
         fontFamily: 'Roboto',
         appBarTheme: const AppBarTheme(
