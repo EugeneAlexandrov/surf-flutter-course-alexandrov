@@ -91,56 +91,60 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 //AppBar for details screen with image
-class ImageAppBar extends StatelessWidget implements PreferredSizeWidget {
+class ImageAppBar extends StatelessWidget {
   ImageAppBar({Key? key}) : super(key: key);
 
   final PageController pageController = PageController();
 
   @override
-  Size get preferredSize => const Size.fromHeight(361);
-
-  @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SizedBox(
-          height: 360,
-          child: Scrollbar(
-            radius: const Radius.circular(12),
-            thickness: 8,
-            controller: pageController,
-            thumbVisibility: true,
-            child: PageView.builder(
-              controller: pageController,
-              itemBuilder: (context, index) {
-                return Container(
-                    color: index % 2 == 0 ? Colors.green : Colors.red);
-              },
-              itemCount: 4,
-            ),
-          ),
-        ),
-        Positioned(
-          top: 36,
-          left: 16,
-          child: Container(
-            height: 32,
-            width: 32,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: InkWell(
-              onTap: () => Navigator.of(context).pop(),
-              child: SvgPicture.asset(
-                AssetImages.iconAppbarArrowPath,
-                color: Colors.black,
-                height: 5,
+    return SliverAppBar(
+      automaticallyImplyLeading: false,
+      expandedHeight: 336,
+      backgroundColor: Colors.transparent,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Stack(
+          children: [
+            SizedBox(
+              height: 360,
+              child: Scrollbar(
+                radius: const Radius.circular(12),
+                thickness: 8,
+                controller: pageController,
+                thumbVisibility: true,
+                child: PageView.builder(
+                  controller: pageController,
+                  itemBuilder: (context, index) {
+                    return Container(
+                        color: index % 2 == 0 ? Colors.green : Colors.red);
+                  },
+                  itemCount: 4,
+                ),
               ),
             ),
-          ),
+            Positioned(
+              top: 36,
+              left: 16,
+              child: Container(
+                height: 32,
+                width: 32,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: InkWell(
+                  onTap: () => Navigator.of(context).pop(),
+                  child: SvgPicture.asset(
+                    AssetImages.iconAppbarArrowPath,
+                    color: Colors.black,
+                    height: 5,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

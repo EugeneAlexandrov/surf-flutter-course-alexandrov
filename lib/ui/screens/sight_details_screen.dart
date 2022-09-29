@@ -16,11 +16,15 @@ class SightDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)?.settings.arguments as int;
     return Scaffold(
-      appBar: ImageAppBar(),
-      body: SingleChildScrollView(
-        child: DetailsInfo(
-          id: id,
-        ),
+      body: CustomScrollView(
+        slivers: [
+          ImageAppBar(),
+          SliverToBoxAdapter(
+            child: DetailsInfo(
+              id: id,
+            ),
+          ),
+        ],
       ),
     );
   }
