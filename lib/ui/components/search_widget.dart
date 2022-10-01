@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:places/app_router.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
-class SearchField extends StatelessWidget {
+class SearchField extends StatelessWidget implements PreferredSizeWidget {
   const SearchField(
       {required this.iconButton, required this.textfield, Key? key})
       : super(key: key);
@@ -28,7 +29,11 @@ class SearchField extends StatelessWidget {
           SvgPicture.asset(AssetImages.iconSearchPath),
           const SizedBox(width: 14),
           Expanded(
-            child: textfield,
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, AppRouter.searchScreen);
+                },
+                child: textfield),
           ),
           const SizedBox(width: 14),
           iconButton,
@@ -36,4 +41,7 @@ class SearchField extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(40);
 }

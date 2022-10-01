@@ -67,7 +67,6 @@ class _MainPageState extends State<MainPage>
               ),
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: appBars[_index],
           body: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: bottomNavController,

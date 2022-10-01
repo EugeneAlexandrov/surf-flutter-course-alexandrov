@@ -85,6 +85,9 @@ class CustomTheme with ChangeNotifier {
         headline1: superSmall.copyWith(
           color: AppColors.lmSecondary,
         ),
+        headline2: largeTitle.copyWith(
+          color: AppColors.lmSecondary,
+        ),
       ),
       iconTheme: const IconThemeData(color: AppColors.lmSecondary),
     );
@@ -161,6 +164,9 @@ class CustomTheme with ChangeNotifier {
           headline1: superSmall.copyWith(
             color: Colors.white,
           ),
+          headline2: largeTitle.copyWith(
+            color: Colors.white,
+          ),
         ),
         iconTheme: const IconThemeData(color: Colors.white));
   }
@@ -189,4 +195,6 @@ extension CustomColorScheme on ColorScheme {
       : AppColors.dmDark;
   Color get lmMainDmWhite =>
       brightness == Brightness.light ? AppColors.lmMain : Colors.white;
+  Color get lmBackgroundDmMain =>
+      brightness == Brightness.light ? Colors.white : AppColors.dmMain;
 }
