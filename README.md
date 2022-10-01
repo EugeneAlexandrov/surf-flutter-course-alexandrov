@@ -1,16 +1,28 @@
 # places
 
-A new Flutter project.
+It's my pet project where I want to demonstrate all my flutter skills.
+Thanks SURF team for the help and the course
 
-## Getting Started
+## IMPLEMENTED FEATURES
 
-This project is a starting point for a Flutter application.
+* Themes and styles
+* Navigation
+* Simple state management with Provadet and InheritedWidgets
+* BottomNavigationBar
+* Appbar/SliverAppbar
+* Tabs
+* Lists/Slivers
+* ThemeSwitcher
+* Draggable cards
+* Dismisseble cards
 
-A few resources to get you started if this is your first Flutter project:
+## PLANNED UPDATES
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+* Animations
+* Architecture
+* Asynchronous
+* Streams
+* Network
+* Release
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![kyIyYFmeAf](https://user-images.githubusercontent.com/53467702/193423812-9ac721a9-d4cd-4701-b92d-265153f058e5.gif)
