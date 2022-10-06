@@ -23,7 +23,7 @@ class _MainPageState extends State<MainPage>
   late TabController bottomNavController;
 
   List<PreferredSizeWidget> appBars = [
-    const SimpleAppBar(AppStrings.appBarTitleIntesestingString),
+    const SimpleAppBar(AppStrings.appBarTitleInterestingStringSmall),
     const SimpleAppBar(AppStrings.appBarTitleMapString),
     const TabsAppBar(AppStrings.appBarTitleFavoriteString),
     const SimpleAppBar(AppStrings.appBarTitlrSettingsString),

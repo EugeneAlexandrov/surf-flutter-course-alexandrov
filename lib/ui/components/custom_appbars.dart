@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:places/app_router.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
+import 'package:places/ui/components/custom_icon_button.dart';
+import 'package:places/ui/components/search_widget.dart';
 import 'package:places/ui/screens/res/themes.dart';
 import '../../app_strings.dart';
 
@@ -144,6 +147,101 @@ class ImageAppBar extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SearchSliverAppBar extends StatefulWidget {
+  const SearchSliverAppBar({Key? key}) : super(key: key);
+
+  @override
+  State<SearchSliverAppBar> createState() => _SearchSliverAppBarState();
+}
+
+class _SearchSliverAppBarState extends State<SearchSliverAppBar> {
+  bool _showTitle = false;
+  final kExpandedHeight = 220.0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return SliverAppBar(
+      backgroundColor: theme.colorScheme.lmBackgroundDmMain,
+      pinned: true,
+      floating: true,
+      snap: true,
+      expandedHeight: kExpandedHeight,
+      elevation: 0,
+      centerTitle: true,
+      flexibleSpace: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          var top = constraints.biggest.height;
+          if (top > 80) {
+            _showTitle = false;
+          } else {
+            _showTitle = true;
+          }
+          return FlexibleSpaceBar(
+            centerTitle: true,
+            title: _showTitle
+                ? Text(
+                    AppStrings.appBarTitleInterestingStringSmall,
+                    style: theme.textTheme.bodyText1,
+                  )
+                : null,
+            // centerTitle: true,
+            background: Container(
+              height: 220,
+              padding: const EdgeInsets.only(top: 64),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(AppStrings.appBarTitleInterestingStringLarge,
+                        textAlign: TextAlign.left,
+                        style: theme.textTheme.headline4?.copyWith(
+                            color: theme.colorScheme.title,
+                            fontWeight: FontWeight.bold)),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 14, bottom: 14),
+                      child: SearchField(
+                          iconButton: CustomIconButton(
+                            child: SvgPicture.asset(AssetImages.iconFilterPath),
+                            onPressed: () {
+                              Navigator.pushNamed(context, AppRouter.filters);
+                            },
+                          ),
+                          textfield: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, AppRouter.searchScreen);
+                            },
+                            child: Text(
+                              AppStrings.searchString,
+                              style: theme.textTheme.bodyText1?.copyWith(
+                                  color: theme.colorScheme.smallInnactive),
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

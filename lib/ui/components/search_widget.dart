@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:places/app_router.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
@@ -29,11 +28,7 @@ class SearchField extends StatelessWidget implements PreferredSizeWidget {
           SvgPicture.asset(AssetImages.iconSearchPath),
           const SizedBox(width: 14),
           Expanded(
-            child: GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, AppRouter.searchScreen);
-                },
-                child: textfield),
+            child: textfield,
           ),
           const SizedBox(width: 14),
           iconButton,

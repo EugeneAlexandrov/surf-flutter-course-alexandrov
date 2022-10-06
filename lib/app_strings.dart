@@ -7,7 +7,8 @@ class AppStrings {
   static const detailsScreenFavButton = 'В избранное';
   static const futureVisitString = 'Хочу посетить';
   static const visitedString = 'Посетил';
-  static const appBarTitleIntesestingString = 'Список интересных мест';
+  static const appBarTitleInterestingStringLarge = 'Список\nинтересных мест';
+  static const appBarTitleInterestingStringSmall = 'Список интересных мест';
   static const appBarTitleMapString = 'Карта';
   static const appBarTitleFavoriteString = 'Избранное';
   static const appBarTitlrSettingsString = 'Настройки';
