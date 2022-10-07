@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:places/colors.dart';
+import 'package:places/ui/screens/res/colors.dart';
 import 'package:places/domain/model/filter.dart';
 import 'package:places/domain/repository/filter_repository.dart';
 import 'package:provider/provider.dart';

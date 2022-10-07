@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_router.dart';
-import 'package:places/colors.dart';
+import 'package:places/ui/screens/res/colors.dart';
 import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/ui/components/background_image_container.dart';

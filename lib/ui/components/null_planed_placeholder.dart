@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/image_paths.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 class NullPlannedPlaceHolder extends StatelessWidget {
@@ -24,7 +25,7 @@ class NullPlannedPlaceHolder extends StatelessWidget {
           AppStrings.nullPlannedTextString,
           textAlign: TextAlign.center,
           style: theme.textTheme.bodyText2
-              ?.copyWith(color: theme.colorScheme.smallInnactive),
+              ?.copyWith(color: theme.extension<CustomColors>()!.subTitle),
         ),
       ],
     );

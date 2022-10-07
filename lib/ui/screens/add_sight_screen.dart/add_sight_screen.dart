@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/colors.dart';
+import 'package:places/ui/screens/res/colors.dart';
 import 'package:places/domain/model/place_image.dart';
 import 'package:places/domain/model/sight.dart';
 import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_text_field.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
@@ -64,7 +65,7 @@ class _NewSightScreenState extends State<NewSightScreen> {
         title: Text(
           AppStrings.addSightAppbarTitle,
           style: theme.textTheme.headline6
-              ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
+              ?.copyWith(color: theme.extension<CustomColors>()!.title),
         ),
         centerTitle: true,
         leading: TextButton(

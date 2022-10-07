@@ -36,8 +36,6 @@ class _MainPageState extends State<MainPage>
     const SettingsScreen(),
   ];
 
-  int _index = 0;
-
   @override
   void initState() {
     super.initState();
@@ -48,7 +46,6 @@ class _MainPageState extends State<MainPage>
   }
 
   void onSelectTab(int index) {
-    _index = index;
     bottomNavController.animateTo(index);
   }
 

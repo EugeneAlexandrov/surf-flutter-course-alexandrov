@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/styles.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/ui/screens/res/styles.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
 import 'package:places/ui/components/search_widget.dart';
 import 'package:places/ui/screens/res/themes.dart';
@@ -27,7 +28,7 @@ class SimpleAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Text(
         title,
         style: theme.textTheme.headline6
-            ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
+            ?.copyWith(color: theme.extension<CustomColors>()!.title),
       ),
     );
   }
@@ -53,7 +54,7 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Text(
             title,
             style: theme.textTheme.headline6
-                ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
+                ?.copyWith(color: theme.extension<CustomColors>()!.title),
           ),
         ),
         Theme(
@@ -232,7 +233,9 @@ class _SearchSliverAppBarState extends State<SearchSliverAppBar> {
                             child: Text(
                               AppStrings.searchString,
                               style: theme.textTheme.bodyText1?.copyWith(
-                                  color: theme.colorScheme.smallInnactive),
+                                  color: theme
+                                      .extension<CustomColors>()!
+                                      .subTitle),
                             ),
                           )),
                     ),

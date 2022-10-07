@@ -11,11 +11,10 @@ class SightListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
 
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
-        return <Widget>[SearchSliverAppBar()];
+        return <Widget>[const SearchSliverAppBar()];
       },
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),

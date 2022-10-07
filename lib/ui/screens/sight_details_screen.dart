@@ -5,6 +5,7 @@ import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_appbars.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
@@ -97,7 +98,7 @@ class DetailsInfo extends StatelessWidget {
                     onPressed: null,
                     icon: SvgPicture.asset(
                       AssetImages.iconCalendarPath,
-                      color: theme.colorScheme.smallInnactive,
+                      color: theme.extension<CustomColors>()!.subTitle,
                       height: 24,
                     ),
                     label: const Text(AppStrings.detailsScreenPlanButton),
@@ -106,7 +107,7 @@ class DetailsInfo extends StatelessWidget {
                     onPressed: () {},
                     icon: SvgPicture.asset(
                       AssetImages.iconHeartOutlinePath,
-                      color: theme.colorScheme.smallInnactive,
+                      color: theme.extension<CustomColors>()!.subTitle,
                       height: 24,
                     ),
                     label: const Text(AppStrings.detailsScreenFavButton),

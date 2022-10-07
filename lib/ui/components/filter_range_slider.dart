@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/domain/repository/filter_repository.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +36,7 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
               AppStrings.distanceString,
               textAlign: TextAlign.start,
               style: theme.textTheme.bodyText1?.copyWith(
-                  color: theme.colorScheme.lmMainDmWhite),
+                  color: theme.extension<CustomColors>()!.title),
             ),
             Text(
               'от ${_selectedRange.start} до ${_selectedRange.end} км',

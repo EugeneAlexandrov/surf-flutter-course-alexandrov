@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/data/mock_filters.dart';
 import 'package:places/image_paths.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 class FilterTypePickerScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
         title: Text(
           AppStrings.filterTypePickerAppbarTitle,
           style: theme.textTheme.headline6
-              ?.copyWith(color: theme.colorScheme.lmMainDmWhite),
+              ?.copyWith(color: theme.extension<CustomColors>()!.title),
         ),
         leading: Center(
           child: IconButton(
