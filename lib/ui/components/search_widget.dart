@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:places/image_paths.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 class SearchField extends StatelessWidget implements PreferredSizeWidget {
@@ -17,7 +18,7 @@ class SearchField extends StatelessWidget implements PreferredSizeWidget {
       padding: const EdgeInsets.only(left: 15),
       height: 40,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.lmBackgroundDmDark,
+        color: Theme.of(context).extension<CustomColors>()!.lmBackgroundDmDark,
         borderRadius: const BorderRadius.all(
           Radius.circular(12),
         ),

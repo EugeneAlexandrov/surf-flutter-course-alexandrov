@@ -65,8 +65,8 @@ class _SearchScreenState extends State<SearchScreen> {
           },
           child: Text(
             AppStrings.cancel,
-            style: theme.textTheme.bodyText1
-                ?.copyWith(color: theme.colorScheme.smallSecondaryTwo),
+            style: theme.textTheme.bodyText1?.copyWith(
+                color: theme.extension<CustomColors>()!.smallSecondaryTwo),
           ),
         ),
       ),
@@ -91,8 +91,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: AppStrings.searchString,
-                  hintStyle: theme.textTheme.bodyText1
-                      ?.copyWith(color: theme.extension<CustomColors>()!.subTitle),
+                  hintStyle: theme.textTheme.bodyText1?.copyWith(
+                      color: theme.extension<CustomColors>()!.subTitle),
                 ),
               ),
             ),
@@ -107,9 +107,12 @@ class _SearchScreenState extends State<SearchScreen> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 32.0),
-                          child: Text(AppStrings.youSearched,
-                              style: theme.textTheme.headline1?.copyWith(
-                                  color: theme.colorScheme.subTitle)),
+                          child: Text(
+                            AppStrings.youSearched,
+                            style: theme.textTheme.headline1?.copyWith(
+                                color:
+                                    theme.extension<CustomColors>()!.subTitle),
+                          ),
                         ),
                         Flexible(
                           child: ListView.separated(
@@ -197,7 +200,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                 //         .searchSightList[index].filterId)
                                 //     .title,
                                 style: theme.textTheme.bodyText2?.copyWith(
-                                    color: theme.colorScheme.smallSecondaryTwo),
+                                    color: theme
+                                        .extension<CustomColors>()!
+                                        .smallSecondaryTwo),
                               ),
                             );
                           },
@@ -218,15 +223,21 @@ class _SearchScreenState extends State<SearchScreen> {
                             padding: const EdgeInsets.only(top: 32),
                             child: Text(
                               AppStrings.findNothing,
-                              style: theme.textTheme.headline6
-                                  ?.copyWith(color: theme.colorScheme.subTitle),
+                              style: theme.textTheme.headline6?.copyWith(
+                                  color: theme
+                                      .extension<CustomColors>()!
+                                      .subTitle),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text(AppStrings.tryAnotherQuery,
-                                style: theme.textTheme.bodyText2?.copyWith(
-                                    color: theme.colorScheme.subTitle)),
+                            child: Text(
+                              AppStrings.tryAnotherQuery,
+                              style: theme.textTheme.bodyText2?.copyWith(
+                                  color: theme
+                                      .extension<CustomColors>()!
+                                      .subTitle),
+                            ),
                           ),
                         ],
                       ),

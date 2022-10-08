@@ -24,7 +24,7 @@ class NullVisitedPlaceHolder extends StatelessWidget {
         Text(
           AppStrings.emptyString,
           style: theme.textTheme.headline6
-              ?.copyWith(color: theme.colorScheme.subTitle),
+              ?.copyWith(color: theme.extension<CustomColors>()!.subTitle),
         ),
         const SizedBox(height: 8),
         Text(

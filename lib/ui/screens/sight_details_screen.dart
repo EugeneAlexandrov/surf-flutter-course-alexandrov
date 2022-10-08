@@ -64,14 +64,14 @@ class DetailsInfo extends StatelessWidget {
                       .getFilterById(sightRepository.getSightById(id).filterId)
                       .title,
                   style: theme.textTheme.caption?.copyWith(
-                    color: theme.colorScheme.smallBoldSecondary,
+                    color: theme.extension<CustomColors>()!.smallBoldSecondary,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Text(
                   AppStrings.detailsScreenTime,
                   style: theme.textTheme.bodyText2?.copyWith(
-                    color: theme.colorScheme.smallSecondaryTwo,
+                    color: theme.extension<CustomColors>()!.smallSecondaryTwo,
                   ),
                 ),
               ]),

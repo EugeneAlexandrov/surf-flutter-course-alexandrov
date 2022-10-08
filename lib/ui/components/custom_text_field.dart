@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 class MyInputField extends StatelessWidget {
@@ -20,7 +21,7 @@ class MyInputField extends StatelessWidget {
         Text(
           title,
           style: theme.textTheme.headline1
-              ?.copyWith(color: theme.colorScheme.subTitle),
+              ?.copyWith(color: theme.extension<CustomColors>()!.subTitle),
         ),
         const SizedBox(height: 12),
         child,

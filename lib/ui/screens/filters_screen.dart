@@ -7,6 +7,7 @@ import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/filter_gridview.dart';
 import 'package:places/ui/components/filter_range_slider.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
@@ -41,7 +42,7 @@ class FiltersScreen extends StatelessWidget {
                 },
                 icon: SvgPicture.asset(
                   AssetImages.iconAppbarArrowPath,
-                  color: theme.colorScheme.title,
+                  color: theme.extension<CustomColors>()!.title,
                   height: 32,
                 ),
               ),
@@ -58,8 +59,8 @@ class FiltersScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 24.0, bottom: 24),
                     child: Text(AppStrings.categoriesString.toUpperCase(),
-                        style: theme.textTheme.headline1
-                            ?.copyWith(color: theme.colorScheme.subTitle)),
+                        style: theme.textTheme.headline1?.copyWith(
+                            color: theme.extension<CustomColors>()!.subTitle)),
                   ),
                   const FilterGridViewWidget(),
                   const SizedBox(height: 30),

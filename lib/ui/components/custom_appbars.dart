@@ -174,7 +174,7 @@ class _SearchSliverAppBarState extends State<SearchSliverAppBar> {
     final theme = Theme.of(context);
 
     return SliverAppBar(
-      backgroundColor: theme.colorScheme.lmBackgroundDmMain,
+      backgroundColor: theme.extension<CustomColors>()!.lmBackgroundDmMain,
       pinned: true,
       floating: true,
       snap: true,
@@ -211,7 +211,7 @@ class _SearchSliverAppBarState extends State<SearchSliverAppBar> {
                     Text(AppStrings.appBarTitleInterestingStringLarge,
                         textAlign: TextAlign.left,
                         style: theme.textTheme.headline4?.copyWith(
-                            color: theme.colorScheme.title,
+                            color: theme.extension<CustomColors>()!.title,
                             fontWeight: FontWeight.bold)),
                     const SizedBox(
                       height: 16,

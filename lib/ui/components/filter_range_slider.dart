@@ -35,14 +35,14 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
             Text(
               AppStrings.distanceString,
               textAlign: TextAlign.start,
-              style: theme.textTheme.bodyText1?.copyWith(
-                  color: theme.extension<CustomColors>()!.title),
+              style: theme.textTheme.bodyText1
+                  ?.copyWith(color: theme.extension<CustomColors>()!.title),
             ),
             Text(
               'от ${_selectedRange.start} до ${_selectedRange.end} км',
               textAlign: TextAlign.end,
               style: theme.textTheme.bodyText1?.copyWith(
-                  color: theme.colorScheme.smallSecondaryTwo),
+                  color: theme.extension<CustomColors>()!.smallSecondaryTwo),
             )
           ],
         ),

@@ -5,6 +5,7 @@ import 'package:places/ui/screens/res/colors.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/main.dart';
 import 'package:places/main_page.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/themes.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -140,14 +141,14 @@ class MyPage extends StatelessWidget {
               title,
               textAlign: TextAlign.center,
               style: theme.textTheme.headline5
-                  ?.copyWith(color: theme.colorScheme.title),
+                  ?.copyWith(color: theme.extension<CustomColors>()!.title),
             ),
             const SizedBox(height: 8),
             Text(
               subtitle,
               textAlign: TextAlign.center,
-              style: theme.textTheme.bodyText2
-                  ?.copyWith(color: theme.colorScheme.smallBoldSecondary),
+              style: theme.textTheme.bodyText2?.copyWith(
+                  color: theme.extension<CustomColors>()!.smallBoldSecondary),
             ),
           ],
         ),

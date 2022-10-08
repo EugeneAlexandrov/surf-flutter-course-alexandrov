@@ -6,6 +6,7 @@ import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/intention_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/styles.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
@@ -54,14 +55,17 @@ class VisitedSightCard extends StatelessWidget {
                           '${AppUtils.getDate(intention.date)}',
                       /*.date*/
                       style: theme.textTheme.bodyText2?.copyWith(
-                        color: theme.colorScheme.smallSecondaryTwo,
+                        color:
+                            theme.extension<CustomColors>()!.smallSecondaryTwo,
                       ),
                     ),
                     const SizedBox(height: 16),
                     Text(
                       sight.details /*.details*/,
                       style: theme.textTheme.bodyText2?.copyWith(
-                          color: theme.colorScheme.smallSecondaryTwo),
+                          color: theme
+                              .extension<CustomColors>()!
+                              .smallSecondaryTwo),
                     ),
                   ],
                 ),

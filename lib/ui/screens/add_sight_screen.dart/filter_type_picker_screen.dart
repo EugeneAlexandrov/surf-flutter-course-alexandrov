@@ -36,7 +36,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
             },
             icon: SvgPicture.asset(
               AssetImages.iconAppbarArrowPath,
-              color: theme.colorScheme.title,
+              color: theme.extension<CustomColors>()!.title,
               height: 32,
             ),
           ),

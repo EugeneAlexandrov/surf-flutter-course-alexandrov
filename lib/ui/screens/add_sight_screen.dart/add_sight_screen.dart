@@ -74,8 +74,8 @@ class _NewSightScreenState extends State<NewSightScreen> {
           },
           child: Text(
             AppStrings.cancel,
-            style: theme.textTheme.bodyText1
-                ?.copyWith(color: theme.colorScheme.smallSecondaryTwo),
+            style: theme.textTheme.bodyText1?.copyWith(
+                color: theme.extension<CustomColors>()!.smallSecondaryTwo),
           ),
         ),
       ),

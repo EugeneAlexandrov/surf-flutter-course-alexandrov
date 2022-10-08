@@ -5,6 +5,7 @@ import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/favorite_icon_button.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
@@ -44,7 +45,9 @@ class SightCard extends StatelessWidget {
                       Text(
                         sightRepository.getSightById(sightID).details,
                         style: theme.textTheme.bodyText2?.copyWith(
-                            color: theme.colorScheme.smallSecondaryTwo),
+                            color: theme
+                                .extension<CustomColors>()!
+                                .smallSecondaryTwo),
                       ),
                     ],
                   ),

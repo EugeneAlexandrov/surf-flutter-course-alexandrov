@@ -179,22 +179,3 @@ class CustomTheme with ChangeNotifier {
     );
   }
 }
-
-extension CustomColorScheme on ColorScheme {
-  Color get title =>
-      brightness == Brightness.light ? AppColors.lmMain : Colors.white;
-  Color get subTitle => brightness == Brightness.light
-      ? AppColors.lmInnactiveBlack
-      : AppColors.dmInnactiveBlack;
-  Color get smallSecondaryTwo => brightness == Brightness.light
-      ? AppColors.lmSecondaryTwo
-      : AppColors.dmSecondaryTwo;
-  Color get smallBoldSecondary => brightness == Brightness.light
-      ? AppColors.lmSecondary
-      : AppColors.dmSecondary;
-  Color get lmBackgroundDmDark => brightness == Brightness.light
-      ? AppColors.lmBackground
-      : AppColors.dmDark;
-  Color get lmBackgroundDmMain =>
-      brightness == Brightness.light ? Colors.white : AppColors.dmMain;
-}
