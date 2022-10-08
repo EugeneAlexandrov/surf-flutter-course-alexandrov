@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:places/domain/model/place_image.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/styles.dart';
 import 'package:places/ui/screens/res/themes.dart';
@@ -92,35 +93,50 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 //AppBar for details screen with image
 class ImageAppBar extends StatelessWidget {
-  ImageAppBar({Key? key}) : super(key: key);
+  ImageAppBar(this.images, {Key? key}) : super(key: key);
 
   final PageController pageController = PageController();
+  final List<PlaceImage> images;
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       automaticallyImplyLeading: false,
-      expandedHeight: 336,
+      expandedHeight: 360,
       backgroundColor: Colors.transparent,
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
           children: [
             SizedBox(
-              height: 360,
-              child: Scrollbar(
-                radius: const Radius.circular(12),
-                thickness: 8,
-                controller: pageController,
-                thumbVisibility: true,
-                child: PageView.builder(
-                  controller: pageController,
-                  itemBuilder: (context, index) {
-                    return Container(
-                        color: index % 2 == 0 ? Colors.green : Colors.red);
-                  },
-                  itemCount: 4,
-                ),
-              ),
+              height: 384,
+              child: images.isEmpty
+                  ? Center(
+                      child: Text('Изображений объекта нет',
+                          style: Theme.of(context).textTheme.headline5),
+                    )
+                  : Scrollbar(
+                      radius: const Radius.circular(12),
+                      thickness: 8,
+                      controller: pageController,
+                      thumbVisibility: true,
+                      child: PageView.builder(
+                        controller: pageController,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                alignment: Alignment.topCenter,
+                                fit: BoxFit.cover,
+                                image: ExactAssetImage(
+                                  images[index].url,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: images.length,
+                      ),
+                    ),
             ),
             Positioned(
               top: 36,

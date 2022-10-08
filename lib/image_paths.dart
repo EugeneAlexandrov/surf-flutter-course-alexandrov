@@ -2,6 +2,11 @@
 class AssetImages {
   static const basicPath = 'assets/images/';
   static const mockImageCardPath = basicPath + 'card_image.png';
+  static const mockImageDetail1 = basicPath + '1.jpg';
+  static const mockImageDetail2 = basicPath + '2.jpg';
+  static const mockImageDetail3 = basicPath + '3.jpg';
+  static const mockImageDetail4 = basicPath + '4.jpg';
+  static const mockImageDetail5 = basicPath + '5.jpg';
   static const mockImageDetailPath = basicPath + 'detail_image.png';
   static const iconHeartOutlinePath = basicPath + 'Heart.svg';
   static const iconListOutlinePath = basicPath + 'List.svg';

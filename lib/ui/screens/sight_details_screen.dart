@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/domain/model/sight.dart';
 import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
@@ -14,14 +15,14 @@ class SightDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final id = ModalRoute.of(context)?.settings.arguments as int;
+    final sight = ModalRoute.of(context)?.settings.arguments as Sight;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          ImageAppBar(),
+          ImageAppBar(sight.images),
           SliverToBoxAdapter(
             child: DetailsInfo(
-              id: id,
+              id: sight.id,
             ),
           ),
         ],
