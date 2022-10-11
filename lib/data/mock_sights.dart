@@ -1,4 +1,6 @@
+import 'package:places/domain/model/place_image.dart';
 import 'package:places/domain/model/sight.dart';
+import 'package:places/image_paths.dart';
 
 final List<Sight> mockSights = [
   Sight.withId(
@@ -10,7 +12,11 @@ final List<Sight> mockSights = [
     lon: 48.036286,
     filterId: 2,
     url: 'https://goo.gl/maps/zQU9HsQBjZDc5p967',
-    images: [],
+    images: [
+      PlaceImage(url: AssetImages.mockImageDetail1),
+      PlaceImage(url: AssetImages.mockImageDetail2),
+      PlaceImage(url: AssetImages.mockImageDetail3),
+    ],
   ),
   Sight.withId(
     id: 1,
@@ -42,7 +48,11 @@ final List<Sight> mockSights = [
     lon: 48.0681409,
     filterId: 2,
     url: 'https://goo.gl/maps/ho1VvTkTPRitcoGd6',
-    images: [],
+    images: [
+      PlaceImage(url: AssetImages.mockImageDetail3),
+      PlaceImage(url: AssetImages.mockImageDetail4),
+      PlaceImage(url: AssetImages.mockImageDetail5),
+    ],
   ),
   Sight.withId(
     id: 4,

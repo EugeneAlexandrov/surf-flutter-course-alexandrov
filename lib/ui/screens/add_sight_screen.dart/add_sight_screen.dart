@@ -272,7 +272,12 @@ class ImageListModel extends ChangeNotifier {
   get imageList => List.castFrom(_imageList);
 
   void addImage() {
-    imageList.add(PlaceImage(color: imageList.length));
+    imageList.add(
+      PlaceImage(
+        url: AssetImages.mockImageDetail1,
+        color: imageList.length,
+      ),
+    );
     notifyListeners();
   }
 

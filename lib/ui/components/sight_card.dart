@@ -72,8 +72,7 @@ class SightCard extends StatelessWidget {
                 child: InkWell(
                   splashColor: AppColors.dmInnactiveBlack,
                   onTap: () {
-                    onSightTap(
-                        context, sightRepository.getSightById(sightID).id);
+                    onSightTap(context, sightRepository.getSightById(sightID));
                   },
                 ),
               ),
@@ -89,7 +88,7 @@ class SightCard extends StatelessWidget {
     });
   }
 
-  void onSightTap(BuildContext context, int id) {
-    Navigator.of(context).pushNamed(AppRouter.details, arguments: id);
+  void onSightTap(BuildContext context, Sight sight) {
+    Navigator.of(context).pushNamed(AppRouter.details, arguments: sight);
   }
 }
