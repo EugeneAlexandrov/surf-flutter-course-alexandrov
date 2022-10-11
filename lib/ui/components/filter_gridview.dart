@@ -20,7 +20,7 @@ class FilterGridViewWidget extends StatelessWidget {
         shrinkWrap: true,
         itemCount: context.read<FilterRepository>().allFilters.length,
         itemBuilder: (BuildContext context, index) {
-          return buildFilterTile(context, index);
+          return FilterTile(index);
         },
       ),
     );

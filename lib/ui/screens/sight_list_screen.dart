@@ -11,7 +11,6 @@ class SightListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return <Widget>[const SearchSliverAppBar()];
@@ -41,7 +40,9 @@ class SightListScreen extends StatelessWidget {
             const Positioned.fill(
               bottom: 16,
               child: Align(
-                  alignment: Alignment.bottomCenter, child: GradientButton()),
+                alignment: Alignment.bottomCenter,
+                child: GradientButton(),
+              ),
             ),
           ],
         ),

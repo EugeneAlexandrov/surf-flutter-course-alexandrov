@@ -10,7 +10,6 @@ import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/styles.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
-import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
 class PlannedSightCard extends StatelessWidget {

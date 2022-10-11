@@ -8,7 +8,6 @@ import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
 import 'package:places/ui/components/search_widget.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -47,6 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -55,8 +55,7 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Colors.transparent,
         title: Text(
           'Список интересных мест',
-          style: theme.textTheme.headline6
-              ?.copyWith(color: theme.extension<CustomColors>()!.title),
+          style: theme.textTheme.headline6?.copyWith(color: colors!.title),
         ),
         centerTitle: true,
         leading: TextButton(
@@ -65,8 +64,8 @@ class _SearchScreenState extends State<SearchScreen> {
           },
           child: Text(
             AppStrings.cancel,
-            style: theme.textTheme.bodyText1?.copyWith(
-                color: theme.extension<CustomColors>()!.smallSecondaryTwo),
+            style: theme.textTheme.bodyText1
+                ?.copyWith(color: colors!.smallSecondaryTwo),
           ),
         ),
       ),
@@ -91,8 +90,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: AppStrings.searchString,
-                  hintStyle: theme.textTheme.bodyText1?.copyWith(
-                      color: theme.extension<CustomColors>()!.subTitle),
+                  hintStyle: theme.textTheme.bodyText1
+                      ?.copyWith(color: colors!.subTitle),
                 ),
               ),
             ),
@@ -109,9 +108,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           padding: const EdgeInsets.only(top: 32.0),
                           child: Text(
                             AppStrings.youSearched,
-                            style: theme.textTheme.headline1?.copyWith(
-                                color:
-                                    theme.extension<CustomColors>()!.subTitle),
+                            style: theme.textTheme.headline1
+                                ?.copyWith(color: colors!.subTitle),
                           ),
                         ),
                         Flexible(
@@ -200,9 +198,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 //         .searchSightList[index].filterId)
                                 //     .title,
                                 style: theme.textTheme.bodyText2?.copyWith(
-                                    color: theme
-                                        .extension<CustomColors>()!
-                                        .smallSecondaryTwo),
+                                    color: colors!.smallSecondaryTwo),
                               ),
                             );
                           },
@@ -223,20 +219,16 @@ class _SearchScreenState extends State<SearchScreen> {
                             padding: const EdgeInsets.only(top: 32),
                             child: Text(
                               AppStrings.findNothing,
-                              style: theme.textTheme.headline6?.copyWith(
-                                  color: theme
-                                      .extension<CustomColors>()!
-                                      .subTitle),
+                              style: theme.textTheme.headline6
+                                  ?.copyWith(color: colors!.subTitle),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               AppStrings.tryAnotherQuery,
-                              style: theme.textTheme.bodyText2?.copyWith(
-                                  color: theme
-                                      .extension<CustomColors>()!
-                                      .subTitle),
+                              style: theme.textTheme.bodyText2
+                                  ?.copyWith(color: colors!.subTitle),
                             ),
                           ),
                         ],

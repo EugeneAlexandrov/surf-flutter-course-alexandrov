@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
 class MyRangeSlider extends StatefulWidget {
@@ -26,6 +25,7 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
     return Column(
       children: [
         Row(
@@ -36,13 +36,13 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
               AppStrings.distanceString,
               textAlign: TextAlign.start,
               style: theme.textTheme.bodyText1
-                  ?.copyWith(color: theme.extension<CustomColors>()!.title),
+                  ?.copyWith(color: colors!.title),
             ),
             Text(
               'от ${_selectedRange.start} до ${_selectedRange.end} км',
               textAlign: TextAlign.end,
               style: theme.textTheme.bodyText1?.copyWith(
-                  color: theme.extension<CustomColors>()!.smallSecondaryTwo),
+                  color: colors!.smallSecondaryTwo),
             )
           ],
         ),

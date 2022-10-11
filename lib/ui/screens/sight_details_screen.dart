@@ -7,16 +7,14 @@ import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
 //Screen with sight card details
 class SightDetailsScreen extends StatelessWidget {
-  const SightDetailsScreen({Key? key}) : super(key: key);
-
+  const SightDetailsScreen(this.sight, {Key? key}) : super(key: key);
+  final Sight sight;
   @override
   Widget build(BuildContext context) {
-    final sight = ModalRoute.of(context)?.settings.arguments as Sight;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -40,6 +38,7 @@ class DetailsInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
     return Consumer2<SightRepository, FilterRepository>(
       builder: (
         context,
@@ -54,7 +53,7 @@ class DetailsInfo extends StatelessWidget {
             children: [
               Text(
                 sightRepository.getSightById(id).name,
-                style: Theme.of(context).textTheme.headline5,
+                style: theme.textTheme.headline5,
               ),
               const SizedBox(
                 height: 4,
@@ -65,14 +64,14 @@ class DetailsInfo extends StatelessWidget {
                       .getFilterById(sightRepository.getSightById(id).filterId)
                       .title,
                   style: theme.textTheme.caption?.copyWith(
-                    color: theme.extension<CustomColors>()!.smallBoldSecondary,
+                    color: colors!.smallBoldSecondary,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Text(
                   AppStrings.detailsScreenTime,
                   style: theme.textTheme.bodyText2?.copyWith(
-                    color: theme.extension<CustomColors>()!.smallSecondaryTwo,
+                    color: colors!.smallSecondaryTwo,
                   ),
                 ),
               ]),
@@ -99,7 +98,7 @@ class DetailsInfo extends StatelessWidget {
                     onPressed: null,
                     icon: SvgPicture.asset(
                       AssetImages.iconCalendarPath,
-                      color: theme.extension<CustomColors>()!.subTitle,
+                      color: colors!.subTitle,
                       height: 24,
                     ),
                     label: const Text(AppStrings.detailsScreenPlanButton),
@@ -108,7 +107,7 @@ class DetailsInfo extends StatelessWidget {
                     onPressed: () {},
                     icon: SvgPicture.asset(
                       AssetImages.iconHeartOutlinePath,
-                      color: theme.extension<CustomColors>()!.subTitle,
+                      color: colors.subTitle,
                       height: 24,
                     ),
                     label: const Text(AppStrings.detailsScreenFavButton),

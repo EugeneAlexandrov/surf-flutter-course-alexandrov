@@ -12,7 +12,6 @@ import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_text_field.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
 class NewSightScreen extends StatefulWidget {
@@ -56,6 +55,7 @@ class _NewSightScreenState extends State<NewSightScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -64,8 +64,7 @@ class _NewSightScreenState extends State<NewSightScreen> {
         backgroundColor: Colors.transparent,
         title: Text(
           AppStrings.addSightAppbarTitle,
-          style: theme.textTheme.headline6
-              ?.copyWith(color: theme.extension<CustomColors>()!.title),
+          style: theme.textTheme.headline6?.copyWith(color: colors!.title),
         ),
         centerTitle: true,
         leading: TextButton(
@@ -74,8 +73,8 @@ class _NewSightScreenState extends State<NewSightScreen> {
           },
           child: Text(
             AppStrings.cancel,
-            style: theme.textTheme.bodyText1?.copyWith(
-                color: theme.extension<CustomColors>()!.smallSecondaryTwo),
+            style: theme.textTheme.bodyText1
+                ?.copyWith(color: colors!.smallSecondaryTwo),
           ),
         ),
       ),

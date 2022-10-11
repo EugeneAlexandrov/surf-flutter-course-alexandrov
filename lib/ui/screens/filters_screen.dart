@@ -8,7 +8,6 @@ import 'package:places/image_paths.dart';
 import 'package:places/ui/components/filter_gridview.dart';
 import 'package:places/ui/components/filter_range_slider.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
 class FiltersScreen extends StatelessWidget {
@@ -17,6 +16,7 @@ class FiltersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
     return Consumer2<SightRepository, FilterRepository>(
       builder: (context, sightRepository, filterRepository, _) {
         return Scaffold(
@@ -42,7 +42,7 @@ class FiltersScreen extends StatelessWidget {
                 },
                 icon: SvgPicture.asset(
                   AssetImages.iconAppbarArrowPath,
-                  color: theme.extension<CustomColors>()!.title,
+                  color: colors!.title,
                   height: 32,
                 ),
               ),
@@ -59,8 +59,8 @@ class FiltersScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 24.0, bottom: 24),
                     child: Text(AppStrings.categoriesString.toUpperCase(),
-                        style: theme.textTheme.headline1?.copyWith(
-                            color: theme.extension<CustomColors>()!.subTitle)),
+                        style: theme.textTheme.headline1
+                            ?.copyWith(color: colors.subTitle)),
                   ),
                   const FilterGridViewWidget(),
                   const SizedBox(height: 30),

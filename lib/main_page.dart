@@ -3,9 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:places/app_strings.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/screens/settings_screen.dart';
 import 'package:places/ui/screens/sight_list_screen.dart';
 import 'package:places/ui/screens/visiting_screen.dart';
@@ -22,13 +20,6 @@ class _MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin {
   late TabController bottomNavController;
 
-  List<PreferredSizeWidget> appBars = [
-    const SimpleAppBar(AppStrings.appBarTitleInterestingStringSmall),
-    const SimpleAppBar(AppStrings.appBarTitleMapString),
-    const TabsAppBar(AppStrings.appBarTitleFavoriteString),
-    const SimpleAppBar(AppStrings.appBarTitlrSettingsString),
-  ];
-
   List<Widget> bottomNavTabs = [
     const SightListScreen(),
     Container(color: Colors.red),
@@ -39,7 +30,8 @@ class _MainPageState extends State<MainPage>
   @override
   void initState() {
     super.initState();
-    bottomNavController = TabController(length: appBars.length, vsync: this);
+    bottomNavController =
+        TabController(length: bottomNavTabs.length, vsync: this);
     bottomNavController.addListener(() {
       setState(() {});
     });

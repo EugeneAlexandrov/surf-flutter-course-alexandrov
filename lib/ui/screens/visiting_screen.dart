@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:places/app_strings.dart';
 import 'package:places/domain/model/intention.dart';
 import 'package:places/domain/repository/intention_repository.dart';
+import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/components/null_planed_placeholder.dart';
 import 'package:places/ui/components/null_visited_placeholder.dart';
 import 'package:places/ui/components/planned_sight_card.dart';
@@ -14,19 +16,22 @@ class VisitingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<IntentionRepository>(
-      builder: (context, intentionRepository, child) {
-        return TabBarView(
-          children: [
-            intentionRepository.plannedList.isEmpty
-                ? const NullPlannedPlaceHolder()
-                : DraggableList(intentionRepository.plannedList),
-            intentionRepository.visitedList.isEmpty
-                ? const NullVisitedPlaceHolder()
-                : DraggableList(intentionRepository.visitedList),
-          ],
-        );
-      },
+    return Scaffold(
+      appBar: const TabsAppBar(AppStrings.appBarTitleFavoriteString),
+      body: Consumer<IntentionRepository>(
+        builder: (context, intentionRepository, child) {
+          return TabBarView(
+            children: [
+              intentionRepository.plannedList.isEmpty
+                  ? const NullPlannedPlaceHolder()
+                  : DraggableList(intentionRepository.plannedList),
+              intentionRepository.visitedList.isEmpty
+                  ? const NullVisitedPlaceHolder()
+                  : DraggableList(intentionRepository.visitedList),
+            ],
+          );
+        },
+      ),
     );
   }
 }

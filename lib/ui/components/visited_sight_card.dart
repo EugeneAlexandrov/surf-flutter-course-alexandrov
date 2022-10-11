@@ -10,7 +10,6 @@ import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/styles.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
-import 'package:places/ui/screens/res/themes.dart';
 import 'package:provider/provider.dart';
 
 class VisitedSightCard extends StatelessWidget {
@@ -21,6 +20,7 @@ class VisitedSightCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
     final intention = Provider.of<IntentionRepository>(context, listen: false)
         .findIntentionBySightId(_sightId);
     final sight = Provider.of<SightRepository>(context, listen: false)
@@ -56,15 +56,14 @@ class VisitedSightCard extends StatelessWidget {
                       /*.date*/
                       style: theme.textTheme.bodyText2?.copyWith(
                         color:
-                            theme.extension<CustomColors>()!.smallSecondaryTwo,
+                            colors!.smallSecondaryTwo,
                       ),
                     ),
                     const SizedBox(height: 16),
                     Text(
                       sight.details /*.details*/,
                       style: theme.textTheme.bodyText2?.copyWith(
-                          color: theme
-                              .extension<CustomColors>()!
+                          color: colors!
                               .smallSecondaryTwo),
                     ),
                   ],

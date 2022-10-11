@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
+import 'package:places/domain/model/place_image.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/styles.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
 import 'package:places/ui/components/search_widget.dart';
-import 'package:places/ui/screens/res/themes.dart';
 import '../../app_strings.dart';
 
 //Simple AppBar with single Text
@@ -46,6 +46,7 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
     return Column(
       children: [
         Container(
@@ -53,8 +54,7 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.only(top: 40, bottom: 22),
           child: Text(
             title,
-            style: theme.textTheme.headline6
-                ?.copyWith(color: theme.extension<CustomColors>()!.title),
+            style: theme.textTheme.headline6?.copyWith(color: colors!.title),
           ),
         ),
         Theme(
@@ -130,7 +130,7 @@ class ImageAppBar extends StatelessWidget {
                               image: DecorationImage(
                                 alignment: Alignment.topCenter,
                                 fit: BoxFit.cover,
-                                image: ExactAssetImage(
+                                image: NetworkImage(
                                   images[index].url,
                                 ),
                               ),
@@ -187,9 +187,10 @@ class _SearchSliverAppBarState extends State<SearchSliverAppBar> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
 
     return SliverAppBar(
-      backgroundColor: theme.extension<CustomColors>()!.lmBackgroundDmMain,
+      backgroundColor: colors!.lmBackgroundDmMain,
       pinned: true,
       floating: true,
       snap: true,
@@ -226,8 +227,7 @@ class _SearchSliverAppBarState extends State<SearchSliverAppBar> {
                     Text(AppStrings.appBarTitleInterestingStringLarge,
                         textAlign: TextAlign.left,
                         style: theme.textTheme.headline4?.copyWith(
-                            color: theme.extension<CustomColors>()!.title,
-                            fontWeight: FontWeight.bold)),
+                            color: colors.title, fontWeight: FontWeight.bold)),
                     const SizedBox(
                       height: 16,
                     ),
@@ -247,10 +247,8 @@ class _SearchSliverAppBarState extends State<SearchSliverAppBar> {
                             },
                             child: Text(
                               AppStrings.searchString,
-                              style: theme.textTheme.bodyText1?.copyWith(
-                                  color: theme
-                                      .extension<CustomColors>()!
-                                      .subTitle),
+                              style: theme.textTheme.bodyText1
+                                  ?.copyWith(color: colors.subTitle),
                             ),
                           )),
                     ),

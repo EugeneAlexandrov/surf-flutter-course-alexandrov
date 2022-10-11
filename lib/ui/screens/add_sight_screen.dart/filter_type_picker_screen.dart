@@ -4,7 +4,6 @@ import 'package:places/app_strings.dart';
 import 'package:places/data/mock_filters.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/res/themes.dart';
 
 class FilterTypePickerScreen extends StatefulWidget {
   const FilterTypePickerScreen({Key? key}) : super(key: key);
@@ -19,6 +18,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -26,8 +26,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
         backgroundColor: Colors.transparent,
         title: Text(
           AppStrings.filterTypePickerAppbarTitle,
-          style: theme.textTheme.headline6
-              ?.copyWith(color: theme.extension<CustomColors>()!.title),
+          style: theme.textTheme.headline6?.copyWith(color: colors!.title),
         ),
         leading: Center(
           child: IconButton(
@@ -36,7 +35,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
             },
             icon: SvgPicture.asset(
               AssetImages.iconAppbarArrowPath,
-              color: theme.extension<CustomColors>()!.title,
+              color: colors!.title,
               height: 32,
             ),
           ),

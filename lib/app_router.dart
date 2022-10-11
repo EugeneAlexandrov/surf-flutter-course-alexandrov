@@ -5,12 +5,10 @@ import 'package:places/ui/screens/add_sight_screen.dart/filter_type_picker_scree
 import 'package:places/ui/screens/filters_screen.dart';
 import 'package:places/ui/screens/onboarding_screen.dart';
 import 'package:places/ui/screens/search_screen.dart';
-import 'package:places/ui/screens/sight_details_screen.dart';
 
 class AppRouter {
   static const String main = '/main_screen';
   static const String onboarding = '/onBoarding';
-  static const String details = '/main_screen/details';
   static const String filters = '/main_screen/filters';
   static const String addSight = '/main_screen/addSight';
   static const String chooseFilter = '/main_screen/addSight/chooseFilter';
@@ -19,7 +17,6 @@ class AppRouter {
   static Map<String, Widget Function(BuildContext context)> routes = {
     AppRouter.main: (_) => const MainPage(),
     AppRouter.onboarding: (_) => const OnboardingScreen(),
-    AppRouter.details: (_) => const SightDetailsScreen(),
     AppRouter.filters: (_) => const FiltersScreen(),
     AppRouter.addSight: (_) => const NewSightScreen(),
     AppRouter.chooseFilter: (_) => const FilterTypePickerScreen(),

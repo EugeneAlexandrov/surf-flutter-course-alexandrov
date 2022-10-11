@@ -6,7 +6,6 @@ import 'package:places/image_paths.dart';
 import 'package:places/main.dart';
 import 'package:places/main_page.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/res/themes.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -124,6 +123,7 @@ class MyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 58.0),
@@ -140,15 +140,14 @@ class MyPage extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: theme.textTheme.headline5
-                  ?.copyWith(color: theme.extension<CustomColors>()!.title),
+              style: theme.textTheme.headline5?.copyWith(color: colors!.title),
             ),
             const SizedBox(height: 8),
             Text(
               subtitle,
               textAlign: TextAlign.center,
-              style: theme.textTheme.bodyText2?.copyWith(
-                  color: theme.extension<CustomColors>()!.smallBoldSecondary),
+              style: theme.textTheme.bodyText2
+                  ?.copyWith(color: colors!.smallBoldSecondary),
             ),
           ],
         ),
