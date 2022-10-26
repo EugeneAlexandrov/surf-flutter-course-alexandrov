@@ -17,7 +17,9 @@ class GradientButton extends StatelessWidget {
           ])),
       child: ElevatedButton.icon(
         onPressed: () {
+          // use pushNamed
           Navigator.pushNamed(context, AppRouter.addSight);
+          //
         },
         style: ButtonStyle(
           shape: MaterialStateProperty.all(

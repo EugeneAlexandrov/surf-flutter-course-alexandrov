@@ -89,10 +89,12 @@ class SightCard extends StatelessWidget {
   }
 
   void onSightTap(BuildContext context, Sight sight) {
+    // navigate to SightDetailsScreen
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => SightDetailsScreen(sight),
       ),
     );
+    //
   }
 }

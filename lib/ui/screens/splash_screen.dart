@@ -21,12 +21,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _navigateToStart() async {
     await isInitialized;
+    // navigate to StartScreen
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => const StartScreen(),
       ),
     );
+    //
   }
 
   @override

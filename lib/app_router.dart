@@ -7,6 +7,7 @@ import 'package:places/ui/screens/onboarding_screen.dart';
 import 'package:places/ui/screens/search_screen.dart';
 import 'package:places/ui/screens/splash_screen.dart';
 
+// routes
 class AppRouter {
   static const String splash = '/splash';
   static const String main = '/main_screen';
@@ -26,3 +27,4 @@ class AppRouter {
     AppRouter.searchScreen: (_) => const SearchScreen(),
   };
 }
+//

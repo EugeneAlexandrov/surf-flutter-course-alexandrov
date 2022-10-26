@@ -237,13 +237,17 @@ class _SearchSliverAppBarState extends State<SearchSliverAppBar> {
                           iconButton: CustomIconButton(
                             child: SvgPicture.asset(AssetImages.iconFilterPath),
                             onPressed: () {
+                              // navigate to Filters
                               Navigator.pushNamed(context, AppRouter.filters);
+                              //
                             },
                           ),
                           textfield: GestureDetector(
                             onTap: () {
+                              // navigate to SearchScreen
                               Navigator.pushNamed(
                                   context, AppRouter.searchScreen);
+                              //
                             },
                             child: Text(
                               AppStrings.searchString,

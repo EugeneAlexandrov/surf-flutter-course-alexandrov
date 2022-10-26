@@ -91,12 +91,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: ElevatedButton(
                     onPressed: () {
                       OnBoardindShowProvider.read(context)?.endShow();
+                      // navigate to MainPage
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
                                   const MainPage()),
                           (route) => false);
+                      //
                     },
                     child: const Text(AppStrings.onBoardingStart)),
               ),
