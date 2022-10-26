@@ -3,9 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/ui/screens/res/colors.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/main.dart';
 import 'package:places/main_page.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/ui/screens/start_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);

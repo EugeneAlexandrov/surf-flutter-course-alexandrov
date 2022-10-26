@@ -36,4 +36,5 @@ class AssetImages {
   static const iconOnboardingOnePath = basicPath + 'onboarding1.svg';
   static const iconOnboardingTwoPath = basicPath + 'onboarding2.svg';
   static const iconOnboardingThreePath = basicPath + 'onboarding3.svg';
+  static const iconLogoPath = basicPath + 'logo.svg';
 }
