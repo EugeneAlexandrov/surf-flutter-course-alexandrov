@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/app_router.dart';
 import 'package:places/domain/model/sight.dart';
 import 'package:places/ui/screens/res/colors.dart';
 import 'package:places/domain/repository/filter_repository.dart';
@@ -6,7 +7,6 @@ import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/favorite_icon_button.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/sight_details_screen.dart';
 import 'package:provider/provider.dart';
 
 class SightCard extends StatelessWidget {
@@ -90,10 +90,9 @@ class SightCard extends StatelessWidget {
 
   void onSightTap(BuildContext context, Sight sight) {
     // navigate to SightDetailsScreen
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => SightDetailsScreen(sight),
-      ),
+    Navigator.of(context).pushNamed(
+      AppRouter.sightDetail,
+      arguments: {'sight': sight},
     );
     //
   }

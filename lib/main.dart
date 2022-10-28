@@ -73,19 +73,8 @@ class App extends StatelessWidget {
           themeMode: customTheme.currentTheme,
           debugShowCheckedModeBanner: false,
           title: AppStrings.appTitle,
-          // add routes
-          routes: AppRouter.routes,
-          //
           initialRoute: AppRouter.splash,
-          onGenerateRoute: (RouteSettings settings) {
-            return MaterialPageRoute<void>(builder: (context) {
-              return const Scaffold(
-                body: Center(
-                  child: Text('Ошибка пути'),
-                ),
-              );
-            });
-          },
+          onGenerateRoute: AppRouter.generateRoute,
         );
       },
     );
