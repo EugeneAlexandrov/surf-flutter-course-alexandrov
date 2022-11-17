@@ -54,4 +54,7 @@ class AppStrings {
   static const onBoardingSubtitleThree =
       'Делись самыми интересными и помоги нам стать лучше!';
   static const onBoardingStart = 'НА СТАРТ';
+  static const addSightCamera = 'Камера';
+  static const addSightPhoto = 'Фотография';
+  static const addSightFile = 'Файл';
 }

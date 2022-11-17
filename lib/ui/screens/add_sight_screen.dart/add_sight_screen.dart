@@ -237,7 +237,73 @@ class Gallary extends StatelessWidget {
               ? InkWell(
                   borderRadius: const BorderRadius.all(Radius.circular(12)),
                   onTap: () {
-                    model?.addImage();
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (_) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(12)),
+                                color: Theme.of(context)
+                                    .extension<CustomColors>()!
+                                    .lmBackgroundDmMain,
+                              ),
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                    onTap: () => addSightPhoto(model, context),
+                                    leading:
+                                        const Icon(Icons.camera_alt_outlined),
+                                    title:
+                                        const Text(AppStrings.addSightCamera),
+                                  ),
+                                  const Divider(),
+                                  ListTile(
+                                    onTap: () => addSightPhoto(model, context),
+                                    leading: const Icon(Icons.photo_outlined),
+                                    title: const Text(AppStrings.addSightPhoto),
+                                  ),
+                                  const Divider(),
+                                  ListTile(
+                                    onTap: () => addSightPhoto(model, context),
+                                    leading:
+                                        const Icon(Icons.file_present_outlined),
+                                    title: const Text(AppStrings.addSightFile),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: Theme.of(context)
+                                    .extension<CustomColors>()!
+                                    .lmBackgroundDmMain,
+                              ),
+                              child: Text(
+                                AppStrings.cancel.toUpperCase(),
+                                style: const TextStyle(
+                                    color: Colors.green, fontSize: 18),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
                   },
                   splashColor: AppColors.dmInnactiveBlack,
                   child: Container(
@@ -262,6 +328,11 @@ class Gallary extends StatelessWidget {
       ),
     );
   }
+}
+
+void addSightPhoto(ImageListModel? model, BuildContext context) {
+  model?.addImage();
+  Navigator.of(context).pop();
 }
 
 // модель для InheritedNotifier
