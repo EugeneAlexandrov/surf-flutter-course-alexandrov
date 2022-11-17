@@ -94,6 +94,9 @@ class CustomTheme with ChangeNotifier {
       extensions: const <ThemeExtension<dynamic>>[
         CustomColors.light,
       ],
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: Colors.transparent,
+      ),
     );
   }
 
@@ -176,6 +179,9 @@ class CustomTheme with ChangeNotifier {
       extensions: const <ThemeExtension<dynamic>>[
         CustomColors.dark,
       ],
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: Colors.transparent,
+      ),
     );
   }
 }
