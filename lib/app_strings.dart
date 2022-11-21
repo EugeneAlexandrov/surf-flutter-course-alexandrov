@@ -5,6 +5,7 @@ class AppStrings {
   static const detailsScreenTime = 'закрыто до 9:00';
   static const detailsScreenPlanButton = 'Запланировать';
   static const detailsScreenFavButton = 'В избранное';
+  static const detailsScreenShareButton = 'Поделиться';
   static const futureVisitString = 'Хочу посетить';
   static const visitedString = 'Посетил';
   static const appBarTitleInterestingStringLarge = 'Список\nинтересных мест';
