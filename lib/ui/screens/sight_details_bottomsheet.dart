@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/model/sight.dart';
+import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/sight_details_screen.dart';
 
 class SightDetailsBottomSheet extends StatelessWidget {
@@ -19,14 +20,16 @@ class SightDetailsBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
     return Stack(
       children: [
         Container(
           clipBehavior: Clip.hardEdge,
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12), topRight: Radius.circular(12)),
-            color: Colors.white,
+            color: colors!.lmBackgroundDmMain,
           ),
           child: ListView(
             controller: scrollController,
@@ -64,7 +67,7 @@ class SightDetailsBottomSheet extends StatelessWidget {
                         ),
                       ),
               ),
-              DetailsInfo(id: sight.id),
+              DetailsInfo(sight.id),
             ],
           ),
         ),

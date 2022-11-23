@@ -86,8 +86,8 @@ class PlannedSightCard extends StatelessWidget {
                       Text(sight.details /*.details*/,
                           style: theme.textTheme.bodyText2?.copyWith(
                               color: theme
-                                      .extension<CustomColors>()!
-                                      .smallSecondaryTwo)),
+                                  .extension<CustomColors>()!
+                                  .smallSecondaryTwo)),
                     ],
                   ),
                 ),
@@ -110,7 +110,20 @@ class PlannedSightCard extends StatelessWidget {
                 height: 40,
                 width: 40,
                 child: CustomIconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    var date = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime.now().add(
+                        const Duration(days: 365),
+                      ),
+                    );
+                    if (date != null) {
+                      Provider.of<IntentionRepository>(context, listen: false)
+                          .changeDate(date, _sightId);
+                    }
+                  },
                   child: SvgPicture.asset(
                     AssetImages.iconCalendarPath,
                   ),
