@@ -99,10 +99,10 @@ class DetailsInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               intentionRepository.findIntentionBySightId(_sightId).hasVisited
-                  ? const VisitedButton()
-                  : PlannedButton(_sightId,
+                  ? const _VisitedButton()
+                  : _PlannedButton(_sightId,
                       intentionRepository: intentionRepository),
-              FavoriteButton(_sightId,
+              _FavoriteButton(_sightId,
                   intentionRepository: intentionRepository),
             ],
           ),
@@ -127,8 +127,8 @@ void changeDate(BuildContext context, int id) async {
   }
 }
 
-class FavoriteButton extends StatelessWidget {
-  const FavoriteButton(this._sightId,
+class _FavoriteButton extends StatelessWidget {
+  const _FavoriteButton(this._sightId,
       {required this.intentionRepository, Key? key})
       : super(key: key);
 
@@ -156,8 +156,8 @@ class FavoriteButton extends StatelessWidget {
   }
 }
 
-class PlannedButton extends StatelessWidget {
-  const PlannedButton(this._sightId,
+class _PlannedButton extends StatelessWidget {
+  const _PlannedButton(this._sightId,
       {required this.intentionRepository, Key? key})
       : super(key: key);
 
@@ -200,8 +200,8 @@ class PlannedButton extends StatelessWidget {
   }
 }
 
-class VisitedButton extends StatelessWidget {
-  const VisitedButton({Key? key}) : super(key: key);
+class _VisitedButton extends StatelessWidget {
+  const _VisitedButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
