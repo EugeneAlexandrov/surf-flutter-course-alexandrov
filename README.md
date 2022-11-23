@@ -7,7 +7,7 @@ Thanks SURF team for the help and the course
 
 * Themes and styles
 * Navigation
-* Simple state management with Provadet and InheritedWidgets
+* Simple state management with Provider and InheritedWidgets
 * BottomNavigationBar
 * Appbar/SliverAppbar
 * Tabs
@@ -15,12 +15,14 @@ Thanks SURF team for the help and the course
 * ThemeSwitcher
 * Draggable cards
 * Dismisseble cards
+* BottomSheets
+* Date/Time Pickers
+* Asynchronous
 
 ## PLANNED UPDATES
 
 * Animations
 * Architecture
-* Asynchronous
 * Streams
 * Network
 * Release
