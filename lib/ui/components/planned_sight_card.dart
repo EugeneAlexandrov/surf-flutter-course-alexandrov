@@ -1,7 +1,10 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/app_utils.dart';
+import 'package:places/domain/model/intention.dart';
 import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/intention_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
@@ -111,14 +114,8 @@ class PlannedSightCard extends StatelessWidget {
                 width: 40,
                 child: CustomIconButton(
                   onPressed: () async {
-                    var date = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now().add(
-                        const Duration(days: 365),
-                      ),
-                    );
+                    var date =
+                        await showCupertinoDatePicker(context, intention);
                     if (date != null) {
                       Provider.of<IntentionRepository>(context, listen: false)
                           .changeDate(date, _sightId);
@@ -147,6 +144,76 @@ class PlannedSightCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+Future<DateTime?> showCupertinoDatePicker(
+    BuildContext context, Intention intention) async {
+  DateTime? date;
+  if (Platform.isAndroid) {
+    date = await showDatePicker(
+      context: context,
+      initialDate: intention.date ?? DateTime.now(),
+      firstDate: intention.date ?? DateTime.now(),
+      lastDate: DateTime.now().add(
+        const Duration(days: 365),
+      ),
+    );
+  } else {
+    date = await showCupertinoModalPopup(
+      context: context,
+      builder: (_) => CupertinoBottomSheet(intention),
+    );
+  }
+  return date;
+}
+
+class CupertinoBottomSheet extends StatefulWidget {
+  const CupertinoBottomSheet(this.intention, {Key? key}) : super(key: key);
+
+  final Intention intention;
+
+  @override
+  State<CupertinoBottomSheet> createState() => _CupertinoBottomSheetState();
+}
+
+class _CupertinoBottomSheetState extends State<CupertinoBottomSheet> {
+  DateTime? tmpDate;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colors = theme.extension<CustomColors>();
+    return Container(
+      height: 500,
+      color: colors?.lmBackgroundDmMain,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 300,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              initialDateTime: widget.intention.date ?? DateTime.now(),
+              minimumYear: 2000,
+              maximumYear: 2100,
+              onDateTimeChanged: (val) {
+                tmpDate = val;
+              },
+            ),
+          ),
+
+          // Close the modal
+          CupertinoButton(
+            child: const Text('OK'),
+            onPressed: () => Navigator.of(context).pop(tmpDate),
+          ),
+          CupertinoButton(
+            child: const Text(AppStrings.cancel),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     );
   }
