@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/ui/components/filter_lisrview.dart';
 import 'package:places/ui/screens/res/colors.dart';
 import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
@@ -48,45 +51,45 @@ class FiltersScreen extends StatelessWidget {
               ),
             ),
           ),
-          body: Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 24.0, bottom: 24),
-                    child: Text(AppStrings.categoriesString.toUpperCase(),
-                        style: theme.textTheme.headline1
-                            ?.copyWith(color: colors.subTitle)),
-                  ),
-                  const FilterGridViewWidget(),
-                  const SizedBox(height: 30),
-                  const MyRangeSlider(),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            child: Text(
-                                '${AppStrings.showString} (${sightRepository.sights.length})'),
-                            onPressed: sightRepository.sights.isEmpty
-                                ? null
-                                : () {
-                                    Navigator.pop(context);
-                                  },
-                          ),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 24.0, bottom: 24),
+                  child: Text(AppStrings.categoriesString.toUpperCase(),
+                      style: theme.textTheme.headline1
+                          ?.copyWith(color: colors.subTitle)),
+                ),
+                window.physicalSize.width <= 480
+                    ? const SizedBox(
+                        width: 108, height: 108, child: FilterListViewWidget())
+                    : const FilterGridViewWidget(),
+                const SizedBox(height: 30),
+                const MyRangeSlider(),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          child: Text(
+                              '${AppStrings.showString} (${sightRepository.sights.length})'),
+                          onPressed: sightRepository.sights.isEmpty
+                              ? null
+                              : () {
+                                  Navigator.pop(context);
+                                },
                         ),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );
