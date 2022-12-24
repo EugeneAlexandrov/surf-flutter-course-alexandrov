@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:places/data/mock_sights.dart';
-import 'package:places/domain/model/sight.dart';
-import 'package:places/domain/repository/filter_repository.dart';
-
-class SightRepository with ChangeNotifier {
+class PlaceInteractor {
   final FilterRepository _filterRepository;
   // late LocationData? _locationData;
   final List<Sight> _sights = List<Sight>.from(mockSights);

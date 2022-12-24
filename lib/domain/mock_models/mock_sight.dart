@@ -1,6 +1,6 @@
-import 'package:places/domain/model/place_image.dart';
+import 'package:places/domain/mock_models/place_image.dart';
 
-class Sight {
+class MockSight {
   final int id;
   final String name;
   final double lon;
@@ -12,7 +12,7 @@ class Sight {
 
   static final Set<int> idList = {0, 1, 2, 3, 4, 5, 6, 7, 8};
 
-  Sight(
+  MockSight(
       {required this.name,
       required this.lon,
       required this.lat,
@@ -24,7 +24,7 @@ class Sight {
     idList.add(id);
   }
 
-  Sight.withId(
+  MockSight.withId(
       {required this.id,
       required this.name,
       required this.lon,

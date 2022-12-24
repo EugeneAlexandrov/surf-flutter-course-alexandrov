@@ -1,4 +1,4 @@
-import 'package:places/domain/model/place_image.dart';
+import 'package:places/data/model/mock_models/place_image.dart';
 import 'package:places/domain/model/sight.dart';
 
 final List<Sight> mockSights = [

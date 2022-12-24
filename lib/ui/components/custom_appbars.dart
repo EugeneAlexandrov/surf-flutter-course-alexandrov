@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
-import 'package:places/domain/model/place_image.dart';
+import 'package:places/data/model/mock_models/place_image.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/screens/res/custom_color_scheme.dart';
 import 'package:places/ui/screens/res/styles.dart';

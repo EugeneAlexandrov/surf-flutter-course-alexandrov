@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/ui/screens/res/colors.dart';
-import 'package:places/domain/model/place_image.dart';
+import 'package:places/data/model/mock_models/place_image.dart';
 import 'package:places/domain/model/sight.dart';
 import 'package:places/domain/repository/filter_repository.dart';
 import 'package:places/domain/repository/sight_repository.dart';
