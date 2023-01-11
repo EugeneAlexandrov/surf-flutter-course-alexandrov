@@ -4,27 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/ui/screens/settings_screen.dart';
-import 'package:places/ui/screens/sight_list_screen.dart';
-import 'package:places/ui/screens/visiting_screen.dart';
+import 'package:places/ui/screens/favorite_tab/favorite_tab_screen.dart';
+import 'package:places/ui/screens/map_tab/map_tab_screen.dart';
+import 'package:places/ui/screens/places_tab/place_screen.dart';
+import 'package:places/ui/screens/settings_tab/settings_screen.dart';
 
 //Main page with BottomNavigationBar
-class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+class BottomNavBarScreen extends StatefulWidget {
+  const BottomNavBarScreen({Key? key}) : super(key: key);
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _BottomNavBarScreenState createState() => _BottomNavBarScreenState();
 }
 
-class _MainPageState extends State<MainPage>
+class _BottomNavBarScreenState extends State<BottomNavBarScreen>
     with SingleTickerProviderStateMixin {
   late TabController bottomNavController;
 
   List<Widget> bottomNavTabs = [
-    const SightListScreen(),
-    Container(color: Colors.red),
-    const VisitingScreen(),
-    const SettingsScreen(),
+    const PlaceTabScreen(),
+    const MapTabScreen(),
+    const FavoriteTabScreen(),
+    const SettingsTabScreen(),
   ];
 
   @override

@@ -3,39 +3,43 @@ import 'package:places/image_paths.dart';
 
 final List<Filter> mockFilters = [
   Filter(
-    id: 0,
     title: 'Отель',
+    requestTitle: 'hotel',
     iconName: AssetImages.iconHotelFilterPath,
     isActive: false,
   ),
   Filter(
-    id: 1,
     title: 'Ресторан',
+    requestTitle: 'restaurant',
     iconName: AssetImages.iconRestourantFilterPath,
     isActive: false,
   ),
   Filter(
-    id: 2,
     title: 'Особое место',
+    requestTitle: 'other',
     iconName: AssetImages.iconSpecialFilterPath,
     isActive: false,
   ),
   Filter(
-    id: 3,
     title: 'Парк',
+    requestTitle: 'park',
     iconName: AssetImages.iconParkFilterPath,
     isActive: false,
   ),
   Filter(
-    id: 4,
     title: 'Музей',
+    requestTitle: 'museum',
     iconName: AssetImages.iconMuseumFilterPath,
     isActive: false,
   ),
   Filter(
-    id: 5,
     title: 'Кафе',
+    requestTitle: 'cafe',
     iconName: AssetImages.iconCafeFilterPath,
     isActive: false,
   ),
 ];
+
+String getFilterTitle(String requestTitle) => mockFilters
+    .firstWhere((element) => element.requestTitle == requestTitle)
+    .title;

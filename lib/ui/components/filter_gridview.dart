@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:places/domain/repository/filter_repository.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/ui/components/filter_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +18,7 @@ class FilterGridViewWidget extends StatelessWidget {
           crossAxisSpacing: 10,
         ),
         shrinkWrap: true,
-        itemCount: context.read<FilterRepository>().allFilters.length,
+        itemCount: context.read<PlaceInteractor>().filters.length,
         itemBuilder: (BuildContext context, index) {
           return FilterTile(index);
         },

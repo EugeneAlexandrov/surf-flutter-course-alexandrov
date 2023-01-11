@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:places/data/dto/place_dto.dart';
+import 'package:places/data/dto/get_place_dto.dart';
 import 'package:places/data/dto/places_filter_request_dto.dart';
+import 'package:places/data/dto/post_place_dto.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -30,12 +31,12 @@ class DioApiService {
       );
   }
 
-  Future<List<PlaceDto>> getFilteredPlaces(
+  Future<List<GetPlaceDto>> getFilteredPlaces(
       PlacesFilterRequestDto requestBody) async {
     final response = await dio.post<List<dynamic>>('/filtered_places',
         data: jsonEncode(requestBody));
     if (response.statusCode == 200 && response.data != null) {
-      var list = response.data!.map((e) => PlaceDto.fromJson(e)).toList();
+      var list = response.data!.map((e) => GetPlaceDto.fromJson(e)).toList();
       return list;
     }
     throw Exception(response.statusCode);
@@ -49,7 +50,7 @@ class DioApiService {
     throw Exception(response.statusCode);
   }
 
-  Future<Place> createPlace(Place place) async {
+  Future<Place> createPlace(PostPlaceDto place) async {
     final response = await dio.post('/place', data: jsonEncode(place));
     if (response.statusCode == 200) {
       return Place.fromJson(response.data);

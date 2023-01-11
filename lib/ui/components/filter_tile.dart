@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:places/ui/screens/res/colors.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/domain/model/filter.dart';
-import 'package:places/domain/repository/filter_repository.dart';
+import 'package:places/ui/res/colors.dart';
 import 'package:provider/provider.dart';
 
 class FilterTile extends StatelessWidget {
@@ -12,14 +12,14 @@ class FilterTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FilterRepository>(
-      builder: (_context, FilterRepository filterRepository, child) {
-        Filter filter = filterRepository.allFilters[index];
+    return Consumer<PlaceInteractor>(
+      builder: (_context, placeInteractor, child) {
+        Filter filter = placeInteractor.filters[index];
         return Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: () {
-              filterRepository.changeFilter(filter.id);
+              placeInteractor.changeFilter(index);
             },
             child: Column(
               mainAxisSize: MainAxisSize.min,

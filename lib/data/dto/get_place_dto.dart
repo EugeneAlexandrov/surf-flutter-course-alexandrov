@@ -1,4 +1,4 @@
-class PlaceDto {
+class GetPlaceDto {
   final int id;
   final double lat;
   final double lng;
@@ -8,7 +8,7 @@ class PlaceDto {
   final String description;
   final List<String> urls;
 
-  PlaceDto(
+  GetPlaceDto(
     this.id,
     this.lat,
     this.lng,
@@ -19,7 +19,7 @@ class PlaceDto {
     this.urls,
   );
 
-  PlaceDto.fromJson(Map<String, dynamic> json)
+  GetPlaceDto.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         lat = json['lat'],
         lng = json['lng'],

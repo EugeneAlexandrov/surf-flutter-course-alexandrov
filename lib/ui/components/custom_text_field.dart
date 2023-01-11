@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
 
 class MyInputField extends StatelessWidget {
   const MyInputField({required this.child, required this.title, Key? key})

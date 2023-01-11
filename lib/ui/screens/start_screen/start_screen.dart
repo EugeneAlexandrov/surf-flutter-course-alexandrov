@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:places/main_page.dart';
-import 'package:places/ui/screens/onboarding_screen.dart';
+import 'package:places/ui/screens/bottom_navigationbar_screen/bottomnavbar_screen.dart';
+import 'package:places/ui/screens/onboarding_screen/onboarding_screen.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class StartScreen extends StatelessWidget {
     return OnBoardindShowProvider(
       model: OnboardingShowModel(),
       child: OnBoardindShowProvider.watch(context)?.shown ?? false
-          ? const MainPage()
+          ? const BottomNavBarScreen()
           : const OnboardingScreen(),
     ); 
   }

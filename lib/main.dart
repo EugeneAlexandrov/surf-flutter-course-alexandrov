@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_router.dart';
-import 'package:places/domain/repository/filter_repository.dart';
-import 'package:places/domain/repository/intention_repository.dart';
-import 'package:places/domain/repository/location_repository.dart';
-import 'package:places/domain/repository/search_repository.dart';
-import 'package:places/domain/repository/sight_repository.dart';
-import 'package:places/ui/screens/res/themes.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
+import 'package:places/services/geo/location_service.dart';
+import 'package:places/ui/res/themes.dart';
 import 'package:provider/provider.dart';
 import 'app_strings.dart';
+import 'data/repository/place_repository/place_repository_impl.dart';
 
 void main() {
   runApp(
@@ -32,28 +30,12 @@ class _AppDependenciesState extends State<AppDependencies> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<CustomTheme>(create: (_) => CustomTheme()),
-        ChangeNotifierProvider<IntentionRepository>(
-            create: (_) => IntentionRepository()),
-        ChangeNotifierProvider<LocationRepository>(
-          create: (_) => LocationRepository()..initLocation(),
+        ChangeNotifierProvider<PlaceInteractor>(
+          create: (_) => PlaceInteractor(
+            PlaceRepositoryImpl(),
+            LocationService(),
+          ),
         ),
-        ChangeNotifierProxyProvider<LocationRepository, FilterRepository>(
-          create: (context) => FilterRepository(
-              Provider.of<LocationRepository>(context, listen: false)),
-          update: (context, locationRepository, filterRepository) =>
-              FilterRepository(locationRepository),
-        ),
-        ChangeNotifierProxyProvider<FilterRepository, SightRepository>(
-          create: (context) => SightRepository(
-              Provider.of<FilterRepository>(context, listen: false)),
-          update: (context, filterRepository, sightRepository) =>
-              SightRepository(filterRepository),
-        ),
-        ChangeNotifierProxyProvider<SightRepository, SearchRepository>(
-            create: (context) => SearchRepository(
-                Provider.of<SightRepository>(context, listen: false)),
-            update: (context, sightRepository, searchRepository) =>
-                SearchRepository(sightRepository)),
       ],
       child: widget.app,
     );

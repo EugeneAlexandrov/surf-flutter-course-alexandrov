@@ -1,5 +1,6 @@
-import 'package:places/data/dto/place_dto.dart';
+import 'package:places/data/dto/get_place_dto.dart';
 import 'package:places/data/dto/places_filter_request_dto.dart';
+import 'package:places/data/dto/post_place_dto.dart';
 import 'package:places/data/repository/place_repository/place_repository.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/services/api/api_service.dart';
@@ -27,7 +28,7 @@ class PlaceRepositoryImpl with PlaceRepository {
       typeFilter: typeFilter,
       nameFilter: nameFilter,
     );
-    List<PlaceDto> filteredPlaces =
+    List<GetPlaceDto> filteredPlaces =
         await apiservice.getFilteredPlaces(requestBody);
     return filteredPlaces.map((placeDto) => Place.fromDto(placeDto)).toList();
   }
@@ -38,7 +39,7 @@ class PlaceRepositoryImpl with PlaceRepository {
   }
 
   @override
-  void postPlace(Place place) {
-    apiservice.createPlace(place);
+  Future<Place> postPlace(PostPlaceDto place) async {
+    return await apiservice.createPlace(place);
   }
 }

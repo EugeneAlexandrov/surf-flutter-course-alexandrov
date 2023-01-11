@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:places/ui/screens/res/colors.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/res/styles.dart';
+import 'package:places/ui/res/colors.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
+import 'package:places/ui/res/styles.dart';
 
 class CustomTheme with ChangeNotifier {
   bool _isDarkTheme = false;

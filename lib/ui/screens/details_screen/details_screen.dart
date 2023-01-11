@@ -2,28 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/domain/model/sight.dart';
-import 'package:places/domain/repository/filter_repository.dart';
-import 'package:places/domain/repository/intention_repository.dart';
-import 'package:places/domain/repository/sight_repository.dart';
+import 'package:places/data/mock_filters.dart';
+import 'package:places/domain/model/place.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_appbars.dart';
-import 'package:places/ui/screens/res/colors.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/ui/res/colors.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
 import 'package:provider/provider.dart';
 
 //Screen with sight card details
-class SightDetailsScreen extends StatelessWidget {
-  const SightDetailsScreen(this.sight, {Key? key}) : super(key: key);
-  final Sight sight;
+class DetailsScreen extends StatelessWidget {
+  const DetailsScreen(this.place, {Key? key}) : super(key: key);
+  final Place place;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          ImageAppBar(sight.images),
+          ImageAppBar(place.urls),
           SliverToBoxAdapter(
-            child: DetailsInfo(sight.id),
+            child: DetailsInfo(place),
           ),
         ],
       ),
@@ -32,20 +31,17 @@ class SightDetailsScreen extends StatelessWidget {
 }
 
 class DetailsInfo extends StatelessWidget {
-  const DetailsInfo(this._sightId, {Key? key}) : super(key: key);
+  const DetailsInfo(this.place, {Key? key}) : super(key: key);
 
-  final int _sightId;
+  final Place place;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.extension<CustomColors>();
 
-    final sightRepository =
-        Provider.of<SightRepository>(context, listen: false);
-    final filterRepository =
-        Provider.of<FilterRepository>(context, listen: false);
-    final intentionRepository = Provider.of<IntentionRepository>(context);
+    final placeInteractor =
+        Provider.of<PlaceInteractor>(context, listen: false);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
@@ -54,17 +50,14 @@ class DetailsInfo extends StatelessWidget {
         children: [
           // name
           Text(
-            sightRepository.getSightById(_sightId).name,
+            place.name,
             style: theme.textTheme.headline5,
           ),
           const SizedBox(height: 4),
           Row(children: [
             //filter title
             Text(
-              filterRepository
-                  .getFilterById(
-                      sightRepository.getSightById(_sightId).filterId)
-                  .title,
+              getFilterTitle(place.placeType),
               style: theme.textTheme.caption?.copyWith(
                 color: colors!.smallBoldSecondary,
               ),
@@ -80,8 +73,7 @@ class DetailsInfo extends StatelessWidget {
           ]),
           const SizedBox(height: 24),
           // details
-          Text(sightRepository.getSightById(_sightId).details,
-              style: theme.textTheme.bodyText2),
+          Text(place.description, style: theme.textTheme.bodyText2),
           const SizedBox(height: 24),
           ElevatedButton.icon(
             onPressed: () {},
@@ -98,12 +90,10 @@ class DetailsInfo extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              intentionRepository.findIntentionBySightId(_sightId).hasVisited
+              placeInteractor.findIntentionByPlaceId(place.id).hasVisited
                   ? const _VisitedButton()
-                  : _PlannedButton(_sightId,
-                      intentionRepository: intentionRepository),
-              _FavoriteButton(_sightId,
-                  intentionRepository: intentionRepository),
+                  : _PlannedButton(place),
+              _FavoriteButton(place),
             ],
           ),
         ],
@@ -122,52 +112,53 @@ void changeDate(BuildContext context, int id) async {
     ),
   );
   if (date != null) {
-    Provider.of<IntentionRepository>(context, listen: false)
-        .changeDate(date, id);
+    Provider.of<PlaceInteractor>(context, listen: false).changeDate(date, id);
   }
 }
 
 class _FavoriteButton extends StatelessWidget {
-  const _FavoriteButton(this._sightId,
-      {required this.intentionRepository, Key? key})
-      : super(key: key);
+  const _FavoriteButton(this.place, {Key? key}) : super(key: key);
 
-  final int _sightId;
-  final IntentionRepository intentionRepository;
+  final Place place;
 
   @override
   Widget build(BuildContext context) {
-    bool pressed = intentionRepository.isFavorite(_sightId);
     final theme = Theme.of(context);
     final colors = theme.extension<CustomColors>();
-    return TextButton.icon(
-      icon: SvgPicture.asset(
-        pressed
-            ? AssetImages.iconHeartFillPath
-            : AssetImages.iconHeartOutlinePath,
-        height: 24,
-        color: colors!.title,
-      ),
-      onPressed: () {
-        intentionRepository.changeFavoriteState(_sightId);
+    return Consumer<PlaceInteractor>(
+      builder: (context, placeInteractor, child) {
+        final PlaceInteractor placeInteractor =
+            Provider.of<PlaceInteractor>(context, listen: false);
+        bool pressed = placeInteractor.isFavorite(place.id);
+        return TextButton.icon(
+          icon: SvgPicture.asset(
+            pressed
+                ? AssetImages.iconHeartFillPath
+                : AssetImages.iconHeartOutlinePath,
+            height: 24,
+            color: colors!.title,
+          ),
+          onPressed: () {
+            placeInteractor.changeFavoriteState(place.id);
+          },
+          label: const Text(AppStrings.detailsScreenFavButton),
+        );
       },
-      label: const Text(AppStrings.detailsScreenFavButton),
     );
   }
 }
 
 class _PlannedButton extends StatelessWidget {
-  const _PlannedButton(this._sightId,
-      {required this.intentionRepository, Key? key})
-      : super(key: key);
+  const _PlannedButton(this.place, {Key? key}) : super(key: key);
 
-  final int _sightId;
-  final IntentionRepository intentionRepository;
+  final Place place;
 
   @override
   Widget build(BuildContext context) {
+    final PlaceInteractor placeInteractor =
+        Provider.of<PlaceInteractor>(context, listen: false);
     String plannedButtonText = AppStrings.detailsScreenPlanButton;
-    DateTime? date = intentionRepository.findIntentionBySightId(_sightId).date;
+    DateTime? date = placeInteractor.findIntentionByPlaceId(place.id).date;
     if (date != null) {
       final DateFormat formatter = DateFormat('yyyy-MMM-dd');
       plannedButtonText = formatter.format(date);
@@ -176,14 +167,14 @@ class _PlannedButton extends StatelessWidget {
     final colors = theme.extension<CustomColors>();
 
     return TextButton.icon(
-      onPressed: intentionRepository.isFavorite(_sightId)
+      onPressed: placeInteractor.isFavorite(place.id)
           ? () {
-              changeDate(context, _sightId);
+              changeDate(context, place.id);
             }
           : null,
       icon: SvgPicture.asset(
         AssetImages.iconCalendarPath,
-        color: intentionRepository.findIntentionBySightId(_sightId).date != null
+        color: placeInteractor.findIntentionByPlaceId(place.id).date != null
             ? AppColors.lmGreen
             : colors!.title,
         height: 24,
@@ -191,8 +182,7 @@ class _PlannedButton extends StatelessWidget {
       label: Text(
         plannedButtonText,
         style: theme.textTheme.bodyText2?.copyWith(
-            color: intentionRepository.findIntentionBySightId(_sightId).date !=
-                    null
+            color: placeInteractor.findIntentionByPlaceId(place.id).date != null
                 ? AppColors.lmGreen
                 : colors!.title),
       ),

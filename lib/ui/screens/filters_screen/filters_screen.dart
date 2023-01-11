@@ -3,14 +3,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/ui/components/filter_lisrview.dart';
-import 'package:places/ui/screens/res/colors.dart';
-import 'package:places/domain/repository/filter_repository.dart';
-import 'package:places/domain/repository/sight_repository.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/filter_gridview.dart';
 import 'package:places/ui/components/filter_range_slider.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/ui/res/colors.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
 import 'package:provider/provider.dart';
 
 class FiltersScreen extends StatelessWidget {
@@ -20,8 +19,8 @@ class FiltersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colors = theme.extension<CustomColors>();
-    return Consumer2<SightRepository, FilterRepository>(
-      builder: (context, sightRepository, filterRepository, _) {
+    return Consumer<PlaceInteractor>(
+      builder: (context, placeInteractor, _) {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
@@ -29,7 +28,7 @@ class FiltersScreen extends StatelessWidget {
             actions: [
               TextButton(
                 onPressed: () {
-                  filterRepository.resetFilters();
+                  placeInteractor.resetFilters();
                 },
                 child: Text(
                   AppStrings.cleanFiltersString,
@@ -78,8 +77,8 @@ class FiltersScreen extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           child: Text(
-                              '${AppStrings.showString} (${sightRepository.sights.length})'),
-                          onPressed: sightRepository.sights.isEmpty
+                              '${AppStrings.showString} (${placeInteractor.places.length})'),
+                          onPressed: placeInteractor.places.isEmpty
                               ? null
                               : () {
                                   Navigator.pop(context);

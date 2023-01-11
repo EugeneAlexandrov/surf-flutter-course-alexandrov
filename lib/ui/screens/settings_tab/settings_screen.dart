@@ -4,11 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_appbars.dart';
-import 'package:places/ui/screens/res/themes.dart';
+import 'package:places/ui/res/themes.dart';
 import 'package:provider/provider.dart';
 
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+class SettingsTabScreen extends StatelessWidget {
+  const SettingsTabScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

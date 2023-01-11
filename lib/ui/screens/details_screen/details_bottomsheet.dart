@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:places/domain/model/sight.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/sight_details_screen.dart';
+import 'package:places/domain/model/place.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
+import 'package:places/ui/screens/details_screen/details_screen.dart';
 
-class SightDetailsBottomSheet extends StatelessWidget {
-  SightDetailsBottomSheet(
-      {required this.sight,
+class DetailsBottomSheet extends StatelessWidget {
+  DetailsBottomSheet(
+      {required this.place,
       Key? key,
       required this.scrollController,
       required this.context,
       required this.bottomSheetOffset})
       : super(key: key);
 
-  final Sight sight;
+  final Place place;
   final ScrollController scrollController;
   final BuildContext context;
   final double bottomSheetOffset;
@@ -37,7 +37,7 @@ class SightDetailsBottomSheet extends StatelessWidget {
             children: [
               SizedBox(
                 height: 384,
-                child: sight.images.isEmpty
+                child: place.urls.isEmpty
                     ? Center(
                         child: Text('Изображений объекта нет',
                             style: Theme.of(context).textTheme.headline5),
@@ -57,17 +57,17 @@ class SightDetailsBottomSheet extends StatelessWidget {
                                   alignment: Alignment.topCenter,
                                   fit: BoxFit.cover,
                                   image: NetworkImage(
-                                    sight.images[index].url,
+                                    place.urls[index],
                                   ),
                                 ),
                               ),
                             );
                           },
-                          itemCount: sight.images.length,
+                          itemCount: place.urls.length,
                         ),
                       ),
               ),
-              DetailsInfo(sight.id),
+              DetailsInfo(place),
             ],
           ),
         ),

@@ -1,27 +1,25 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:places/domain/model/sight.dart';
-import 'package:places/ui/screens/res/colors.dart';
-import 'package:places/domain/repository/filter_repository.dart';
-import 'package:places/domain/repository/sight_repository.dart';
+import 'package:places/data/mock_filters.dart';
+import 'package:places/domain/model/place.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/favorite_icon_button.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/sight_details_bottomsheet.dart';
+import 'package:places/ui/res/colors.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
+import 'package:places/ui/screens/details_screen/details_bottomsheet.dart';
 import 'package:provider/provider.dart';
 
-class SightCard extends StatelessWidget {
-  const SightCard({required this.sightID, Key? key}) : super(key: key);
+class PlaceCard extends StatelessWidget {
+  const PlaceCard({required this.place, Key? key}) : super(key: key);
 
-  final int sightID;
+  final Place place;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Consumer2<FilterRepository, SightRepository>(builder: (context,
-        FilterRepository filterRepository,
-        SightRepository sightRepository,
-        child) {
+    return Consumer<PlaceInteractor>(
+        builder: (context, placeInteractor, child) {
       return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         clipBehavior: Clip.hardEdge,
@@ -40,11 +38,11 @@ class SightCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        sightRepository.getSightById(sightID).name,
+                        place.name,
                         style: theme.textTheme.bodyText1,
                       ),
                       Text(
-                        sightRepository.getSightById(sightID).details,
+                        place.description,
                         style: theme.textTheme.bodyText2?.copyWith(
                             color: theme
                                 .extension<CustomColors>()!
@@ -59,10 +57,7 @@ class SightCard extends StatelessWidget {
               top: 16,
               left: 16,
               child: Text(
-                filterRepository
-                    .getFilterById(
-                        sightRepository.getSightById(sightID).filterId)
-                    .title,
+                getFilterTitle(place.placeType),
                 style: theme.textTheme.caption,
               ),
             ),
@@ -73,7 +68,7 @@ class SightCard extends StatelessWidget {
                 child: InkWell(
                   splashColor: AppColors.dmInnactiveBlack,
                   onTap: () {
-                    onSightTap(context, sightRepository.getSightById(sightID));
+                    onSightTap(context, place);
                   },
                 ),
               ),
@@ -81,7 +76,7 @@ class SightCard extends StatelessWidget {
             Positioned(
               top: 4,
               right: 4,
-              child: FavoriteIconButton(sightID),
+              child: FavoriteIconButton(place.id),
             ),
           ],
         ),
@@ -89,7 +84,7 @@ class SightCard extends StatelessWidget {
     });
   }
 
-  void onSightTap(BuildContext context, Sight sight) {
+  void onSightTap(BuildContext context, Place place) {
     showFlexibleBottomSheet(
       minHeight: 0,
       initHeight: 0.8,
@@ -101,8 +96,8 @@ class SightCard extends StatelessWidget {
         ScrollController scrollController,
         double bottomSheetOffset,
       ) {
-        return SightDetailsBottomSheet(
-          sight: sight,
+        return DetailsBottomSheet(
+          place: place,
           context: context,
           scrollController: scrollController,
           bottomSheetOffset: bottomSheetOffset,
