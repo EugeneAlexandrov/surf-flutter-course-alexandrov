@@ -7,18 +7,55 @@ class SearchInteractor with ChangeNotifier {
 
   SearchInteractor(this.placeRepository);
 
-  List<String> searchQueries = <String>[];
-  List<Place> searchSightList = <Place>[];
+  final List<String> _searchQueries = <String>[];
+  List<Place> _searchPlaceList = <Place>[];
+  String _actualQuery = '';
 
-  void findSightsByName(String name) {}
+  List<String> get queries => _searchQueries;
+  Future<List<Place>> get places async {
+    if (_actualQuery.isNotEmpty) {
+      await findPlacesByName();
+    }
+    return _searchPlaceList;
+  }
 
-  void deleteSearchQuery(int index) => searchQueries.removeAt(index);
+  String get actualQuery => _actualQuery;
 
-  void clearSearchList() => searchSightList.clear();
+  Future<void> findPlacesByName() async {
+    _searchPlaceList =
+        await placeRepository.getFilteredPlaces(nameFilter: actualQuery);
+    //notifyListeners();
+  }
 
-  void addQuery(String query) => searchQueries.add(query);
+  void changeQuery(String value) {
+    _actualQuery = value;
+    notifyListeners();
+  }
 
-  void clearHistory() => searchQueries.clear();
+  void clearSearchList() {
+    _searchPlaceList.clear();
+    notifyListeners();
+  }
+
+  void addSearchQuery(String query) {
+    _searchQueries.add(query);
+    notifyListeners();
+  }
+
+  void deleteSearchQuery(int index) {
+    _searchQueries.removeAt(index);
+    notifyListeners();
+  }
+
+  void clearSearchQueryHistory() {
+    _searchQueries.clear();
+    notifyListeners();
+  }
+
+  void deleteActualQuery() {
+    _actualQuery = '';
+    notifyListeners();
+  }
 }
 
 // class SearchRepository with ChangeNotifier {

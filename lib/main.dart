@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_router.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
+import 'package:places/domain/search_interactor/search_interactor.dart';
 import 'package:places/services/geo/location_service.dart';
 import 'package:places/ui/res/themes.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +37,8 @@ class _AppDependenciesState extends State<AppDependencies> {
             LocationService(),
           ),
         ),
+        ChangeNotifierProvider<SearchInteractor>(
+            create: (_) => SearchInteractor(PlaceRepositoryImpl())),
       ],
       child: widget.app,
     );
