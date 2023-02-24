@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:places/domain/repository/intention_repository.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/image_paths.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +11,7 @@ class FavoriteIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<IntentionRepository>(
+    return Consumer<PlaceInteractor>(
       builder: (context, intentionRepository, child) {
         bool pressed = intentionRepository.isFavorite(_sightId);
         return Material(

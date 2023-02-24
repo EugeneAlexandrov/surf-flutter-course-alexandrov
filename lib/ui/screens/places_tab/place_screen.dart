@@ -3,34 +3,34 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/domain/repository/sight_repository.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
 import 'package:places/ui/components/gradient_button.dart';
 import 'package:places/ui/components/search_widget.dart';
-import 'package:places/ui/components/sight_card.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/ui/components/place_card.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
 import 'package:provider/provider.dart';
 
 //First tab with list of interesting places
-class SightListScreen extends StatelessWidget {
-  const SightListScreen({Key? key}) : super(key: key);
+class PlaceTabScreen extends StatelessWidget {
+  const PlaceTabScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SightRepository>(
-      builder: (context, sightRepository, child) {
+    return Consumer<PlaceInteractor>(
+      builder: (context, placeInteractor, child) {
         return MediaQuery.of(context).orientation == Orientation.portrait
-            ? const _PortraitSightListScreen()
-            : const _LandscapeSightListScreen();
+            ? const _PortraitPlaceListScreen()
+            : const _LandscapePlaceListScreen();
       },
     );
   }
 }
 
-class _PortraitSightListScreen extends StatelessWidget {
-  const _PortraitSightListScreen({Key? key}) : super(key: key);
+class _PortraitPlaceListScreen extends StatelessWidget {
+  const _PortraitPlaceListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,9 @@ class _PortraitSightListScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Stack(
           children: [
-            Consumer<SightRepository>(
-              builder: (context, sightRepository, child) {
-                return _ListPortraitWidget(sightRepository);
+            Consumer<PlaceInteractor>(
+              builder: (context, placeInteractor, child) {
+                return _ListPortraitWidget(placeInteractor);
               },
             ),
             const Positioned.fill(
@@ -61,8 +61,8 @@ class _PortraitSightListScreen extends StatelessWidget {
   }
 }
 
-class _LandscapeSightListScreen extends StatelessWidget {
-  const _LandscapeSightListScreen({Key? key}) : super(key: key);
+class _LandscapePlaceListScreen extends StatelessWidget {
+  const _LandscapePlaceListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +79,8 @@ class _LandscapeSightListScreen extends StatelessWidget {
         bottom: const _BottomWidget(),
       ),
       body:
-          Consumer<SightRepository>(builder: (context, sightRepository, child) {
-        return _ListLandscapeWidget(sightRepository);
+          Consumer<PlaceInteractor>(builder: (context, placeInteractor, child) {
+        return _ListLandscapeWidget(placeInteractor);
       }),
     );
   }
@@ -124,10 +124,10 @@ class _BottomWidget extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class _ListLandscapeWidget extends StatelessWidget {
-  const _ListLandscapeWidget(this.sightRepository, {Key? key})
+  const _ListLandscapeWidget(this.placeInteractor, {Key? key})
       : super(key: key);
 
-  final SightRepository sightRepository;
+  final PlaceInteractor placeInteractor;
 
   @override
   Widget build(BuildContext context) {
@@ -137,30 +137,30 @@ class _ListLandscapeWidget extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
-          itemCount: sightRepository.sights.length,
+          itemCount: placeInteractor.places.length,
           itemBuilder: (context, index) {
-            return SightCard(sightID: sightRepository.sights[index].id);
+            return PlaceCard(place: placeInteractor.places[index]);
           }),
     );
   }
 }
 
 class _ListPortraitWidget extends StatelessWidget {
-  const _ListPortraitWidget(this.sightRepository, {Key? key}) : super(key: key);
+  const _ListPortraitWidget(this.placeInteractor, {Key? key}) : super(key: key);
 
-  final SightRepository sightRepository;
+  final PlaceInteractor placeInteractor;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.only(top: 8),
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      itemCount: sightRepository.sights.length,
+      itemCount: placeInteractor.places.length,
       scrollDirection: Axis.vertical,
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
-          child: SightCard(sightID: sightRepository.sights[index].id),
+          child: PlaceCard(place: placeInteractor.places[index]),
         );
       },
     );

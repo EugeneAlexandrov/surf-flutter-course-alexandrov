@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/domain/repository/filter_repository.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
 import 'package:provider/provider.dart';
 
 class MyRangeSlider extends StatefulWidget {
@@ -14,12 +14,12 @@ class MyRangeSlider extends StatefulWidget {
 }
 
 class _MyRangeSliderState extends State<MyRangeSlider> {
-  late RangeValues _selectedRange;
+  late double _selectedRadius;
 
   @override
   void initState() {
     super.initState();
-    _selectedRange = context.read<FilterRepository>().range;
+    _selectedRadius = context.read<PlaceInteractor>().radius;
   }
 
   @override
@@ -35,26 +35,25 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
             Text(
               AppStrings.distanceString,
               textAlign: TextAlign.start,
-              style: theme.textTheme.bodyText1
-                  ?.copyWith(color: colors!.title),
+              style: theme.textTheme.bodyText1?.copyWith(color: colors!.title),
             ),
             Text(
-              'от ${_selectedRange.start} до ${_selectedRange.end} км',
+              '$_selectedRadius км',
               textAlign: TextAlign.end,
-              style: theme.textTheme.bodyText1?.copyWith(
-                  color: colors!.smallSecondaryTwo),
+              style: theme.textTheme.bodyText1
+                  ?.copyWith(color: colors!.smallSecondaryTwo),
             )
           ],
         ),
         const SizedBox(height: 10),
-        RangeSlider(
+        Slider(
           min: 0.1,
-          max: 10,
-          values: _selectedRange,
-          onChangeEnd: (RangeValues newRange) {
-            context.read<FilterRepository>().changeRange(_selectedRange);
+          max: 10.0,
+          value: _selectedRadius,
+          onChangeEnd: (double newValue) {
+            context.read<PlaceInteractor>().changeRange(_selectedRadius * 1000);
           },
-          onChanged: (RangeValues value) {
+          onChanged: (double value) {
             roundToDecimals(value);
             setState(() {});
           },
@@ -63,9 +62,8 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
     );
   }
 
-  void roundToDecimals(RangeValues oldRange) {
-    double start = (oldRange.start * 10).round() / 10;
-    double end = (oldRange.end * 10).round() / 10;
-    _selectedRange = RangeValues(start, end);
+  void roundToDecimals(double value) {
+    double radius = (value * 10).round() / 10;
+    _selectedRadius = radius;
   }
 }

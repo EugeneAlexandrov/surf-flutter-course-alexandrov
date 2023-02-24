@@ -1,7 +1,4 @@
-import 'package:places/data/dto/get_place_dto.dart';
-
-class Place {
-  final int id;
+class PostPlaceDto {
   final String name;
   final double lng;
   final double lat;
@@ -9,8 +6,7 @@ class Place {
   final String description;
   final String placeType;
 
-  Place({
-    required this.id,
+  PostPlaceDto({
     required this.name,
     required this.lng,
     required this.lat,
@@ -19,18 +15,16 @@ class Place {
     required this.placeType,
   });
 
-  Place.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        name = json['name'],
+  PostPlaceDto.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
         lng = json['lng'],
         lat = json['lat'],
         urls = List<String>.from(json['urls']),
         description = json['description'],
         placeType = json['placeType'];
 
-  Place.fromDto(GetPlaceDto getPlaceDto)
-      : id = getPlaceDto.id,
-        name = getPlaceDto.name,
+  PostPlaceDto.fromDto(PostPlaceDto getPlaceDto)
+      : name = getPlaceDto.name,
         lng = getPlaceDto.lng,
         lat = getPlaceDto.lat,
         urls = getPlaceDto.urls,
@@ -48,14 +42,6 @@ class Place {
 
   @override
   String toString() {
-    return '--> Place $id $name $lng $lat $description $placeType $description';
+    return '--> Place $name $lng $lat $description $placeType $description';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || other is Place && id == other.id;
-  }
-
-  @override
-  int get hashCode => id;
 }

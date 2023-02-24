@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/data/mock_filters.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
 
 class FilterTypePickerScreen extends StatefulWidget {
   const FilterTypePickerScreen({Key? key}) : super(key: key);
@@ -76,7 +76,8 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
                 onPressed: _index == null
                     ? null
                     : () {
-                        Navigator.of(context).pop(mockFilters[_index!].id);
+                        Navigator.of(context)
+                            .pop(mockFilters[_index!].requestTitle);
                       },
                 child: const Text(AppStrings.select)),
           ),

@@ -3,35 +3,55 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/domain/model/intention.dart';
-import 'package:places/domain/repository/intention_repository.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/components/null_planed_placeholder.dart';
 import 'package:places/ui/components/null_visited_placeholder.dart';
-import 'package:places/ui/components/planned_sight_card.dart';
+import 'package:places/ui/components/planned_place_card.dart';
+import 'package:places/ui/components/visited_place_card.dart';
 import 'package:provider/provider.dart';
 
 //Third tab with visited places
-class VisitingScreen extends StatelessWidget {
-  const VisitingScreen({Key? key}) : super(key: key);
+class FavoriteTabScreen extends StatelessWidget {
+  const FavoriteTabScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const TabsAppBar(AppStrings.appBarTitleFavoriteString),
-      body: Consumer<IntentionRepository>(
-        builder: (context, intentionRepository, child) {
+      body: Consumer<PlaceInteractor>(
+        builder: (context, placeInteractor, child) {
           return TabBarView(
             children: [
-              intentionRepository.plannedList.isEmpty
+              placeInteractor.favoritePlaces.isEmpty
                   ? const NullPlannedPlaceHolder()
-                  : DraggableList(intentionRepository.plannedList),
-              intentionRepository.visitedList.isEmpty
+                  : DraggableList(placeInteractor.favoritePlaces),
+              placeInteractor.visitedPlaces.isEmpty
                   ? const NullVisitedPlaceHolder()
-                  : DraggableList(intentionRepository.visitedList),
+                  : VisitedList(placeInteractor.visitedPlaces),
             ],
           );
         },
       ),
+    );
+  }
+}
+
+class VisitedList extends StatelessWidget {
+  const VisitedList(this.list, {Key? key}) : super(key: key);
+
+  final List<Intention> list;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      physics: Platform.isAndroid
+          ? const ClampingScrollPhysics()
+          : const BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        return VisitedPlaceCard(list[index].placeId);
+      },
+      itemCount: list.length,
     );
   }
 }
@@ -50,24 +70,22 @@ class _DraggableListState extends State<DraggableList> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.list.isEmpty
-        ? const NullPlannedPlaceHolder()
-        : ListView.builder(
-            physics: Platform.isAndroid
-                ? const ClampingScrollPhysics()
-                : const BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return DraggableElementWidget(widget.list[index].sightId);
-            },
-            itemCount: widget.list.length,
-          );
+    return ListView.builder(
+      physics: Platform.isAndroid
+          ? const ClampingScrollPhysics()
+          : const BouncingScrollPhysics(),
+      itemBuilder: (context, index) {
+        return DraggableElementWidget(widget.list[index].placeId);
+      },
+      itemCount: widget.list.length,
+    );
   }
 }
 
 class DraggableElementWidget extends StatefulWidget {
-  const DraggableElementWidget(this._sightId, {Key? key}) : super(key: key);
+  const DraggableElementWidget(this._placeId, {Key? key}) : super(key: key);
 
-  final int _sightId;
+  final int _placeId;
 
   @override
   State<DraggableElementWidget> createState() => _DraggableElementWidgetState();
@@ -89,22 +107,22 @@ class _DraggableElementWidgetState extends State<DraggableElementWidget> {
                   }
                   return false;
                 },
-                onAccept: (data) => Provider.of<IntentionRepository>(context,
+                onAccept: (data) => Provider.of<PlaceInteractor>(context,
                         listen: false)
                     .swapIntention(
                         context
                                 .findAncestorStateOfType<_DraggableListState>()
                                 ?.startIndex ??
                             0,
-                        widget._sightId),
+                        widget._placeId),
                 builder: (context, candidateData, rejectedData) =>
-                    PlannedSightCard(widget._sightId,
-                        key: ValueKey(widget._sightId))),
+                    PlannedPlaceCard(widget._placeId,
+                        key: ValueKey(widget._placeId))),
         feedback:
-            PlannedSightCard(widget._sightId, key: ValueKey(widget._sightId)),
+            PlannedPlaceCard(widget._placeId, key: ValueKey(widget._placeId)),
         onDragStarted: () {
           context.findAncestorStateOfType<_DraggableListState>()?.startIndex =
-              widget._sightId;
+              widget._placeId;
           setState(() {
             isDrag = true;
           });

@@ -4,24 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/ui/screens/res/colors.dart';
-import 'package:places/data/model/mock_models/place_image.dart';
-import 'package:places/domain/model/sight.dart';
-import 'package:places/domain/repository/filter_repository.dart';
-import 'package:places/domain/repository/sight_repository.dart';
+import 'package:places/data/dto/post_place_dto.dart';
+import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_text_field.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/ui/res/colors.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
 import 'package:provider/provider.dart';
 
-class NewSightScreen extends StatefulWidget {
-  const NewSightScreen({Key? key}) : super(key: key);
+class AddPlaceScreen extends StatefulWidget {
+  const AddPlaceScreen({Key? key}) : super(key: key);
 
   @override
-  State<NewSightScreen> createState() => _NewSightScreenState();
+  State<AddPlaceScreen> createState() => _AddPlaceScreenState();
 }
 
-class _NewSightScreenState extends State<NewSightScreen> {
+class _AddPlaceScreenState extends State<AddPlaceScreen> {
   // FocusNodes
   final titleFocus = FocusNode();
   // широта
@@ -36,7 +34,7 @@ class _NewSightScreenState extends State<NewSightScreen> {
   final longitudeController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  int? filterId;
+  String filterType = '';
   // local model for images persist
   final ImageListModel _model = ImageListModel();
 
@@ -94,11 +92,9 @@ class _NewSightScreenState extends State<NewSightScreen> {
                   onTap: () {
                     _navigateAndPickFIlterType(context);
                   },
-                  title: Text(filterId == null
+                  title: Text(filterType == ''
                       ? AppStrings.addSightNoFiltersSelect
-                      : Provider.of<FilterRepository>(context)
-                          .getFilterById(filterId!)
-                          .title),
+                      : filterType),
                   trailing: SvgPicture.asset(AssetImages.iconRihgtArrowPath),
                 ),
               ),
@@ -181,7 +177,7 @@ class _NewSightScreenState extends State<NewSightScreen> {
                           longitudeController.text.isEmpty ||
                           latitudeController.text.isEmpty ||
                           descriptionController.text.isEmpty ||
-                          filterId == null)
+                          filterType == '')
                       ? null
                       : () {
                           addSight(context);
@@ -197,22 +193,22 @@ class _NewSightScreenState extends State<NewSightScreen> {
   }
 
   void addSight(BuildContext context) {
-    Sight newSight = Sight(
+    PostPlaceDto newPlace = PostPlaceDto(
         name: titleController.text,
-        lon: double.parse(longitudeController.text),
+        lng: double.parse(longitudeController.text),
         lat: double.parse(latitudeController.text),
-        details: descriptionController.text,
-        filterId: filterId!,
-        images: ImageListProvider.read(context)?.imageList ?? <PlaceImage>[]);
-    Provider.of<SightRepository>(context, listen: false).addSight(newSight);
+        description: descriptionController.text,
+        placeType: filterType,
+        urls: []);
+    Provider.of<PlaceInteractor>(context, listen: false).addNewPlace(newPlace);
     Navigator.pop(context);
   }
 
   void _navigateAndPickFIlterType(BuildContext context) async {
-    final int? result =
-        await Navigator.of(context).pushNamed(AppRouter.chooseFilter) as int?;
+    final String result =
+        await Navigator.of(context).pushNamed(AppRouter.chooseFilter) as String;
     setState(() {
-      filterId = result;
+      filterType = result;
     });
   }
 }
@@ -337,17 +333,12 @@ void addSightPhoto(ImageListModel? model, BuildContext context) {
 
 // модель для InheritedNotifier
 class ImageListModel extends ChangeNotifier {
-  final List<PlaceImage> _imageList = [];
+  final List<String> _imageList = [];
 
   get imageList => List.castFrom(_imageList);
 
   void addImage() {
-    imageList.add(
-      PlaceImage(
-        url: AssetImages.mockImageDetail1,
-        color: imageList.length,
-      ),
-    );
+    imageList.add('1');
     notifyListeners();
   }
 

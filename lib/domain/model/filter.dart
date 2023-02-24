@@ -1,12 +1,18 @@
 class Filter {
-  int id;
   String title;
+  String requestTitle;
   bool isActive;
   String iconName;
 
-  Filter(
-      {required this.iconName,
-      required this.id,
-      required this.title,
-      required this.isActive});
+  Filter({
+    required this.title,
+    required this.requestTitle,
+    required this.isActive,
+    required this.iconName,
+  });
+
+  @override
+  String toString() {
+    return requestTitle;
+  }
 }

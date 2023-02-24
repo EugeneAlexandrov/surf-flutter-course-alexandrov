@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/ui/screens/res/colors.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/main_page.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/start_screen.dart';
+import 'package:places/ui/res/colors.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
+import 'package:places/ui/screens/bottom_navigationbar_screen/bottomnavbar_screen.dart';
+import 'package:places/ui/screens/start_screen/start_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -96,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  const MainPage()),
+                                  const BottomNavBarScreen()),
                           (route) => false);
                       //
                     },
