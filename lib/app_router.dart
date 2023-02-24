@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:places/domain/model/sight.dart';
-import 'package:places/ui/screens/add_sight_screen.dart/add_sight_screen.dart';
-import 'package:places/ui/screens/add_sight_screen.dart/filter_type_picker_screen.dart';
-import 'package:places/ui/screens/filters_screen.dart';
-import 'package:places/ui/screens/search_screen.dart';
-import 'package:places/ui/screens/splash_screen.dart';
-import 'package:places/ui/screens/sight_details_screen.dart';
-import 'package:places/ui/screens/start_screen.dart';
+import 'package:places/domain/model/place.dart';
+import 'package:places/ui/screens/filters_screen/filters_screen.dart';
+import 'package:places/ui/screens/new_place_screen/filter_type_picker_screen.dart';
+import 'package:places/ui/screens/new_place_screen/new_place_screen.dart';
+import 'package:places/ui/screens/search_screen/search_screen.dart';
+import 'package:places/ui/screens/splash_screen/splash_screen.dart';
+import 'package:places/ui/screens/details_screen/details_screen.dart';
+import 'package:places/ui/screens/start_screen/start_screen.dart';
 
 // routes
 class AppRouter {
@@ -31,7 +31,7 @@ class AppRouter {
         );
       case addSight:
         return MaterialPageRoute<Object?>(
-          builder: (_) => const NewSightScreen(),
+          builder: (_) => const AddPlaceScreen(),
         );
       case chooseFilter:
         return MaterialPageRoute<Object?>(
@@ -43,9 +43,9 @@ class AppRouter {
         );
       case sightDetail:
         final arguments = settings.arguments as Map<String, dynamic>;
-        final sight = arguments['sight'] as Sight;
+        final place = arguments['place'] as Place;
         return MaterialPageRoute<Object?>(
-          builder: (_) => SightDetailsScreen(sight),
+          builder: (_) => DetailsScreen(place),
         );
       case main:
       default:

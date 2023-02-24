@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
 
 class SearchField extends StatelessWidget implements PreferredSizeWidget {
   const SearchField(

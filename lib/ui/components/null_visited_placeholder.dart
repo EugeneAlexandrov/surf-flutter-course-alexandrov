@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/ui/screens/res/colors.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
+import 'package:places/ui/res/colors.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
 
 class NullVisitedPlaceHolder extends StatelessWidget {
   const NullVisitedPlaceHolder({Key? key}) : super(key: key);

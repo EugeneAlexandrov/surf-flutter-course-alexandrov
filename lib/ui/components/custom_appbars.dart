@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
-import 'package:places/domain/model/place_image.dart';
 import 'package:places/image_paths.dart';
-import 'package:places/ui/screens/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/res/styles.dart';
 import 'package:places/ui/components/custom_icon_button.dart';
 import 'package:places/ui/components/search_widget.dart';
+import 'package:places/ui/res/custom_color_scheme.dart';
+import 'package:places/ui/res/styles.dart';
 import '../../app_strings.dart';
 
 //Simple AppBar with single Text
@@ -99,7 +98,7 @@ class ImageAppBar extends StatelessWidget {
   ImageAppBar(this.images, {Key? key}) : super(key: key);
 
   final PageController pageController = PageController();
-  final List<PlaceImage> images;
+  final List<String> images;
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +130,7 @@ class ImageAppBar extends StatelessWidget {
                                 alignment: Alignment.topCenter,
                                 fit: BoxFit.cover,
                                 image: NetworkImage(
-                                  images[index].url,
+                                  images[index],
                                 ),
                               ),
                             ),
