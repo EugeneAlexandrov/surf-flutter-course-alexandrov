@@ -55,4 +55,7 @@ class Place {
   bool operator ==(dynamic other) {
     return identical(this, other) || other is Place && id == other.id;
   }
+
+  @override
+  int get hashCode => id;
 }

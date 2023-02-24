@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
+import 'package:places/domain/settings_interactor/settings_interactor.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_appbars.dart';
-import 'package:places/ui/res/themes.dart';
 import 'package:provider/provider.dart';
 
 class SettingsTabScreen extends StatelessWidget {
@@ -18,12 +18,12 @@ class SettingsTabScreen extends StatelessWidget {
         children: ListTile.divideTiles(context: context, tiles: [
           ListTile(
             title: const Text(AppStrings.darkThemeString),
-            trailing: Consumer<CustomTheme>(
-              builder: (context, CustomTheme theme, child) {
+            trailing: Consumer<SettingsInteractor>(
+              builder: (context, settingsInteractor, child) {
                 return CupertinoSwitch(
-                  value: theme.isDark,
+                  value: settingsInteractor.isDark,
                   onChanged: (newValue) {
-                    theme.changeTheme(newValue);
+                    settingsInteractor.changeTheme(newValue);
                   },
                 );
               },

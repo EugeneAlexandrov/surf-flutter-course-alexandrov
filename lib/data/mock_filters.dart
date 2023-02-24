@@ -41,5 +41,10 @@ final List<Filter> mockFilters = [
 ];
 
 String getFilterTitle(String requestTitle) => mockFilters
-    .firstWhere((element) => element.requestTitle == requestTitle)
+    .firstWhere((element) => element.requestTitle == requestTitle,
+        orElse: () => Filter(
+            title: requestTitle,
+            requestTitle: requestTitle,
+            iconName: '',
+            isActive: false))
     .title;
