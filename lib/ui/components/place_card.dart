@@ -1,13 +1,13 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:places/data/mock_filters.dart';
+import 'package:places/data/mock_categories.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/ui/components/background_image_container.dart';
 import 'package:places/ui/components/favorite_icon_button.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:places/ui/res/custom_color_scheme.dart';
-import 'package:places/ui/screens/details_screen/details_bottomsheet.dart';
+import 'package:places/ui/components/details_bottomsheet.dart';
 import 'package:provider/provider.dart';
 
 class PlaceCard extends StatelessWidget {

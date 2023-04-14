@@ -58,4 +58,5 @@ class AppStrings {
   static const addSightCamera = 'Камера';
   static const addSightPhoto = 'Фотография';
   static const addSightFile = 'Файл';
+  static const utilsDate = 'Дата не указана';
 }

@@ -1,4 +1,4 @@
-import 'package:places/data/dto/get_place_dto.dart';
+import 'package:places/data/dto/place_dto.dart';
 
 class Place {
   final int id;
@@ -19,6 +19,15 @@ class Place {
     required this.placeType,
   });
 
+  Place.unpersist({
+    required this.name,
+    required this.lng,
+    required this.lat,
+    required this.urls,
+    required this.description,
+    required this.placeType,
+  }) : id = -1;
+
   Place.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         name = json['name'],
@@ -28,7 +37,7 @@ class Place {
         description = json['description'],
         placeType = json['placeType'];
 
-  Place.fromDto(GetPlaceDto getPlaceDto)
+  Place.fromDto(PlaceDto getPlaceDto)
       : id = getPlaceDto.id,
         name = getPlaceDto.name,
         lng = getPlaceDto.lng,

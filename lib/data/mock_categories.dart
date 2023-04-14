@@ -1,38 +1,38 @@
-import 'package:places/domain/model/filter.dart';
+import 'package:places/domain/model/category.dart';
 import 'package:places/image_paths.dart';
 
-final List<Filter> mockFilters = [
-  Filter(
+final List<Category> mockCategories = [
+  Category(
     title: 'Отель',
     requestTitle: 'hotel',
     iconName: AssetImages.iconHotelFilterPath,
     isActive: false,
   ),
-  Filter(
+  Category(
     title: 'Ресторан',
     requestTitle: 'restaurant',
     iconName: AssetImages.iconRestourantFilterPath,
     isActive: false,
   ),
-  Filter(
+  Category(
     title: 'Особое место',
     requestTitle: 'other',
     iconName: AssetImages.iconSpecialFilterPath,
     isActive: false,
   ),
-  Filter(
+  Category(
     title: 'Парк',
     requestTitle: 'park',
     iconName: AssetImages.iconParkFilterPath,
     isActive: false,
   ),
-  Filter(
+  Category(
     title: 'Музей',
     requestTitle: 'museum',
     iconName: AssetImages.iconMuseumFilterPath,
     isActive: false,
   ),
-  Filter(
+  Category(
     title: 'Кафе',
     requestTitle: 'cafe',
     iconName: AssetImages.iconCafeFilterPath,
@@ -40,9 +40,9 @@ final List<Filter> mockFilters = [
   ),
 ];
 
-String getFilterTitle(String requestTitle) => mockFilters
+String getFilterTitle(String requestTitle) => mockCategories
     .firstWhere((element) => element.requestTitle == requestTitle,
-        orElse: () => Filter(
+        orElse: () => Category(
             title: requestTitle,
             requestTitle: requestTitle,
             iconName: '',

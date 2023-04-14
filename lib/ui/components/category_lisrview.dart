@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
-import 'package:places/ui/components/filter_tile.dart';
+import 'package:places/ui/components/category_tile.dart';
 import 'package:provider/provider.dart';
 
 class FilterListViewWidget extends StatelessWidget {

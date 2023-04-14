@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/data/mock_filters.dart';
+import 'package:places/data/mock_categories.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/res/custom_color_scheme.dart';
 
@@ -50,7 +50,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(mockFilters[index].title),
+                    title: Text(mockCategories[index].title),
                     trailing: index != _index
                         ? null
                         : const Icon(
@@ -68,7 +68,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Divider(color: Colors.grey),
                     ),
-                itemCount: mockFilters.length),
+                itemCount: mockCategories.length),
           ),
           Padding(
             padding: const EdgeInsets.all(16),
@@ -77,7 +77,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
                     ? null
                     : () {
                         Navigator.of(context)
-                            .pop(mockFilters[_index!].requestTitle);
+                            .pop(mockCategories[_index!].requestTitle);
                       },
                 child: const Text(AppStrings.select)),
           ),

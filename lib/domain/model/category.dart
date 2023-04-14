@@ -1,10 +1,10 @@
-class Filter {
+class Category {
   String title;
   String requestTitle;
   bool isActive;
   String iconName;
 
-  Filter({
+  Category({
     required this.title,
     required this.requestTitle,
     required this.isActive,
