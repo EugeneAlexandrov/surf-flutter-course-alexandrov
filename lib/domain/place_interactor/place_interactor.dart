@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
-import 'package:places/data/dto/post_place_dto.dart';
-import 'package:places/data/mock_filters.dart';
+import 'package:places/data/mock_categories.dart';
 import 'package:places/data/repository/place_repository/place_repository.dart';
-import 'package:places/domain/model/filter.dart';
+import 'package:places/domain/model/category.dart';
 import 'package:places/domain/model/intention.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/services/geo/location_service.dart';
@@ -13,21 +12,21 @@ class PlaceInteractor with ChangeNotifier {
   final LocationService locationService;
   List<Place> _places = [];
   final List<Intention> _favoritePlaces = [];
-  final List<Filter> _filters = mockFilters;
+  final List<Category> _categories = mockCategories;
   double _radius = 500;
 
   PlaceInteractor(this.placeRepository, this.locationService);
 
   List<Place> get places => _places;
 
-  void getPlaces() async {
+  Future<void> getPlaces() async {
     try {
       LocationData location = await locationService.locationData;
       _places = await placeRepository.getFilteredPlaces(
         lat: location.latitude,
         lng: location.longitude,
         radius: _radius,
-        typeFilter: _filters
+        category: _categories
             .where((element) => element.isActive)
             .map((e) => e.toString())
             .toList(),
@@ -46,7 +45,7 @@ class PlaceInteractor with ChangeNotifier {
     return await placeRepository.getPlace(id);
   }
 
-  void addNewPlace(PostPlaceDto place) async {
+  Future<void> addNewPlace(Place place) async {
     await placeRepository.postPlace(place);
     getPlaces();
     notifyListeners();
@@ -63,19 +62,19 @@ class PlaceInteractor with ChangeNotifier {
 
 // ----------------------------------------------------------------------------
 
-  List<Filter> get filters => _filters;
+  List<Category> get filters => _categories;
 
   double get radius => _radius / 1000;
 
   void resetFilters() {
-    for (Filter filter in _filters) {
+    for (Category filter in _categories) {
       filter.isActive = false;
     }
     notifyListeners();
   }
 
   void changeFilter(int index) {
-    _filters[index].isActive = !_filters[index].isActive;
+    _categories[index].isActive = !_categories[index].isActive;
     getPlaces();
     notifyListeners();
   }
@@ -143,5 +142,3 @@ class PlaceInteractor with ChangeNotifier {
         orElse: () => Intention(placeId: -1));
   }
 }
-
-

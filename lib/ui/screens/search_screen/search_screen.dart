@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/data/mock_filters.dart';
+import 'package:places/data/mock_categories.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/domain/search_interactor/search_interactor.dart';
 import 'package:places/image_paths.dart';

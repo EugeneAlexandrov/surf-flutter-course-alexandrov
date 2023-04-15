@@ -18,7 +18,6 @@ void main() {
 
 class AppDependencies extends StatefulWidget {
   final App app;
-
   const AppDependencies({required this.app, Key? key}) : super(key: key);
 
   @override

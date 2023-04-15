@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_router.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/data/dto/post_place_dto.dart';
+import 'package:places/domain/model/place.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/components/custom_text_field.dart';
@@ -34,7 +34,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   final longitudeController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  String filterType = '';
+  String placeType = '';
   // local model for images persist
   final ImageListModel _model = ImageListModel();
 
@@ -92,9 +92,9 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   onTap: () {
                     _navigateAndPickFIlterType(context);
                   },
-                  title: Text(filterType == ''
+                  title: Text(placeType == ''
                       ? AppStrings.addSightNoFiltersSelect
-                      : filterType),
+                      : placeType),
                   trailing: SvgPicture.asset(AssetImages.iconRihgtArrowPath),
                 ),
               ),
@@ -177,7 +177,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                           longitudeController.text.isEmpty ||
                           latitudeController.text.isEmpty ||
                           descriptionController.text.isEmpty ||
-                          filterType == '')
+                          placeType == '')
                       ? null
                       : () {
                           addSight(context);
@@ -193,12 +193,12 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   }
 
   void addSight(BuildContext context) {
-    PostPlaceDto newPlace = PostPlaceDto(
+    Place newPlace = Place.unpersist(
         name: titleController.text,
         lng: double.parse(longitudeController.text),
         lat: double.parse(latitudeController.text),
         description: descriptionController.text,
-        placeType: filterType,
+        placeType: placeType,
         urls: []);
     Provider.of<PlaceInteractor>(context, listen: false).addNewPlace(newPlace);
     Navigator.pop(context);
@@ -208,7 +208,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
     final String result =
         await Navigator.of(context).pushNamed(AppRouter.chooseFilter) as String;
     setState(() {
-      filterType = result;
+      placeType = result;
     });
   }
 }

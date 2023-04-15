@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/ui/screens/filters_screen/filters_screen.dart';
-import 'package:places/ui/screens/new_place_screen/filter_type_picker_screen.dart';
+import 'package:places/ui/screens/new_place_screen/category_type_picker_screen.dart';
 import 'package:places/ui/screens/new_place_screen/new_place_screen.dart';
 import 'package:places/ui/screens/search_screen/search_screen.dart';
 import 'package:places/ui/screens/splash_screen/splash_screen.dart';

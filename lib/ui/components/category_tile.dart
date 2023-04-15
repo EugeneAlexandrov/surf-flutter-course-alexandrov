@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
-import 'package:places/domain/model/filter.dart';
+import 'package:places/domain/model/category.dart';
 import 'package:places/ui/res/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +14,7 @@ class FilterTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<PlaceInteractor>(
       builder: (_context, placeInteractor, child) {
-        Filter filter = placeInteractor.filters[index];
+        Category filter = placeInteractor.filters[index];
         return Material(
           color: Colors.transparent,
           child: InkWell(

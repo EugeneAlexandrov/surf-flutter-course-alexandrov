@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/app_utils.dart';
-import 'package:places/data/mock_filters.dart';
+import 'package:places/data/mock_categories.dart';
 import 'package:places/domain/model/intention.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';

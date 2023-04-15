@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _navigateToStart();
   }
 
-  _navigateToStart() async {
+  void _navigateToStart() async {
     await isInitialized;
     // navigate to StartScreen
     Navigator.pushReplacement(
