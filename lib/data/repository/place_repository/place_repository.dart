@@ -6,7 +6,7 @@ abstract class PlaceRepository {
     double? lng,
     double? lat,
     double? radius,
-    List<String>? category,
+    List<String>? typeFilter,
     String? nameFilter,
   });
   // get place detail

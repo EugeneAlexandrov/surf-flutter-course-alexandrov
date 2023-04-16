@@ -13,7 +13,7 @@ class FilterListViewWidget extends StatelessWidget {
     return ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: context.read<PlaceInteractor>().filters.length,
+        itemCount: context.read<PlaceInteractor>().placeTypes.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),

@@ -17,14 +17,14 @@ class PlaceRepositoryImpl with PlaceRepository {
     double? lng,
     double? lat,
     double? radius,
-    List<String>? category,
+    List<String>? typeFilter,
     String? nameFilter,
   }) async {
     var requestBody = PlacesFilterRequestDto(
       lng: lng,
       lat: lat,
       radius: radius,
-      typeFilter: category,
+      typeFilter: typeFilter,
       nameFilter: nameFilter,
     );
     List<PlaceDto> filteredPlaces =

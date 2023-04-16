@@ -28,7 +28,7 @@ class FiltersScreen extends StatelessWidget {
             actions: [
               TextButton(
                 onPressed: () {
-                  placeInteractor.resetFilters();
+                  placeInteractor.resetPlaceTypes();
                 },
                 child: Text(
                   AppStrings.cleanFiltersString,

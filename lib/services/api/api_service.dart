@@ -32,8 +32,11 @@ class DioApiService {
 
   Future<List<PlaceDto>> getFilteredPlaces(
       PlacesFilterRequestDto requestBody) async {
-    final response = await dio.post<List<dynamic>>('/filtered_places',
-        data: jsonEncode(requestBody));
+    final response = await dio.post<List<dynamic>>(
+      '/filtered_places',
+      data: jsonEncode(requestBody),
+    );
+
     if (response.statusCode == 200 && response.data != null) {
       var list = response.data!.map((e) => PlaceDto.fromJson(e)).toList();
       return list;
@@ -43,6 +46,7 @@ class DioApiService {
 
   Future<Place> getPlace(int id) async {
     final response = await dio.get('/place/$id');
+
     if (response.statusCode == 200) {
       return Place.fromJson(response.data);
     }
@@ -51,6 +55,7 @@ class DioApiService {
 
   Future<Place> createPlace(Place place) async {
     final response = await dio.post('/place', data: jsonEncode(place));
+
     if (response.statusCode == 200) {
       return Place.fromJson(response.data);
     }
@@ -59,6 +64,7 @@ class DioApiService {
 
   Future<List<Place>> getAllPlaces() async {
     final response = await dio.get('/place');
+    
     if (response.statusCode == 200) {
       return response.data;
     }

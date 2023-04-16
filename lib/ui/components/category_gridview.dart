@@ -18,7 +18,7 @@ class FilterGridViewWidget extends StatelessWidget {
           crossAxisSpacing: 10,
         ),
         shrinkWrap: true,
-        itemCount: context.read<PlaceInteractor>().filters.length,
+        itemCount: context.read<PlaceInteractor>().placeTypes.length,
         itemBuilder: (BuildContext context, index) {
           return FilterTile(index);
         },

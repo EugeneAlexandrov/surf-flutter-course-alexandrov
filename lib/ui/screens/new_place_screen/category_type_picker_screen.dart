@@ -50,7 +50,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(mockCategories[index].title),
+                    title: Text(mockPlaceTypes[index].title),
                     trailing: index != _index
                         ? null
                         : const Icon(
@@ -68,7 +68,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: Divider(color: Colors.grey),
                     ),
-                itemCount: mockCategories.length),
+                itemCount: mockPlaceTypes.length),
           ),
           Padding(
             padding: const EdgeInsets.all(16),
@@ -77,7 +77,7 @@ class _FilterTypePickerScreenState extends State<FilterTypePickerScreen> {
                     ? null
                     : () {
                         Navigator.of(context)
-                            .pop(mockCategories[_index!].requestTitle);
+                            .pop(mockPlaceTypes[_index!].requestTitle);
                       },
                 child: const Text(AppStrings.select)),
           ),

@@ -35,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: Text(
-          'Список интересных мест',
+          AppStrings.appBarTitleInterestingStringSmall,
           style: theme.textTheme.headline6?.copyWith(color: colors!.title),
         ),
         centerTitle: true,

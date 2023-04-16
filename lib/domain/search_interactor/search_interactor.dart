@@ -8,10 +8,12 @@ class SearchInteractor with ChangeNotifier {
   SearchInteractor(this.placeRepository);
 
   final List<String> _searchQueries = <String>[];
+  List<String> get queries => _searchQueries;
+  
   List<Place> _searchPlaceList = <Place>[];
+  
   String _actualQuery = '';
 
-  List<String> get queries => _searchQueries;
   Future<List<Place>> get places async {
     if (_actualQuery.isNotEmpty) {
       await findPlacesByName();

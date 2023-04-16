@@ -1,10 +1,10 @@
-class Category {
+class PlaceType {
   String title;
   String requestTitle;
   bool isActive;
   String iconName;
 
-  Category({
+  PlaceType({
     required this.title,
     required this.requestTitle,
     required this.isActive,

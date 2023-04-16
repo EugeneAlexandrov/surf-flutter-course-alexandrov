@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:places/data/mock_categories.dart';
 import 'package:places/data/repository/place_repository/place_repository.dart';
-import 'package:places/domain/model/category.dart';
+import 'package:places/domain/model/place_type.dart';
 import 'package:places/domain/model/intention.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/services/geo/location_service.dart';
@@ -12,21 +12,21 @@ class PlaceInteractor with ChangeNotifier {
   final LocationService locationService;
   List<Place> _places = [];
   final List<Intention> _favoritePlaces = [];
-  final List<Category> _categories = mockCategories;
+  final List<PlaceType> _placeTypes = mockPlaceTypes;
   double _radius = 500;
 
   PlaceInteractor(this.placeRepository, this.locationService);
 
   List<Place> get places => _places;
 
-  Future<void> getPlaces() async {
+  Future<void> updatePlaces() async {
     try {
       LocationData location = await locationService.locationData;
       _places = await placeRepository.getFilteredPlaces(
         lat: location.latitude,
         lng: location.longitude,
         radius: _radius,
-        category: _categories
+        typeFilter: _placeTypes
             .where((element) => element.isActive)
             .map((e) => e.toString())
             .toList(),
@@ -47,8 +47,8 @@ class PlaceInteractor with ChangeNotifier {
 
   Future<void> addNewPlace(Place place) async {
     await placeRepository.postPlace(place);
-    getPlaces();
-    notifyListeners();
+    updatePlaces();
+    // notifyListeners();
   }
 
   Place? findPlaceInLocal(int id) {
@@ -62,27 +62,27 @@ class PlaceInteractor with ChangeNotifier {
 
 // ----------------------------------------------------------------------------
 
-  List<Category> get filters => _categories;
+  List<PlaceType> get placeTypes => _placeTypes;
 
   double get radius => _radius / 1000;
 
-  void resetFilters() {
-    for (Category filter in _categories) {
+  void resetPlaceTypes() {
+    for (PlaceType filter in _placeTypes) {
       filter.isActive = false;
     }
     notifyListeners();
   }
 
-  void changeFilter(int index) {
-    _categories[index].isActive = !_categories[index].isActive;
-    getPlaces();
-    notifyListeners();
+  void changePlaceType(int index) {
+    _placeTypes[index].isActive = !_placeTypes[index].isActive;
+    updatePlaces();
+    // notifyListeners();
   }
 
   void changeRange(double radius) {
     _radius = radius;
-    getPlaces();
-    notifyListeners();
+    updatePlaces();
+    // notifyListeners();
   }
 
 // ----------------------------------------------------------------------------
