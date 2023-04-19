@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/main.dart';
 import 'package:places/ui/screens/bottom_navigationbar_screen/bottomnavbar_screen.dart';
 import 'package:places/ui/screens/onboarding_screen/onboarding_screen.dart';
 
@@ -7,12 +8,13 @@ class StartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final model = serviceLocator.get<OnboardingShowModel>();
     return OnBoardindShowProvider(
-      model: OnboardingShowModel(),
-      child: OnBoardindShowProvider.watch(context)?.shown ?? false
+      model: model,
+      child: OnBoardindShowProvider.read(context)?.shown??true
           ? const BottomNavBarScreen()
           : const OnboardingScreen(),
-    ); 
+    );
   }
 }
 

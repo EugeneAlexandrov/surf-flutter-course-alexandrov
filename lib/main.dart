@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:places/app_router.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/domain/search_interactor/search_interactor.dart';
 import 'package:places/domain/settings_interactor/settings_interactor.dart';
 import 'package:places/services/geo/location_service.dart';
+import 'package:places/ui/screens/start_screen/start_screen.dart';
 import 'package:provider/provider.dart';
 import 'app_strings.dart';
 import 'data/repository/place_repository/place_repository_impl.dart';
 
+final serviceLocator = GetIt.instance;
+
+void setUp() {
+  serviceLocator.registerSingleton<OnboardingShowModel>(OnboardingShowModel());
+}
+
 void main() {
+  setUp();
   runApp(
     const AppDependencies(
       app: App(),

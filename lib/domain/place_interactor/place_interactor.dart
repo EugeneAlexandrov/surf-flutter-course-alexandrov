@@ -60,6 +60,13 @@ class PlaceInteractor with ChangeNotifier {
     }
   }
 
+  Stream<Place> getPlaces() async* {
+    for (Place place in _places) {
+      await Future.delayed(const Duration(seconds: 1));
+      yield place;
+    }
+  }
+
 // ----------------------------------------------------------------------------
 
   List<PlaceType> get placeTypes => _placeTypes;
@@ -76,13 +83,13 @@ class PlaceInteractor with ChangeNotifier {
   void changePlaceType(int index) {
     _placeTypes[index].isActive = !_placeTypes[index].isActive;
     updatePlaces();
-    // notifyListeners();
+    notifyListeners();
   }
 
   void changeRange(double radius) {
     _radius = radius;
     updatePlaces();
-    // notifyListeners();
+    notifyListeners();
   }
 
 // ----------------------------------------------------------------------------
@@ -97,7 +104,7 @@ class PlaceInteractor with ChangeNotifier {
 
   void removeFromFavorites(int placeId) {
     _favoritePlaces.remove(findIntentionByPlaceId(placeId));
-    // notifyListeners();
+    notifyListeners();
   }
 
   bool isFavorite(int placeId) =>
