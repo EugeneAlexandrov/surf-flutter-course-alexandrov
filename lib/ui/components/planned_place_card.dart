@@ -72,7 +72,7 @@ class PlannedPlaceCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const BackgroundImageContainer(),
+                        BackgroundImageContainer(url: place.urls[0]),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
@@ -85,7 +85,7 @@ class PlannedPlaceCard extends StatelessWidget {
                               ),
                               Text(
                                   AppStrings.plannedCardGoalString +
-                                      '${AppUtils.dateToString(intention.date)}',
+                                      AppUtils.dateToString(intention.date),
                                   style: theme.textTheme.bodyText2?.copyWith(
                                       color: AppUtils.colorByDate(
                                           intention.date))),
