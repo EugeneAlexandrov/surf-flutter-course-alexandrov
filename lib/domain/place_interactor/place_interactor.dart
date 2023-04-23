@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:places/data/mock_categories.dart';
@@ -15,6 +17,8 @@ class PlaceInteractor with ChangeNotifier {
   final List<PlaceType> _placeTypes = mockPlaceTypes;
   double _radius = 500;
 
+  final _placeController = StreamController<List<Place>>.broadcast();
+
   PlaceInteractor(this.placeRepository, this.locationService);
 
   List<Place> get places => _places;
@@ -31,6 +35,7 @@ class PlaceInteractor with ChangeNotifier {
             .map((e) => e.toString())
             .toList(),
       );
+      _placeController.add(_places);
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -60,12 +65,7 @@ class PlaceInteractor with ChangeNotifier {
     }
   }
 
-  Stream<Place> getPlaces() async* {
-    for (Place place in _places) {
-      await Future.delayed(const Duration(seconds: 1));
-      yield place;
-    }
-  }
+  Stream<List<Place>> getPlaces() => _placeController.stream;
 
 // ----------------------------------------------------------------------------
 
@@ -77,6 +77,7 @@ class PlaceInteractor with ChangeNotifier {
     for (PlaceType filter in _placeTypes) {
       filter.isActive = false;
     }
+    updatePlaces();
     notifyListeners();
   }
 

@@ -11,7 +11,7 @@ class StartScreen extends StatelessWidget {
     final model = serviceLocator.get<OnboardingShowModel>();
     return OnBoardindShowProvider(
       model: model,
-      child: OnBoardindShowProvider.read(context)?.shown??true
+      child: OnBoardindShowProvider.read(context)?.shown??false
           ? const BottomNavBarScreen()
           : const OnboardingScreen(),
     );

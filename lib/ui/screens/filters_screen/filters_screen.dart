@@ -82,10 +82,7 @@ class FiltersScreen extends StatelessWidget {
                           onPressed: placeInteractor.places.isEmpty
                               ? null
                               : () {
-                                  Navigator.pushNamedAndRemoveUntil(
-                                      context,
-                                      AppRouter.main,
-                                      (Route<dynamic> route) => false);
+                                  Navigator.pop(context);
                                 },
                         ),
                       ),

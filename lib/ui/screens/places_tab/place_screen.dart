@@ -38,9 +38,9 @@ class _PortraitPlaceListScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Stack(
-          children: [
+          children: const [
             _ListPortraitWidget(),
-            const Positioned.fill(
+            Positioned.fill(
               bottom: 16,
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -139,16 +139,19 @@ class _ListLandscapeWidget extends StatelessWidget {
 }
 
 class _ListPortraitWidget extends StatelessWidget {
-  _ListPortraitWidget({Key? key}) : super(key: key);
-
-  final List<Place> places = [];
+  const _ListPortraitWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print('build Widget');
+    final places = Provider.of<PlaceInteractor>(context, listen: false).places;
     return StreamBuilder(
       initialData: places,
       stream: Provider.of<PlaceInteractor>(context, listen: false).getPlaces(),
       builder: (context, snapshot) {
+        print('Snapshot ${snapshot.data}');
+        print('Connection ${snapshot.connectionState}');
+
         if (snapshot.hasError) {
           return const Center(
             child: Text('Error'),
@@ -156,17 +159,12 @@ class _ListPortraitWidget extends StatelessWidget {
         }
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return const LinearProgressIndicator();
-          case ConnectionState.none:
-            return const Center(child: Text('Нет данных'));
+            // return const LinearProgressIndicator();
           case ConnectionState.active:
-            places.add(snapshot.data as Place);
-            return Center(child: Text('Загружено ${places.length} мест'));
-          case ConnectionState.done:
-            if (snapshot.data is List<Place>) {
+            if ((snapshot.data as List<Place>).isEmpty) {
               return const Center(child: Text('Нет данных'));
             }
-            places.add(snapshot.data as Place);
+            final places = snapshot.data as List<Place>;
             return ListView.builder(
               padding: const EdgeInsets.only(top: 8),
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -179,6 +177,10 @@ class _ListPortraitWidget extends StatelessWidget {
                 );
               },
             );
+          case ConnectionState.none:
+            return const Center(child: Text('Нет данных'));
+          case ConnectionState.done:
+            return Center(child: Text('232'));
         }
       },
     );
