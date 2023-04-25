@@ -41,7 +41,7 @@ class VisitedPlaceCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const BackgroundImageContainer(),
+                      BackgroundImageContainer(url: place.urls[0]),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -54,7 +54,7 @@ class VisitedPlaceCard extends StatelessWidget {
                             ),
                             Text(
                               AppStrings.visitedCardGoalString +
-                                  '${AppUtils.dateToString(intention.date)}',
+                                  AppUtils.dateToString(intention.date),
                               /*.date*/
                               style: theme.textTheme.bodyText2?.copyWith(
                                 color: colors!.smallSecondaryTwo,

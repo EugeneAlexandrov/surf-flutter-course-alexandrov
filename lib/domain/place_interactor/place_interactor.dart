@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:places/data/mock_categories.dart';
@@ -15,6 +17,8 @@ class PlaceInteractor with ChangeNotifier {
   final List<PlaceType> _placeTypes = mockPlaceTypes;
   double _radius = 500;
 
+  final _placeController = StreamController<List<Place>>.broadcast();
+
   PlaceInteractor(this.placeRepository, this.locationService);
 
   List<Place> get places => _places;
@@ -31,6 +35,7 @@ class PlaceInteractor with ChangeNotifier {
             .map((e) => e.toString())
             .toList(),
       );
+      _placeController.add(_places);
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -60,6 +65,8 @@ class PlaceInteractor with ChangeNotifier {
     }
   }
 
+  Stream<List<Place>> getPlaces() => _placeController.stream;
+
 // ----------------------------------------------------------------------------
 
   List<PlaceType> get placeTypes => _placeTypes;
@@ -70,19 +77,20 @@ class PlaceInteractor with ChangeNotifier {
     for (PlaceType filter in _placeTypes) {
       filter.isActive = false;
     }
+    updatePlaces();
     notifyListeners();
   }
 
   void changePlaceType(int index) {
     _placeTypes[index].isActive = !_placeTypes[index].isActive;
     updatePlaces();
-    // notifyListeners();
+    notifyListeners();
   }
 
   void changeRange(double radius) {
     _radius = radius;
     updatePlaces();
-    // notifyListeners();
+    notifyListeners();
   }
 
 // ----------------------------------------------------------------------------
@@ -97,7 +105,7 @@ class PlaceInteractor with ChangeNotifier {
 
   void removeFromFavorites(int placeId) {
     _favoritePlaces.remove(findIntentionByPlaceId(placeId));
-    // notifyListeners();
+    notifyListeners();
   }
 
   bool isFavorite(int placeId) =>
