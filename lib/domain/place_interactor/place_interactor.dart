@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
@@ -7,6 +8,7 @@ import 'package:places/data/repository/place_repository/place_repository.dart';
 import 'package:places/domain/model/place_type.dart';
 import 'package:places/domain/model/intention.dart';
 import 'package:places/domain/model/place.dart';
+import 'package:places/services/api/network_exception.dart';
 import 'package:places/services/geo/location_service.dart';
 
 class PlaceInteractor with ChangeNotifier {
@@ -37,8 +39,9 @@ class PlaceInteractor with ChangeNotifier {
       );
       _placeController.add(_places);
       notifyListeners();
-    } catch (e) {
-      rethrow;
+    } on NetworkException catch (e) {
+      log('Error!',error: e);
+      _placeController.addError(e);
     }
   }
 
