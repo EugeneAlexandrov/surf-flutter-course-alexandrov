@@ -47,73 +47,66 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen>
     final theme = Theme.of(context);
     return DefaultTabController(
       length: 2,
-      child: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: Platform.isIOS
-            ? SystemUiOverlayStyle.dark
-            : const SystemUiOverlayStyle(
-                statusBarColor: Colors.transparent,
-                statusBarBrightness: Brightness.dark,
-                statusBarIconBrightness: Brightness.dark,
-              ),
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: TabBarView(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
+          child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: bottomNavController,
               children: bottomNavTabs),
-          bottomNavigationBar: BottomNavigationBar(
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            type: BottomNavigationBarType.fixed,
-            onTap: onSelectTab,
-            currentIndex: bottomNavController.index,
-            items: [
-              BottomNavigationBarItem(
-                activeIcon: SvgPicture.asset(
-                  AssetImages.iconListFillPath,
-                  color: theme.iconTheme.color,
-                ),
-                icon: SvgPicture.asset(
-                  AssetImages.iconListOutlinePath,
-                  color: theme.iconTheme.color,
-                ),
-                label: '',
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+          onTap: onSelectTab,
+          currentIndex: bottomNavController.index,
+          items: [
+            BottomNavigationBarItem(
+              activeIcon: SvgPicture.asset(
+                AssetImages.iconListFillPath,
+                color: theme.iconTheme.color,
               ),
-              BottomNavigationBarItem(
-                activeIcon: SvgPicture.asset(
-                  AssetImages.iconMapFillPath,
-                  color: theme.iconTheme.color,
-                ),
-                icon: SvgPicture.asset(
-                  AssetImages.iconMapOutlinePath,
-                  color: theme.iconTheme.color,
-                ),
-                label: '',
+              icon: SvgPicture.asset(
+                AssetImages.iconListOutlinePath,
+                color: theme.iconTheme.color,
               ),
-              BottomNavigationBarItem(
-                activeIcon: SvgPicture.asset(
-                  AssetImages.iconHeartFillPath,
-                  color: theme.iconTheme.color,
-                ),
-                icon: SvgPicture.asset(
-                  AssetImages.iconHeartOutlinePath,
-                  color: theme.iconTheme.color,
-                ),
-                label: '',
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: SvgPicture.asset(
+                AssetImages.iconMapFillPath,
+                color: theme.iconTheme.color,
               ),
-              BottomNavigationBarItem(
-                activeIcon: SvgPicture.asset(
-                  AssetImages.iconSettingsFillPath,
-                  color: theme.iconTheme.color,
-                ),
-                icon: SvgPicture.asset(
-                  AssetImages.iconSettingsOutlinePath,
-                  color: theme.iconTheme.color,
-                ),
-                label: '',
+              icon: SvgPicture.asset(
+                AssetImages.iconMapOutlinePath,
+                color: theme.iconTheme.color,
               ),
-            ],
-          ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: SvgPicture.asset(
+                AssetImages.iconHeartFillPath,
+                color: theme.iconTheme.color,
+              ),
+              icon: SvgPicture.asset(
+                AssetImages.iconHeartOutlinePath,
+                color: theme.iconTheme.color,
+              ),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              activeIcon: SvgPicture.asset(
+                AssetImages.iconSettingsFillPath,
+                color: theme.iconTheme.color,
+              ),
+              icon: SvgPicture.asset(
+                AssetImages.iconSettingsOutlinePath,
+                color: theme.iconTheme.color,
+              ),
+              label: '',
+            ),
+          ],
         ),
       ),
     );

@@ -176,7 +176,7 @@ class SearchSliverAppBar extends StatefulWidget {
 
 class _SearchSliverAppBarState extends State<SearchSliverAppBar> {
   bool _showTitle = false;
-  final kExpandedHeight = 220.0;
+  final kExpandedHeight = 228.0;
 
   @override
   void initState() {
@@ -214,7 +214,7 @@ class _SearchSliverAppBarState extends State<SearchSliverAppBar> {
                 : null,
             // centerTitle: true,
             background: Container(
-              height: 220,
+              height: 228,
               padding: const EdgeInsets.only(top: 64),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
