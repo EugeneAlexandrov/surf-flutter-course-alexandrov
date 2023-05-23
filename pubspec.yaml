@@ -22,10 +22,15 @@ dependencies:
   dio: ^4.0.6
   pretty_dio_logger: ^1.1.1
   get_it: ^7.2.0
+  flutter_mobx: ^2.0.6+5
+  mobx: ^2.2.0
+  mobx_codegen: ^2.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.4.4
+
 
   flutter_lints: ^1.0.4
   dart_code_metrics: ^4.6.0

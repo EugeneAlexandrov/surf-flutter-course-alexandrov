@@ -4,6 +4,7 @@ import 'package:places/app_router.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/domain/search_interactor/search_interactor.dart';
 import 'package:places/domain/settings_interactor/settings_interactor.dart';
+import 'package:places/domain/store/places_store.dart';
 import 'package:places/services/geo/location_service.dart';
 import 'package:places/ui/screens/start_screen/start_screen.dart';
 import 'package:provider/provider.dart';
@@ -34,18 +35,26 @@ class AppDependencies extends StatefulWidget {
 }
 
 class _AppDependenciesState extends State<AppDependencies> {
+  final locationService = LocationService();
+
+  @override
+  void initState() {
+    super.initState();
+    locationService.initLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<SettingsInteractor>(
             create: (_) => SettingsInteractor()),
-        ChangeNotifierProvider<PlaceInteractor>(
-          create: (_) => PlaceInteractor(
-            PlaceRepositoryImpl(),
-            LocationService(),
-          ),
-        ),
+        Provider<PlacesStore>(
+            create: (_) => PlacesStore(
+                PlaceRepositoryImpl(), locationService.locationData)),
+        Provider<PlaceInteractor>(
+            create: (_) =>
+                PlaceInteractor(PlaceRepositoryImpl(), locationService)),
         ChangeNotifierProvider<SearchInteractor>(
             create: (_) => SearchInteractor(PlaceRepositoryImpl())),
       ],

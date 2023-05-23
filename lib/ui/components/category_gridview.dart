@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:places/domain/place_interactor/place_interactor.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:places/domain/store/places_store.dart';
 import 'package:places/ui/components/category_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -10,19 +13,23 @@ class FilterGridViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('gridview build');
     return GridViewGlowAbsorber(
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-        ),
-        shrinkWrap: true,
-        itemCount: context.read<PlaceInteractor>().placeTypes.length,
-        itemBuilder: (BuildContext context, index) {
-          return FilterTile(index);
-        },
-      ),
+      child: Observer(builder: (context) {
+        log('gridview observer run', name: 'GridView');
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
+          shrinkWrap: true,
+          itemCount: context.read<PlacesStore>().placeTypes.length,
+          itemBuilder: (BuildContext context, index) {
+            return FilterTile(index);
+          },
+        );
+      }),
     );
   }
 }
