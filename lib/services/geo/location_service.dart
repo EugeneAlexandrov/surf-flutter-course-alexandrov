@@ -2,16 +2,16 @@ import 'package:location/location.dart';
 
 class LocationService {
   late LocationData _locationData;
+  bool dataIsReady = false;
 
-  Future<LocationData> get locationData async {
-    var i = await initLocation();
-    if (i) {
+  LocationData get locationData {
+    if (dataIsReady) {
       return _locationData;
     }
     throw GeoServiceException();
   }
 
-  Future<bool> initLocation() async {
+  Future<void> initLocation() async {
     Location location = Location();
 
     bool _serviceEnabled;
@@ -21,7 +21,7 @@ class LocationService {
     if (!_serviceEnabled) {
       _serviceEnabled = await location.requestService();
       if (!_serviceEnabled) {
-        return false;
+        return;
       }
     }
 
@@ -29,11 +29,11 @@ class LocationService {
     if (_permissionGranted == PermissionStatus.denied) {
       _permissionGranted = await location.requestPermission();
       if (_permissionGranted != PermissionStatus.granted) {
-        return false;
+        return;
       }
     }
     _locationData = await location.getLocation();
-    return true;
+    dataIsReady = true;
   }
 }
 

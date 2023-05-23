@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/domain/place_interactor/place_interactor.dart';
+import 'package:places/domain/store/places_store.dart';
 import 'package:places/ui/res/custom_color_scheme.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +19,7 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
   @override
   void initState() {
     super.initState();
-    _selectedRadius = context.read<PlaceInteractor>().radius;
+    _selectedRadius = context.read<PlacesStore>().radius;
   }
 
   @override
@@ -51,7 +51,7 @@ class _MyRangeSliderState extends State<MyRangeSlider> {
           max: 10.0,
           value: _selectedRadius,
           onChangeEnd: (double newValue) {
-            context.read<PlaceInteractor>().changeRange(_selectedRadius * 1000);
+            context.read<PlacesStore>().changeRange(_selectedRadius * 1000);
           },
           onChanged: (double value) {
             roundToDecimals(value);

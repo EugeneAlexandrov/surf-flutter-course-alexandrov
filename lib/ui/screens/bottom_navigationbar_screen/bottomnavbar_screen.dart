@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/image_paths.dart';
 import 'package:places/ui/screens/favorite_tab/favorite_tab_screen.dart';
