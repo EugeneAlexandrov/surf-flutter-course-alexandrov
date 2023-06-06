@@ -41,6 +41,7 @@ class PlaceCard extends StatelessWidget {
                         place.name,
                         style: theme.textTheme.bodyText1,
                       ),
+                      const SizedBox(height: 8),
                       Text(
                         place.description,
                         maxLines: 3,

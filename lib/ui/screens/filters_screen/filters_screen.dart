@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:places/app_router.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/ui/components/category_lisrview.dart';

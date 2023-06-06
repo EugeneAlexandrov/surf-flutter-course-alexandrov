@@ -50,7 +50,7 @@ class TabsAppBar extends StatelessWidget implements PreferredSizeWidget {
       children: [
         Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 40, bottom: 22),
+          padding: const EdgeInsets.only(top: 30, bottom: 22),
           child: Text(
             title,
             style: theme.textTheme.headline6?.copyWith(color: colors!.title),

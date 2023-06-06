@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:places/app_router.dart';
+import 'package:places/data/repository/intention_repository/intention_reposotory.dart';
+import 'package:places/data/repository/intention_repository/intention_reposotory_impl.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/domain/search_interactor/search_interactor.dart';
 import 'package:places/domain/settings_interactor/settings_interactor.dart';
@@ -34,6 +36,14 @@ class AppDependencies extends StatefulWidget {
 }
 
 class _AppDependenciesState extends State<AppDependencies> {
+  late IntentionRepository intentionRepository;
+
+  @override
+  void initState() {
+    super.initState();
+    intentionRepository = IntentionRepositoryImpl();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -43,9 +53,11 @@ class _AppDependenciesState extends State<AppDependencies> {
         ChangeNotifierProvider<PlaceInteractor>(
           create: (_) => PlaceInteractor(
             PlaceRepositoryImpl(),
+            intentionRepository,
             LocationService(),
           ),
         ),
+        Provider<IntentionRepository>(create: (_) => intentionRepository),
         ChangeNotifierProvider<SearchInteractor>(
             create: (_) => SearchInteractor(PlaceRepositoryImpl())),
       ],

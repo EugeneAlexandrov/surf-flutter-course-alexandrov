@@ -4,7 +4,7 @@ import 'package:places/data/repository/place_repository/place_repository.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/services/api/api_service.dart';
 
-class PlaceRepositoryImpl with PlaceRepository {
+class PlaceRepositoryImpl implements PlaceRepository {
   DioApiService apiservice = DioApiService();
 
   @override

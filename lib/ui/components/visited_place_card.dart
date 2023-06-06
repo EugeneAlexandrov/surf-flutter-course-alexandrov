@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/app_utils.dart';
 import 'package:places/data/mock_categories.dart';
+import 'package:places/domain/bloc/visited_bloc/visited_bloc.dart';
+import 'package:places/domain/bloc/visited_bloc/visited_event.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/image_paths.dart';
@@ -104,8 +109,9 @@ class VisitedPlaceCard extends StatelessWidget {
                       child: CustomIconButton(
                         child: SvgPicture.asset(AssetImages.iconCrossPath),
                         onPressed: () {
-                          Provider.of<PlaceInteractor>(context, listen: false)
-                              .removeFromFavorites(place.id);
+                          log('Pressed delete', name: 'VisitedPLaceCard');
+                          BlocProvider.of<VisitedBloc>(context)
+                              .add(RemoveFromVisitedEvent(intention));
                         },
                       ),
                     ),

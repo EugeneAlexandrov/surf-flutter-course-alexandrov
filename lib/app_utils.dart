@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:places/app_strings.dart';
 
 class AppUtils {
-  static Color colorByDate(DateTime? date) {
+  static Color colorByDate(DateTime? date, ThemeData theme) {
     if (date != null) {
       return (date.isAfter(DateTime.now())) ? Colors.green : Colors.red;
     }

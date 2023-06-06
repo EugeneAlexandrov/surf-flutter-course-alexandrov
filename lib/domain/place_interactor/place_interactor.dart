@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:places/data/mock_categories.dart';
+import 'package:places/data/repository/intention_repository/intention_reposotory.dart';
 import 'package:places/data/repository/place_repository/place_repository.dart';
 import 'package:places/domain/model/place_type.dart';
 import 'package:places/domain/model/intention.dart';
@@ -13,6 +14,7 @@ import 'package:places/services/geo/location_service.dart';
 
 class PlaceInteractor with ChangeNotifier {
   final PlaceRepository placeRepository;
+  final IntentionRepository intentionRepository;
   final LocationService locationService;
   List<Place> _places = [];
   final List<Intention> _favoritePlaces = [];
@@ -21,7 +23,8 @@ class PlaceInteractor with ChangeNotifier {
 
   final _placeController = StreamController<List<Place>>.broadcast();
 
-  PlaceInteractor(this.placeRepository, this.locationService);
+  PlaceInteractor(
+      this.placeRepository, this.intentionRepository, this.locationService);
 
   List<Place> get places => _places;
 
@@ -40,7 +43,7 @@ class PlaceInteractor with ChangeNotifier {
       _placeController.add(_places);
       notifyListeners();
     } on NetworkException catch (e) {
-      log('Error!',error: e);
+      log('Error!', error: e);
       _placeController.addError(e);
     }
   }
@@ -102,11 +105,14 @@ class PlaceInteractor with ChangeNotifier {
       _favoritePlaces.where((element) => !element.hasVisited).toList();
 
   void addToFavorites(int placeId) {
+    intentionRepository.addIntentionToFavorite(Intention.empty(placeId));
     _favoritePlaces.add(Intention.empty(placeId));
-    // notifyListeners();
+    notifyListeners();
   }
 
   void removeFromFavorites(int placeId) {
+    intentionRepository
+        .removeIntentionFromFavorite(findIntentionByPlaceId(placeId));
     _favoritePlaces.remove(findIntentionByPlaceId(placeId));
     notifyListeners();
   }

@@ -1,15 +1,18 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:places/app_strings.dart';
-import 'package:places/domain/model/intention.dart';
-import 'package:places/domain/place_interactor/place_interactor.dart';
+import 'package:places/domain/bloc/favotite_bloc/favorite_bloc.dart';
+import 'package:places/domain/bloc/favotite_bloc/favorite_state.dart';
+import 'package:places/domain/bloc/visited_bloc/visited_bloc.dart';
+import 'package:places/domain/bloc/visited_bloc/visited_state.dart';
 import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/components/null_planed_placeholder.dart';
 import 'package:places/ui/components/null_visited_placeholder.dart';
 import 'package:places/ui/components/planned_place_card.dart';
 import 'package:places/ui/components/visited_place_card.dart';
-import 'package:provider/provider.dart';
 
 //Third tab with visited places
 class FavoriteTabScreen extends StatelessWidget {
@@ -17,120 +20,88 @@ class FavoriteTabScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const TabsAppBar(AppStrings.appBarTitleFavoriteString),
-      body: Consumer<PlaceInteractor>(
-        builder: (context, placeInteractor, child) {
-          return TabBarView(
-            children: [
-              placeInteractor.favoritePlaces.isEmpty
-                  ? const NullPlannedPlaceHolder()
-                  : DraggableList(placeInteractor.favoritePlaces),
-              placeInteractor.visitedPlaces.isEmpty
-                  ? const NullVisitedPlaceHolder()
-                  : VisitedList(placeInteractor.visitedPlaces),
-            ],
-          );
-        },
+    return const Scaffold(
+      appBar: TabsAppBar(AppStrings.appBarTitleFavoriteString),
+      body: TabBarView(
+        children: [
+          FavoriteList(),
+          VisitedList(),
+        ],
       ),
     );
   }
 }
 
 class VisitedList extends StatelessWidget {
-  const VisitedList(this.list, {Key? key}) : super(key: key);
-
-  final List<Intention> list;
+  const VisitedList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: Platform.isAndroid
-          ? const ClampingScrollPhysics()
-          : const BouncingScrollPhysics(),
-      itemBuilder: (context, index) {
-        return VisitedPlaceCard(list[index].placeId);
-      },
-      itemCount: list.length,
-    );
+    return BlocBuilder<VisitedBloc, VisitedState>(builder: (context, state) {
+      if (state is VisitedLoadInProgressState) {
+        log('state is Loading', name: 'VisitedListTab');
+        return const Center(child: CircularProgressIndicator());
+      } else if (state is VisitedEmptyListState) {
+        log('state is Empty', name: 'VisitedListTab');
+        return const NullVisitedPlaceHolder();
+      } else if (state is VisitedLoadSuccessState) {
+        log('state is Loaded', name: 'VisitedListTab');
+        final list = state.visitedList;
+        return ListView.builder(
+          physics: Platform.isAndroid
+              ? const ClampingScrollPhysics()
+              : const BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+            return VisitedPlaceCard(list[index].placeId);
+          },
+          itemCount: list.length,
+        );
+      } else {
+        return const Center(child: Text('Something wrong'));
+      }
+    });
   }
 }
 
-class DraggableList extends StatefulWidget {
-  const DraggableList(this.list, {Key? key}) : super(key: key);
-
-  final List<Intention> list;
-
-  @override
-  State<DraggableList> createState() => _DraggableListState();
-}
-
-class _DraggableListState extends State<DraggableList> {
-  int? startIndex;
+class FavoriteList extends StatelessWidget {
+  const FavoriteList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: Platform.isAndroid
-          ? const ClampingScrollPhysics()
-          : const BouncingScrollPhysics(),
-      itemBuilder: (context, index) {
-        return DraggableElementWidget(widget.list[index].placeId);
-      },
-      itemCount: widget.list.length,
-    );
-  }
-}
-
-class DraggableElementWidget extends StatefulWidget {
-  const DraggableElementWidget(this._placeId, {Key? key}) : super(key: key);
-
-  final int _placeId;
-
-  @override
-  State<DraggableElementWidget> createState() => _DraggableElementWidgetState();
-}
-
-class _DraggableElementWidgetState extends State<DraggableElementWidget> {
-  bool isDrag = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return LongPressDraggable(
-        data: 'card',
-        child: isDrag
-            ? const SizedBox.shrink()
-            : DragTarget(
-                onWillAccept: (String? data) {
-                  if (data == 'card') {
-                    return true;
-                  }
-                  return false;
-                },
-                onAccept: (data) => Provider.of<PlaceInteractor>(context,
-                        listen: false)
-                    .swapIntention(
-                        context
-                                .findAncestorStateOfType<_DraggableListState>()
-                                ?.startIndex ??
-                            0,
-                        widget._placeId),
-                builder: (context, candidateData, rejectedData) =>
-                    PlannedPlaceCard(widget._placeId,
-                        key: ValueKey(widget._placeId))),
-        feedback:
-            PlannedPlaceCard(widget._placeId, key: ValueKey(widget._placeId)),
-        onDragStarted: () {
-          context.findAncestorStateOfType<_DraggableListState>()?.startIndex =
-              widget._placeId;
-          setState(() {
-            isDrag = true;
-          });
-        },
-        onDragEnd: (details) {
-          setState(() {
-            isDrag = false;
-          });
-        });
+    return BlocBuilder<FavoriteBloc, FavoriteState>(builder: (context, state) {
+      if (state is FavoriteLoadInProgressState) {
+        log('state is Loading', name: 'FavoriteListTab');
+        return const Center(child: CircularProgressIndicator());
+      } else if (state is FavoriteEmptyListState) {
+        log('state is Empty', name: 'FavoriteListTab');
+        return const NullPlannedPlaceHolder();
+      } else if (state is FavoriteLoadSuccessState) {
+        log('state is Loaded', name: 'FavoriteListTab');
+        final list = state.favoriteList;
+        return ListView.builder(
+          padding: const EdgeInsets.only(top: 8),
+          physics: Platform.isAndroid
+              ? const ClampingScrollPhysics()
+              : const BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+            return PlannedPlaceCard(list[index].placeId,
+                key: Key('${list[index].placeId}'));
+          },
+          itemCount: list.length,
+          // implemnet reorder
+          // onReorder: (int oldIndex, int newIndex) {
+          //   print('reoder oldIndex:$oldIndex newIndex:$newIndex');
+          //   if (oldIndex < newIndex) {
+          //     newIndex -= 1;
+          //   }
+          //   final Intention item = list.removeAt(oldIndex);
+          //   list.insert(newIndex, item);
+          //   BlocProvider.of<FavoriteBloc>(context).add(SwapItemsEvent(list));
+          // },
+        );
+      } else {
+        return const Center(child: Text('Something wrong'));
+      }
+    });
   }
 }

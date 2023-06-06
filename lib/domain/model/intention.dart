@@ -19,4 +19,9 @@ class Intention {
 
   @override
   int get hashCode => placeId;
+
+  @override
+  String toString() {
+    return 'Intention $placeId';
+  }
 }

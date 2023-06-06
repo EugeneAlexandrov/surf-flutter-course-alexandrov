@@ -1,10 +1,14 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/app_strings.dart';
 import 'package:places/app_utils.dart';
 import 'package:places/data/mock_categories.dart';
+import 'package:places/data/repository/intention_repository/intention_reposotory.dart';
+import 'package:places/domain/bloc/favotite_bloc/favorite_bloc.dart';
+import 'package:places/domain/bloc/favotite_bloc/favorite_event.dart';
 import 'package:places/domain/model/intention.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
@@ -24,9 +28,9 @@ class PlannedPlaceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final intention = Provider.of<PlaceInteractor>(context, listen: false)
-        .findIntentionByPlaceId(_placeId);
-
+    final intention = Provider.of<IntentionRepository>(context, listen: false)
+        .findIntentionById(_placeId);
+    print('---Build PlaceCard with ${intention.placeId} ${intention.date}');
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -42,8 +46,9 @@ class PlannedPlaceCard extends StatelessWidget {
                 direction: DismissDirection.endToStart,
                 key: UniqueKey(),
                 onDismissed: (direction) {
-                  Provider.of<PlaceInteractor>(context, listen: false)
-                      .changeFavoriteState(_placeId);
+                  print('dismis');
+                  BlocProvider.of<FavoriteBloc>(context)
+                      .add(RemoveFromFavoriteEvent(intention));
                 },
                 background: Container(
                     color: Colors.red,
@@ -83,14 +88,19 @@ class PlannedPlaceCard extends StatelessWidget {
                                 place.name,
                                 style: theme.textTheme.bodyText1,
                               ),
+                              const SizedBox(height: 3),
                               Text(
                                   AppStrings.plannedCardGoalString +
                                       AppUtils.dateToString(intention.date),
-                                  style: theme.textTheme.bodyText2?.copyWith(
-                                      color: AppUtils.colorByDate(
-                                          intention.date))),
-                              const SizedBox(height: 16),
+                                  style: intention.date != null
+                                      ? theme.textTheme.bodyText2?.copyWith(
+                                          color: AppUtils.colorByDate(
+                                              intention.date, theme))
+                                      : theme.textTheme.bodyText2),
+                              const SizedBox(height: 8),
                               Text(place.description /*.details*/,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
                                   style: theme.textTheme.bodyText2?.copyWith(
                                       color: theme
                                           .extension<CustomColors>()!
@@ -121,9 +131,9 @@ class PlannedPlaceCard extends StatelessWidget {
                             var date = await showCupertinoDatePicker(
                                 context, intention);
                             if (date != null) {
-                              Provider.of<PlaceInteractor>(context,
-                                      listen: false)
-                                  .changeDate(date, place.id);
+                              intention.date = date;
+                              BlocProvider.of<FavoriteBloc>(context)
+                                  .add(ChangeDateEvent(intention));
                             }
                           },
                           child: SvgPicture.asset(
@@ -141,8 +151,8 @@ class PlannedPlaceCard extends StatelessWidget {
                         child: CustomIconButton(
                           child: SvgPicture.asset(AssetImages.iconCrossPath),
                           onPressed: () {
-                            Provider.of<PlaceInteractor>(context, listen: false)
-                                .removeFromFavorites(place.id);
+                            BlocProvider.of<FavoriteBloc>(context)
+                                .add(RemoveFromFavoriteEvent(intention));
                           },
                         ),
                       ),
@@ -169,7 +179,7 @@ Future<DateTime?> showCupertinoDatePicker(
     date = await showDatePicker(
       context: context,
       initialDate: intention.date ?? DateTime.now(),
-      firstDate: intention.date ?? DateTime.now(),
+      firstDate: DateTime.now(),
       lastDate: DateTime.now().add(
         const Duration(days: 365),
       ),

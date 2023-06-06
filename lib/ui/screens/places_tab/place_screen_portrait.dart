@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:places/app_strings.dart';
 import 'package:places/domain/model/place.dart';
 import 'package:places/domain/place_interactor/place_interactor.dart';
 import 'package:places/ui/components/custom_appbars.dart';
 import 'package:places/ui/components/gradient_button.dart';
 import 'package:places/ui/components/place_card.dart';
-import 'package:places/ui/res/colors.dart';
 import 'package:provider/provider.dart';
 
 class PortraitPlaceListScreen extends StatefulWidget {
@@ -19,7 +17,6 @@ class PortraitPlaceListScreen extends StatefulWidget {
 class _PortraitPlaceListScreenState extends State<PortraitPlaceListScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Provider.of<PlaceInteractor>(context, listen: false)
         .getPlaces()
@@ -43,10 +40,10 @@ class _PortraitPlaceListScreenState extends State<PortraitPlaceListScreen> {
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return <Widget>[const SearchSliverAppBar()];
       },
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Stack(
-          children: const [
+          children: [
             _ListPortraitWidget(),
             Positioned.fill(
               bottom: 16,
@@ -78,11 +75,11 @@ class _ListPortraitWidget extends StatelessWidget {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.cancel_outlined, size: 64),
-                  SizedBox(height: 24),
+                  const Icon(Icons.cancel_outlined, size: 64),
+                  const SizedBox(height: 24),
                   Text('Ошибка', style: theme.textTheme.bodyText1),
-                  SizedBox(height: 8),
-                  Text('Что то пошло не так\nПопробуйте позже.'),
+                  const SizedBox(height: 8),
+                  const Text('Что то пошло не так\nПопробуйте позже.'),
                 ],
                 crossAxisAlignment: CrossAxisAlignment.center),
           );
