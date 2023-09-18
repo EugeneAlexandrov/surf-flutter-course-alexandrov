@@ -18,13 +18,13 @@ Thanks SURF team for the help and the course
 * BottomSheets
 * Date/Time Pickers
 * Asynchronous
+* Network
+* Architecture(Bloc)
 
 ## PLANNED UPDATES
 
 * Animations
-* Architecture
 * Streams
-* Network
 * Release
 
 ![kyIyYFmeAf](https://user-images.githubusercontent.com/53467702/193423812-9ac721a9-d4cd-4701-b92d-265153f058e5.gif)
